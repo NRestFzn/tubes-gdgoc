@@ -1,0 +1,15 @@
+.main.container {
+  width: 100vw;
+  height: fit-content;
+  background-color: rgb(233, 221, 255);
+
+  flex-direction: row;
+  align-items: start;
+  justify-content: flex-start;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

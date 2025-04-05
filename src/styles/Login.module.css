@@ -1,0 +1,13 @@
+.background {
+  background-image: url('../assets/cloudBackground.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(rgba(175, 224, 255, 0.726), white);
+}
