@@ -14,37 +14,37 @@ export const Sidepanel: React.FC = (): React.ReactElement => {
         <ul>
           <li>
               <button className="dashboard">
-                <DashboardIcon />
+                <DashboardIcon className={styles.icon} />
                 Dashboard
               </button>
           </li>
           <li>
               <button className="sales">
-                <SalesIcon />
+                <SalesIcon className={styles.icon} />
                 Destination
               </button>
           </li>
           <li>
               <button className="stock">
-                <StockIcon />
+                <StockIcon className={styles.icon} />
                 Vacation
               </button>
           </li>
           <li>
               <button className="stock">
-                <StockIcon />
+                <StockIcon className={styles.icon} />
                 User
               </button>
           </li>
           <li>
               <button className="stock">
-                <StockIcon />
+                <StockIcon className={styles.icon} />
                 Booking
               </button>
           </li>
           <li>
             <button id="logout">
-              <LogoutIcon />
+              <LogoutIcon className={styles.icon} />
               Keluar
             </button>
           </li>
