@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 .background {
   background-image: url('../assets/cloudBackground.png');
   background-repeat: no-repeat;
   background-size: cover;
 
-  height: 100vh;
+  height: 55rem;
 }
 
 .background > div {
@@ -19,7 +21,7 @@
 }
 
 header {
-  height: 3em;
+  height: 5em;
   width: 100vw;
 
   position:absolute;
@@ -28,11 +30,75 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  scale: 0.9;
+
+  gap: 65rem;
 }
 
-.logo > p {
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 40px;
+  width: 40px;
+
+  border-radius: 10px;
+}
+
+.logo p {
+  font-family: "Roboto";
   font-weight: 550;
   font-size: 1.3em;
+
+  color: white;
+  letter-spacing: 1.5px;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  gap: 15px;
+}
+
+.headerButtons button {
+  height: 45px;
+  width: 100px;
+
+  background-color: #8E97EC;
+  border: 1px solid white;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.headerButtons button:hover {
+  background-color: #626FE5;
+}
+
+.headerButtons > button + button {
+  background-color: white;
+  border: 1px solid #8E97EC;
+  color: #8E97EC;
+}
+
+.headerButtons > button + button:hover {
+  background-color: #B48EEC;
+  border: 1px solid white;
+  color: white;
 }
 
 .loginBox {
@@ -44,8 +110,8 @@ header {
   justify-content: flex-start;
   gap: 1em;
 
-  height: 30em;
-  width: 25em;
+  height: 37em;
+  width: 27em;
   border-radius: 30px;
 }
 
@@ -94,7 +160,7 @@ header {
 form {
   width: 19em;
 
-  margin-top: 10px;
+  margin-top: 20px;
 
   display: flex;
   align-items: center;
@@ -133,14 +199,86 @@ form {
   outline: none;
 }
 
-.loginBox p {
+.inputContainer + p {
   font-weight: 400;
   font-size: 12px;
   text-align: right;
+
   width: inherit;
+
+  cursor: pointer;
+}
+
+.inputContainer + p:hover {
+  text-decoration: underline;
 }
 
 form button {
   background-color: black;
   color: white;
+
+  margin-top: 15px;
+
+  height: 3.5em;
+  width: inherit;
+  
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #353535;
+}
+
+.loginBox button + p {
+  text-align: center;
+  margin-top: 5px;
+  cursor: default;
+
+  font-size: 12px;
+}
+
+.thirdPartyContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.thirdPartyContainer div {
+  width: 80px;
+  height: 50px;
+
+  background-color: white;
+  border: 0.5px solid #e0e0e0;
+  
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.thirdPartyContainer div:hover {
+  opacity: 0.8;
+}
+
+.googleLogin {
+  background-image: url('../assets/googleIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.facebookLogin {
+  background-image: url('../assets/facebookIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.appleLogin {
+  background-image: url('../assets/appleIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
 }
