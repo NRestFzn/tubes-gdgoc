@@ -1,4 +1,5 @@
 import styles from '../styles/SignIn.module.css'
+import logo from '../assets/mochi.jpg'
 
 import {LoginIcon} from '../components/SvgIcons'
 
@@ -8,7 +9,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
       <div>
         <header>
           <div className={styles.logo}>
-            {/*Logo Icon here*/}
+            <img src={logo} alt="mochi-travel-logo" />
             <p>Mochi Travel</p>
           </div>
 
@@ -40,9 +41,11 @@ export const SignIn: React.FC = (): React.ReactElement => {
             <p>Or sign in with</p>
           </form>
 
-          <div className={styles.thirdPartyLogin}></div>
-          <div className={styles.thirdPartyLogin}></div>
-          <div className={styles.thirdPartyLogin}></div>
+          <div className={styles.thirdPartyContainer}>
+            <div className={styles.googleLogin}></div>
+            <div className={styles.facebookLogin}></div>
+            <div className={styles.appleLogin}></div>
+          </div>
         </div>
       </div>
     </div>
