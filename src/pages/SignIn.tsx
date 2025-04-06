@@ -1,8 +1,6 @@
 import styles from '../styles/SignIn.module.css'
 
-import {LogoutIcon} from '../components/SvgIcons'
-
-const SignInIcon = LogoutIcon
+import {LoginIcon} from '../components/SvgIcons'
 
 export const SignIn: React.FC = (): React.ReactElement => {
   return (
@@ -22,22 +20,25 @@ export const SignIn: React.FC = (): React.ReactElement => {
 
         <div className={styles.loginBox}>
           <div className={styles.svgContainer}>
-            <SignInIcon className={styles.icon}/>
+            <LoginIcon className={styles.icon}/>
           </div>
 
-          <p className={styles.title}>Sign in with email</p>
-          <p className={styles.description}>Make your dream vacation come true. Start looking for destination now</p>
+          <div className={styles.title}>
+            <p>Sign in with email</p>
+            <p>Make your dream vacation come true. Start looking for destination now</p>
+          </div>
 
-          <div className={styles.formSection}>
-            <form>
-              <div className={styles.inputContainer}></div>
-              <div className={styles.inputContainer}></div>
-            </form>
+          <form>
+            <div className={styles.inputContainer}>
+              <input type="text" placeholder='Email'/>
+            </div>
+            <div className={styles.inputContainer}>
+              <input type="password" placeholder='Password' />
+            </div>
             <p>Forgot password?</p>
-
             <button>Get Started</button>
             <p>Or sign in with</p>
-          </div>
+          </form>
 
           <div className={styles.thirdPartyLogin}></div>
           <div className={styles.thirdPartyLogin}></div>

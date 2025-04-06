@@ -36,13 +36,13 @@ header {
 }
 
 .loginBox {
-  background-image: linear-gradient(rgba(187, 245, 252, 0.726) 15%, rgb(244, 254, 255) 30%);
+  background-image: linear-gradient(#bbf5fcb9 15%, #f4feff 30%);
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.8em;
+  gap: 1em;
 
   height: 30em;
   width: 25em;
@@ -69,8 +69,78 @@ header {
   height: 2em;
 }
 
-.title > p {
-  font-weight: 510;
-  font-size: 1.3em;
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  scale: 0.9;
 }
 
+.loginBox .title > p {
+  font-weight: 510;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.loginBox .title > p + p {
+  padding-top: 5px;
+  width: 20em;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+form {
+  width: 19em;
+
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputContainer {
+  width: inherit;
+}
+
+.inputContainer > input {
+  height: 3em;
+  width: inherit;
+
+  padding-left: 40px;
+
+  background: url('../assets/EnvelopeIcon.svg') no-repeat left;
+  background-size: 2em;
+  background-position: 7px;
+
+  background-color: #f4f9ff;
+  border: 0.5px solid #cdcdcd;
+}
+
+.inputContainer + .inputContainer > input {
+  background: url('../assets/LockIcon.svg') no-repeat left;
+  background-size: 2em;
+  background-position: 7px;
+
+  background-color: #f4f9ff;
+}
+
+.inputContainer > input:focus {
+  outline: none;
+}
+
+.loginBox p {
+  font-weight: 400;
+  font-size: 12px;
+  text-align: right;
+  width: inherit;
+}
+
+form button {
+  background-color: black;
+  color: white;
+}
