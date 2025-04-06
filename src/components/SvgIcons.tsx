@@ -33,3 +33,11 @@ export const LogoutIcon: React.FC<IconProps> = ({className}): React.ReactElement
     <path d="M9 12H21" stroke="black" strokeWidth="2" fill="none" />
   </svg>
 );
+
+export const LoginIcon: React.FC<IconProps> = ({ className }): React.ReactElement => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M10 3H18C18.53 3 19 3.47 19 4V20C19 20.53 18.53 21 18 21H10" stroke="black" strokeWidth="2" fill="none" />
+    <path d="M3 12H15" stroke="black" strokeWidth="2" fill="none" />
+    <path d="M11 8L15 12L11 16" stroke="black" strokeWidth="2" fill="none" />
+  </svg>
+);
