@@ -44,7 +44,7 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const { setTheme } = useTheme()
-  const [themeValue, setThemeValue] = useState<"light" | "dark" | "system">("system");
+  const [themeValue, setThemeValue] = useState<"light" | "dark" | "system">("light");
   useEffect(() => {
     setTheme(themeValue)
   }, [themeValue, setTheme])
