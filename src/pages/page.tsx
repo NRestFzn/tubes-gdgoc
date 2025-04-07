@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { AppSidebar } from "@/components/app-sidebar"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
@@ -20,6 +21,15 @@ import {
   CardContent,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 //delete after initiate db
 import dummyData from "../assets/dummy_data.json"
@@ -37,6 +47,15 @@ type Destination = {
 };
 
 export default function Page() {
+  const itemsPerPage = 10
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const totalPages = Math.ceil(dummyData.length / itemsPerPage)
+  const paginatedData = dummyData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -59,18 +78,17 @@ export default function Page() {
           orientation="horizontal"
           className="data-[orientation=vertical]:h-4"
         />
-        <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4">
-          <div className=" flex w-full max-w-sm items-center space-x-2 gap-2">
+        <div className="bg-muted/50 flex md:min-h-min p-4">
+          <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
             <Input type="Search" placeholder="Search" />
             <Button variant="outline">+ Add Destination</Button>
           </div>
         </div>
 
-        <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4">
+        <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4 pt-0">
           <Card>
             <CardContent>
-              <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
+              <Table className="w-full">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[100px]">ID</TableHead>
@@ -83,8 +101,9 @@ export default function Page() {
                     <TableHead>Action</TableHead>
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
-                  {(dummyData as Destination[]).map((item) => (
+                  {paginatedData.map((item) => (
                     <TableRow key={item.id}>
                       <TableCell className="font-medium">{item.id}</TableCell>
                       <TableCell>{item.city}</TableCell>
@@ -101,6 +120,38 @@ export default function Page() {
                   ))}
                 </TableBody>
               </Table>
+
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      href="#"
+                      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    />
+                  </PaginationItem>
+
+                  {Array.from({ length: totalPages }, (_, i) => (
+                    <PaginationItem key={i}>
+                      <PaginationLink
+                        href="#"
+                        isActive={i + 1 === currentPage}
+                        onClick={() => setCurrentPage(i + 1)}
+                      >
+                        {i + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+
+                  <PaginationItem>
+                    <PaginationNext
+                      href="#"
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                      }
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
             </CardContent>
           </Card>
         </div>
