@@ -39,9 +39,9 @@ import {
 } from "@/components/ui/dialog"
 
 //delete after initiate db
-import dummyData from "../assets/dummy_booking.json"
+import dummyData from "../assets/dummy_plan.json"
 
-export default function Booking() {
+export default function Vacation() {
   const itemsPerPage = 10
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -64,7 +64,7 @@ export default function Booking() {
               className="mr-2 data-[orientation=vertical]:h-4"
             />
             <div className="text-3xl font-bold transition-all duration-200 group-has-data-[collapsible=icon]/sidebar-wrapper:text-sm">
-              Manage Bookings
+              Manage Vacations
             </div>
           </div>
         </header>
@@ -76,7 +76,7 @@ export default function Booking() {
         <div className="bg-muted/50 flex md:min-h-min p-4">
           <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
             <Input type="Search" placeholder="Search" />
-            <Button variant="outline">+ Add Booking</Button>
+            <Button variant="outline">+ Add Vacation</Button>
           </div>
         </div>
 
@@ -87,9 +87,12 @@ export default function Booking() {
                 <TableHeader className="bg-muted rounded-tl-lg rounded-tr-lg">
                   <TableRow>
                     <TableHead className="w-[100px]">ID</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>Destination</TableHead>
+                    <TableHead>City</TableHead>
+                    <TableHead>Country</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Day Trip</TableHead>
+                    <TableHead>Rating</TableHead>
+                    <TableHead>Quota</TableHead>
                     <TableHead>Action</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -98,9 +101,12 @@ export default function Booking() {
                   {paginatedData.map((item) => (
                     <TableRow key={item.id}>
                       <TableCell className="font-medium">{item.id}</TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.phone_number}</TableCell>
-                      <TableCell>${item.destination}</TableCell>
+                      <TableCell>{item.city}</TableCell>
+                      <TableCell>{item.country}</TableCell>
+                      <TableCell>${item.price}</TableCell>
+                      <TableCell>{item.day_trip} days</TableCell>
+                      <TableCell>{item.rating} ★</TableCell>
+                      <TableCell>{item.quota}</TableCell>
                       <TableCell className="flex gap-2">
                         <Button variant="outline">Edit</Button>
                         <Button variant="destructive">Delete</Button>
