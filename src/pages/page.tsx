@@ -30,6 +30,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 //delete after initiate db
 import dummyData from "../assets/dummy_data.json"
@@ -112,7 +120,8 @@ export default function Page() {
                       <TableCell>{item.discount}%</TableCell>
                       <TableCell>{item.rating} ★</TableCell>
                       <TableCell>{item.quota}</TableCell>
-                      <TableCell className="flex gap-2">
+                      <TableCell className="gap-2">
+
                         <Button variant="outline">Edit</Button>
                         <Button variant="destructive">Delete</Button>
                       </TableCell>

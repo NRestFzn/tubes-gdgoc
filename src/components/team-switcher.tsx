@@ -1,4 +1,3 @@
-import * as React from "react"
 import logo from '../assets/mochi.jpg'
 import {
   SidebarMenu,
@@ -6,15 +5,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-export function TeamSwitcher({
-  teams,
-}: {
-  teams: {
-    name: string
-    logo: React.ElementType
-    plan: string
-  }[]
-}) {
+export function TeamSwitcher() {
 
   return (
     <SidebarMenu>
