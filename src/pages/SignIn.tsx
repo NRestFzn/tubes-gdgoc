@@ -49,7 +49,8 @@ export const SignIn: React.FC = (): React.ReactElement => {
                 onClick={togglePassword}
                 tabIndex={0}
                 style={{
-                  backgroundImage: `url(${showPassword ? viewEye : hideEye})`
+                  WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
+                  maskImage: `url(${showPassword ? viewEye : hideEye})`,
                 }}
               ></div>
             </div>
