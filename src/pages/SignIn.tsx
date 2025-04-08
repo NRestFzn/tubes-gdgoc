@@ -1,9 +1,14 @@
-import styles from '../styles/SignIn.module.css'
-import logo from '../assets/mochi.jpg'
+import styles from '../styles/SignIn.module.css';
+import logo from '../assets/mochi.jpg';
+import {useState} from 'react';
 
-import {LoginIcon} from '../components/SvgIcons'
+import {LoginIcon} from '../components/SvgIcons';
 
 export const SignIn: React.FC = (): React.ReactElement => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = (): void => setShowPassword((prev) => !prev);
+
   return (
     <div className={styles.background}>
       <div>
@@ -21,20 +26,27 @@ export const SignIn: React.FC = (): React.ReactElement => {
 
         <div className={styles.loginBox}>
           <div className={styles.svgContainer}>
-            <LoginIcon className={styles.icon}/>
+            <LoginIcon className={styles.icon} />
           </div>
 
           <div className={styles.title}>
             <p>Sign in with email</p>
-            <p>Make your dream vacation come true. Start looking for destination now</p>
+            <p>
+              Make your dream vacation come true. Start looking for destination
+              now
+            </p>
           </div>
 
           <form>
             <div className={styles.inputContainer}>
-              <input type="text" placeholder='Email'/>
+              <input type="text" placeholder="Email" />
             </div>
             <div className={styles.inputContainer}>
-              <input type="password" placeholder='Password' />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+              />
+              <div className={styles.eyeIcon} onClick={togglePassword}></div>
             </div>
             <p>Forgot password?</p>
             <button>Get Started</button>
@@ -49,5 +61,5 @@ export const SignIn: React.FC = (): React.ReactElement => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
