@@ -25,8 +25,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import styles from '../styles/Users.module.css';
-import {SearchIcon} from '../components/SvgIcons';
+import styles from '../../styles/Users.module.css';
+import {SearchIcon} from '../../components/SvgIcons';
 import {
   Dialog,
   DialogContent,

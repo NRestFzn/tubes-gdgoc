@@ -7,31 +7,10 @@ import type {TableColumnsType} from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
 import {User as UserInterface} from '@/utils/types';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {doc, deleteDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {useDeleteUser} from '@/hooks/useDeleteUser';
 
 const User: React.FC = (): React.ReactElement => {
   const {data, isLoading, isError} = useGetUsers();
-
-  const deleteUser = async (id: string): Promise<void> => {
-    const docRef = doc(db, 'users', id);
-    await deleteDoc(docRef);
-  };
-
-  const useDeleteUser = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-      mutationFn: deleteUser,
-      onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['getAllUsers']});
-      },
-      onError: (error) => {
-        console.error('Failed to delete user:', error);
-      },
-    });
-  };
 
   const deleteUserMutation = useDeleteUser();
 
