@@ -1,13 +1,24 @@
 import React, {useState} from 'react';
 import {User as UserInterface} from '@/utils/types';
-import {Modal, Input, notification} from 'antd';
+import {Modal, Input, notification, Spin} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddUser} from '@/hooks/useAddUser';
+import {useUpdateUser} from '@/hooks/useUpdateUser';
+import {useGetUserById} from '@/hooks/useGetUserById';
 
-const ModalForm: React.FC = (): React.ReactElement => {
+type ModalFormProps = {
+  mode: 'add' | 'edit';
+  id?: string;
+};
+
+const ModalForm: React.FC<ModalFormProps> = ({
+  mode,
+  id,
+}): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {mutate: mutateAddUser, isPending} = useAddUser();
+  const mutateAddUser = useAddUser();
+  const mutateUpdateUser = useUpdateUser();
 
   const [addUser, setAddUser] = useState<UserInterface>({
     name: '',
@@ -24,24 +35,55 @@ const ModalForm: React.FC = (): React.ReactElement => {
     }));
   };
 
+  const {data, isLoading, isError} = useGetUserById(id as string);
+
   const showModal = () => {
     setIsModalOpen(true);
+
+    if (mode === 'edit') {
+      setAddUser({
+        name: data?.name || '',
+        phone: data?.phone || '',
+        email: data?.email || '',
+        password: data?.password || '',
+      });
+    }
   };
 
   const handleOk = () => {
-    mutateAddUser(
-      {id: Date.now().toString(), ...addUser},
-      {
-        onSuccess: () => {
-          setIsModalOpen(false);
-          setAddUser({name: '', phone: '', email: '', password: ''});
-          notification.success({
-            message: 'Added!',
-            description: 'User added successfully',
-          });
-        },
-      }
-    );
+    if (mode === 'add') {
+      mutateAddUser.mutate(
+        {...addUser},
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+            setAddUser({
+              name: '',
+              phone: '',
+              email: '',
+              password: '',
+            });
+            notification.success({
+              message: 'Added!',
+              description: 'User added successfully',
+            });
+          },
+        }
+      );
+    } else if (mode === 'edit') {
+      mutateUpdateUser.mutate(
+        {id: id as string, formData: addUser},
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+            notification.success({
+              message: 'Updated!',
+              description: 'User updated successfully',
+            });
+          },
+        }
+      );
+    }
   };
 
   const handleCancel = () => {
@@ -57,14 +99,15 @@ const ModalForm: React.FC = (): React.ReactElement => {
   return (
     <>
       <Button variant="outline" onClick={showModal}>
-        + Add user
+        {mode === 'add' ? '+ Add User' : 'Edit'}
       </Button>
+
       <Modal
-        title="Add User"
+        title={mode === 'add' ? 'Add User' : 'Edit User'}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        confirmLoading={isPending}
+        confirmLoading={mutateAddUser.isPending}
       >
         <div className="flex flex-col gap-4">
           <Input
