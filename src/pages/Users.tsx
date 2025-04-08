@@ -29,6 +29,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import styles from '../styles/Users.module.css' 
+import { SearchIcon } from "../components/SvgIcons"
 import {
   Dialog,
   DialogContent,
@@ -63,7 +65,7 @@ export default function User() {
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
             />
-            <div className="text-3xl font-bold transition-all duration-200 group-has-data-[collapsible=icon]/sidebar-wrapper:text-sm">
+            <div className="text-[20px] font-bold transition-all duration-200 group-has-data-[collapsible=icon]/sidebar-wrapper:text-sm">
               Manage Users
             </div>
           </div>
@@ -74,8 +76,9 @@ export default function User() {
           className="data-[orientation=vertical]:h-4"
         />
         <div className="bg-muted/50 flex md:min-h-min p-4">
-          <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
-            <Input type="Search" placeholder="Search" />
+          <div className=" relative flex w-full max-w-3xl items-center space-x-2 gap-2">
+            <Input type="Search" placeholder="Search" className="pl-[40px]" />
+            <SearchIcon className={styles.searchIcon}/>
             <Button variant="outline">+ Add User</Button>
           </div>
         </div>
@@ -102,8 +105,8 @@ export default function User() {
                       <TableCell>{item.phone_number}</TableCell>
                       <TableCell>${item.email}</TableCell>
                       <TableCell className="flex gap-2">
-                        <Button variant="outline">Edit</Button>
-                        <Button variant="destructive">Delete</Button>
+                        <Button className={styles.editButton} variant="outline">Edit</Button>
+                        <Button className={styles.deleteButton} variant="destructive">Delete</Button>
                       </TableCell>
                     </TableRow>
                   ))}
