@@ -1,7 +1,7 @@
 import {Card, CardContent} from '@/components/ui/card';
 import AdminLayout from '../layout/AdminLayout';
 import {useGetUsers} from '@/hooks/useGetUser';
-import {Space, Table, Spin, Modal, Input} from 'antd';
+import {Space, Table, Spin, Modal, Input, notification} from 'antd';
 import {Button} from '@/components/ui/button';
 import type {TableColumnsType} from 'antd';
 import React from 'react';
@@ -40,7 +40,22 @@ const User: React.FC = (): React.ReactElement => {
 
           <Button
             variant="destructive"
-            onClick={() => deleteUserMutation.mutate(record.key)}
+            onClick={() => {
+              Modal.confirm({
+                title: 'Are you sure you want to delete this user?',
+                content: 'This action cannot be undone.',
+                onOk: () => {
+                  deleteUserMutation.mutate(record.key, {
+                    onSuccess: () => {
+                      notification.success({
+                        message: 'Deleted!',
+                        description: 'User deleted successfully.',
+                      });
+                    },
+                  });
+                },
+              });
+            }}
           >
             Delete
           </Button>

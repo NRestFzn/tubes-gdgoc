@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {User as UserInterface} from '@/utils/types';
-import {Modal, Input} from 'antd';
+import {Modal, Input, notification} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddUser} from '@/hooks/useAddUser';
 
@@ -35,6 +35,10 @@ const ModalForm: React.FC = (): React.ReactElement => {
         onSuccess: () => {
           setIsModalOpen(false);
           setAddUser({name: '', phone: '', email: '', password: ''});
+          notification.success({
+            message: 'Added!',
+            description: 'User added successfully',
+          });
         },
       }
     );
