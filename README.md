@@ -1,11 +1,11 @@
-<!--
+
 TODO:
-- fix darkmode on table (not important)
-- ubah popup agar spwan from center dari button
+- fix darkmode on table
+- ubah popup agar spwan from center bukan dari button
 - header sizing
 - form input handling
+- show password input on login page
 -
--->
 
 # TUBES GDGOC TELKOM BANDUNG - Travel Dashboard
 
