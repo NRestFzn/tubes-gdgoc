@@ -110,7 +110,7 @@ header {
   justify-content: flex-start;
   gap: 1em;
 
-  height: 37em;
+  height: 39em;
   width: 27em;
   border-radius: 30px;
 }
@@ -178,11 +178,11 @@ form {
   height: 3em;
   width: inherit;
 
-  padding-left: 40px;
+  padding-left: 41px;
 
   background: url('../assets/EnvelopeIcon.svg') no-repeat left;
-  background-size: 2em;
-  background-position: 7px;
+  background-size: 1.5em;
+  background-position: 10px;
 
   background-color: #f4f9ff;
   border: 0.5px solid #cdcdcd;
@@ -190,8 +190,8 @@ form {
 
 .inputContainer + .inputContainer > input {
   background: url('../assets/LockIcon.svg') no-repeat left;
-  background-size: 2em;
-  background-position: 7px;
+  background-size: 1.5em;
+  background-position: 10px;
 
   background-color: #f4f9ff;
 }
@@ -289,13 +289,17 @@ form button:hover {
   height: 20px;
   width: 20px;
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-color: rgb(63, 63, 63);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  -webkit-mask-position: center;
 
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 12.5px;
 
   cursor: pointer;
 }
