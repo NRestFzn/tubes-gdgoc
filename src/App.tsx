@@ -1,16 +1,44 @@
-import {Dashboard} from './pages/Dashboard.tsx';
-import {SignIn} from './pages/SignIn.tsx';
-import Destination from './pages/Destination.tsx';
-import User from './pages/Users.tsx';
-import Vacation from './pages/Vacation.tsx';
-import Booking from './pages/Booking.tsx';
+import SignIn from './pages/SignIn.tsx';
+import User from './pages/admin/User';
+import Booking from './pages/admin/Booking.tsx';
+import Vacation from './pages/admin/Vacation.tsx';
+import Destination from './pages/admin/Destination.tsx';
 import {ThemeProvider} from '@/components/theme-provider';
+import {createBrowserRouter, RouterProvider} from 'react-router';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+const routes = createBrowserRouter([
+  // {
+  //   path: '/signin',
+  //   element: <SignIn />,
+  // },
+  {
+    path: '/admin/destination',
+    element: <Destination />,
+  },
+  {
+    path: '/admin/user',
+    element: <User />,
+  },
+  {
+    path: '/admin/vacation',
+    element: <Vacation />,
+  },
+  {
+    path: '/admin/booking',
+    element: <Booking />,
+  },
+]);
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <User />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={routes} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
