@@ -1,37 +1,16 @@
 import {Card, CardContent} from '@/components/ui/card';
 import AdminLayout from '../layout/AdminLayout';
 import {useGetUsers} from '@/hooks/useGetUser';
-import {Space, Table, Spin, Modal, Input} from 'antd';
+import {Space, Table, Spin, Modal, Input, notification} from 'antd';
 import {Button} from '@/components/ui/button';
 import type {TableColumnsType} from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
 import {User as UserInterface} from '@/utils/types';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {doc, deleteDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {useDeleteUser} from '@/hooks/useDeleteUser';
 
 const User: React.FC = (): React.ReactElement => {
   const {data, isLoading, isError} = useGetUsers();
-
-  const deleteUser = async (id: string): Promise<void> => {
-    const docRef = doc(db, 'users', id);
-    await deleteDoc(docRef);
-  };
-
-  const useDeleteUser = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-      mutationFn: deleteUser,
-      onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['getAllUsers']});
-      },
-      onError: (error) => {
-        console.error('Failed to delete user:', error);
-      },
-    });
-  };
 
   const deleteUserMutation = useDeleteUser();
 
@@ -61,7 +40,22 @@ const User: React.FC = (): React.ReactElement => {
 
           <Button
             variant="destructive"
-            onClick={() => deleteUserMutation.mutate(record.key)}
+            onClick={() => {
+              Modal.confirm({
+                title: 'Are you sure you want to delete this user?',
+                content: 'This action cannot be undone.',
+                onOk: () => {
+                  deleteUserMutation.mutate(record.key, {
+                    onSuccess: () => {
+                      notification.success({
+                        message: 'Deleted!',
+                        description: 'User deleted successfully.',
+                      });
+                    },
+                  });
+                },
+              });
+            }}
           >
             Delete
           </Button>
