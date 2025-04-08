@@ -1,0 +1,202 @@
+[
+  {
+    "id": "vp_001",
+    "city": "Paris",
+    "price": 1200.50,
+    "day_trip": false,
+    "country": "France",
+    "rating": 4.8,
+    "quota": 20,
+    "action": "booked"
+  },
+  {
+    "id": "vp_002",
+    "city": "Rome",
+    "price": 950.00,
+    "day_trip": true,
+    "country": "Italy",
+    "rating": 4.5,
+    "quota": 10,
+    "action": "available"
+  },
+  {
+    "id": "vp_003",
+    "city": "Tokyo",
+    "price": 1800.75,
+    "day_trip": false,
+    "country": "Japan",
+    "rating": 4.9,
+    "quota": 15,
+    "action": "booked"
+  },
+  {
+    "id": "vp_004",
+    "city": "Cairo",
+    "price": 650.00,
+    "day_trip": true,
+    "country": "Egypt",
+    "rating": 4.3,
+    "quota": 25,
+    "action": "available"
+  },
+  {
+    "id": "vp_005",
+    "city": "New York",
+    "price": 1100.00,
+    "day_trip": false,
+    "country": "USA",
+    "rating": 4.6,
+    "quota": 12,
+    "action": "cancelled"
+  },
+  {
+    "id": "vp_006",
+    "city": "Barcelona",
+    "price": 870.00,
+    "day_trip": true,
+    "country": "Spain",
+    "rating": 4.4,
+    "quota": 30,
+    "action": "available"
+  },
+  {
+    "id": "vp_007",
+    "city": "Istanbul",
+    "price": 720.00,
+    "day_trip": true,
+    "country": "Turkey",
+    "rating": 4.7,
+    "quota": 18,
+    "action": "booked"
+  },
+  {
+    "id": "vp_008",
+    "city": "Sydney",
+    "price": 2000.00,
+    "day_trip": false,
+    "country": "Australia",
+    "rating": 4.8,
+    "quota": 10,
+    "action": "available"
+  },
+  {
+    "id": "vp_009",
+    "city": "Cape Town",
+    "price": 980.00,
+    "day_trip": true,
+    "country": "South Africa",
+    "rating": 4.5,
+    "quota": 22,
+    "action": "booked"
+  },
+  {
+    "id": "vp_010",
+    "city": "Bangkok",
+    "price": 850.50,
+    "day_trip": false,
+    "country": "Thailand",
+    "rating": 4.6,
+    "quota": 19,
+    "action": "available"
+  },
+  {
+    "id": "vp_011",
+    "city": "London",
+    "price": 1300.00,
+    "day_trip": false,
+    "country": "UK",
+    "rating": 4.7,
+    "quota": 16,
+    "action": "booked"
+  },
+  {
+    "id": "vp_012",
+    "city": "Rio de Janeiro",
+    "price": 990.00,
+    "day_trip": true,
+    "country": "Brazil",
+    "rating": 4.4,
+    "quota": 20,
+    "action": "available"
+  },
+  {
+    "id": "vp_013",
+    "city": "Toronto",
+    "price": 1250.00,
+    "day_trip": false,
+    "country": "Canada",
+    "rating": 4.6,
+    "quota": 14,
+    "action": "cancelled"
+  },
+  {
+    "id": "vp_014",
+    "city": "Berlin",
+    "price": 900.00,
+    "day_trip": true,
+    "country": "Germany",
+    "rating": 4.5,
+    "quota": 17,
+    "action": "available"
+  },
+  {
+    "id": "vp_015",
+    "city": "Marrakesh",
+    "price": 760.00,
+    "day_trip": true,
+    "country": "Morocco",
+    "rating": 4.3,
+    "quota": 28,
+    "action": "booked"
+  },
+  {
+    "id": "vp_016",
+    "city": "Seoul",
+    "price": 1450.00,
+    "day_trip": false,
+    "country": "South Korea",
+    "rating": 4.8,
+    "quota": 13,
+    "action": "available"
+  },
+  {
+    "id": "vp_017",
+    "city": "Dubai",
+    "price": 1700.00,
+    "day_trip": false,
+    "country": "UAE",
+    "rating": 4.7,
+    "quota": 11,
+    "action": "booked"
+  },
+  {
+    "id": "vp_018",
+    "city": "Lisbon",
+    "price": 880.00,
+    "day_trip": true,
+    "country": "Portugal",
+    "rating": 4.6,
+    "quota": 21,
+    "action": "available"
+  },
+  {
+    "id": "vp_019",
+    "city": "Athens",
+    "price": 940.00,
+    "day_trip": true,
+    "country": "Greece",
+    "rating": 4.5,
+    "quota": 24,
+    "action": "booked"
+  },
+  {
+    "id": "vp_020",
+    "city": "Amsterdam",
+    "price": 1150.00,
+    "day_trip": false,
+    "country": "Netherlands",
+    "rating": 4.7,
+    "quota": 20,
+    "action": "available"
+  }
+]
