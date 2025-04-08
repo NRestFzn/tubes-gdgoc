@@ -36,22 +36,18 @@ const User: React.FC = (): React.ReactElement => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button variant="outline">Edit</Button>
-
+          <ModalForm mode="edit" id={record.key} />
           <Button
             variant="destructive"
             onClick={() => {
               Modal.confirm({
                 title: 'Are you sure you want to delete this user?',
                 content: 'This action cannot be undone.',
-                onOk: () => {
-                  deleteUserMutation.mutate(record.key, {
-                    onSuccess: () => {
-                      notification.success({
-                        message: 'Deleted!',
-                        description: 'User deleted successfully.',
-                      });
-                    },
+                onOk: async () => {
+                  await deleteUserMutation.mutateAsync(record.key as string);
+                  notification.success({
+                    message: 'Deleted!',
+                    description: 'User deleted successfully',
                   });
                 },
               });
@@ -81,7 +77,7 @@ const User: React.FC = (): React.ReactElement => {
       <div className="bg-muted/50 flex md:min-h-min p-4">
         <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
           <Input type="Search" placeholder="Search" />
-          <ModalForm />
+          <ModalForm mode="add" />
         </div>
       </div>
 

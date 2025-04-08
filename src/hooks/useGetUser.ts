@@ -5,7 +5,7 @@ import { User as UserInterface } from '@/utils/types';
 
 const fetchUsers = async () => {
   const querySnapshot = await getDocs(collection(db, 'users'));
-  return querySnapshot.docs.map((doc) => ({
+   return querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Omit<UserInterface, 'id'>),
   }));

@@ -1,19 +1,19 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {doc, setDoc} from 'firebase/firestore';
+import {doc, updateDoc} from 'firebase/firestore';
 import {db} from '@/config';
 import {User} from '@/utils/types';
-import {v4} from 'uuid';
 
-export const useAddUser = () => {
+export const useUpdateUser = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (formData: User) => {
-      const id = v4();
-      const docRef = await setDoc(doc(db, 'users', id), {
+    mutationFn: async ({id, formData}: {id: string; formData: User}) => {
+      const docRef = doc(db, 'users', id);
+
+      await updateDoc(docRef, {
         ...formData,
-        id: id,
       });
+
       return docRef;
     },
     onSuccess: () => {
