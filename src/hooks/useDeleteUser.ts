@@ -14,6 +14,7 @@ export const useDeleteUser = () => {
     mutationFn: deleteUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getAllUsers'] });
+      alert('Notifier lagi di buat')
     },
     onError: (error) => {
       console.error('Failed to delete user:', error);

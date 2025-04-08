@@ -1,36 +1,19 @@
 import React, {useState} from 'react';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {doc, setDoc} from 'firebase/firestore';
 import {User as UserInterface} from '@/utils/types';
-import {db} from '@/config';
 import {Modal, Input} from 'antd';
 import {Button} from '@/components/ui/button';
+import {useAddUser} from '@/hooks/useAddUser';
 
 const ModalForm: React.FC = (): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {mutate: mutateAddUser, isPending} = useAddUser();
 
   const [addUser, setAddUser] = useState<UserInterface>({
     name: '',
     phone: '',
     email: '',
     password: '',
-  });
-
-  const createUser = async (data: UserInterface) => {
-    const id = Date.now().toString();
-    const userRef = doc(db, 'users', id);
-    await setDoc(userRef, {...data, id: id});
-    return {id, ...data};
-  };
-
-  const queryClient = useQueryClient();
-
-  const useAddUser = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['addUser']});
-      console.log('User added successfully');
-    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +29,15 @@ const ModalForm: React.FC = (): React.ReactElement => {
   };
 
   const handleOk = () => {
-    useAddUser.mutate({id: Date.now().toString(), ...addUser});
-    setIsModalOpen(false);
-    setAddUser({name: '', phone: '', email: '', password: ''});
+    mutateAddUser(
+      {id: Date.now().toString(), ...addUser},
+      {
+        onSuccess: () => {
+          setIsModalOpen(false);
+          setAddUser({name: '', phone: '', email: '', password: ''});
+        },
+      }
+    );
   };
 
   const handleCancel = () => {
@@ -71,6 +60,7 @@ const ModalForm: React.FC = (): React.ReactElement => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        confirmLoading={isPending}
       >
         <div className="flex flex-col gap-4">
           <Input
