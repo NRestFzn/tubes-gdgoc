@@ -1,6 +1,6 @@
 import SignIn from './pages/SignIn.tsx';
 import User from './pages/admin/User';
-import Booking from './pages/admin/Booking.tsx';
+import Booking from './pages/admin/Booking/index.tsx';
 import Vacation from './pages/admin/Vacation.tsx';
 import Destination from './pages/admin/Destination.tsx';
 import {ThemeProvider} from '@/components/theme-provider';
