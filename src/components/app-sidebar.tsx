@@ -27,23 +27,23 @@ const data = {
   navMain: [
     {
       title: "Destinations",
-      url: "#",
+      url: "/destinations",
       icon: MapPinHouse,
       isActive: true,
     },
     {
       title: "Vacations",
-      url: "#",
+      url: "/vacations",
       icon: TicketsPlane,
     },
     {
       title: "Users",
-      url: "#",
+      url: "/users",
       icon: UsersRound,
     },
     {
       title: "Bookings",
-      url: "#",
+      url: "/bookings",
       icon: NotebookPen,
     },
   ],

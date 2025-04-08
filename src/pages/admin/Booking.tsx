@@ -25,6 +25,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
+import styles from '../styles/Users.module.css';
+import {SearchIcon} from '../components/SvgIcons';
 import {
   Dialog,
   DialogContent,
@@ -50,15 +52,15 @@ export default function Booking() {
   return (
     <SidebarProvider>
       <SidebarInset className="group">
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12`">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
             />
-            <div className="text-3xl font-bold transition-all duration-200 group-has-data-[collapsible=icon]/sidebar-wrapper:text-sm">
-              Manage Bookings
+            <div className="text-[20px] font-bold transition-all duration-200 group-has-data-[collapsible=icon]/sidebar-wrapper:text-sm">
+              Manage Users
             </div>
           </div>
         </header>
@@ -68,9 +70,10 @@ export default function Booking() {
           className="data-[orientation=vertical]:h-4"
         />
         <div className="bg-muted/50 flex md:min-h-min p-4">
-          <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
-            <Input type="Search" placeholder="Search" />
-            <Button variant="outline">+ Add Booking</Button>
+          <div className=" relative flex w-full max-w-3xl items-center space-x-2 gap-2">
+            <Input type="Search" placeholder="Search" className="pl-[40px]" />
+            <SearchIcon className={styles.searchIcon} />
+            <Button variant="outline">+ Add User</Button>
           </div>
         </div>
 
@@ -96,8 +99,15 @@ export default function Booking() {
                       <TableCell>{item.phone_number}</TableCell>
                       <TableCell>${item.destination}</TableCell>
                       <TableCell className="flex gap-2">
-                        <Button variant="outline">Edit</Button>
-                        <Button variant="destructive">Delete</Button>
+                        <Button className={styles.editButton} variant="outline">
+                          Edit
+                        </Button>
+                        <Button
+                          className={styles.deleteButton}
+                          variant="destructive"
+                        >
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
