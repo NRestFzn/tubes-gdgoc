@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.editButton {
+  cursor: pointer;
+  border: 0.3px solid rgb(165, 165, 165);
+}
+
+.deleteButton {
+  cursor: pointer;
+  background-color: rgb(191, 0, 0);
+}
+
+.deleteButton:hover {
+  opacity: 0.75;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  width: 18px;
+  height: 18px;
+  stroke: rgb(113, 113, 113);
+}
+
+header > div {
+  padding-left: 25px;
+}
+
+header > div div {
+  /* font-family: "Roboto"; */
+  font-weight: 600;
+}

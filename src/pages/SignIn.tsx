@@ -1,7 +1,10 @@
 import styles from '../styles/SignIn.module.css'
-import logo from '../assets/mochi.jpg'
-import { useState } from 'react'
 
+import logo from '../assets/mochi.jpg'
+import viewEye from '../assets/viewEye.png';
+import hideEye from '../assets/hideEye.png';
+
+import { useState } from 'react'
 import {LoginIcon} from '../components/SvgIcons'
 
 export const SignIn: React.FC = (): React.ReactElement => {
@@ -32,7 +35,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
 
           <div className={styles.title}>
             <p>Sign in with email</p>
-            <p>Make your dream vacation come true. Start looking for destination now</p>
+            <p>Your travel management companion, all in one place.</p>
           </div>
 
           <form>
@@ -44,10 +47,14 @@ export const SignIn: React.FC = (): React.ReactElement => {
               <div 
                 className={styles.eyeIcon}
                 onClick={togglePassword}
+                tabIndex={0}
+                style={{
+                  backgroundImage: `url(${showPassword ? viewEye : hideEye})`
+                }}
               ></div>
             </div>
             <p>Forgot password?</p>
-            <button>Get Started</button>
+            <button>Start working</button>
             <p>Or sign in with</p>
           </form>
 
