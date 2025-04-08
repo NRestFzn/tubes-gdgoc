@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Booking as BookingInterface} from '@/utils/types';
-import {Modal, Input, notification, Spin} from 'antd';
+import {Modal, Input, notification} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddBooking} from '@/hooks/useAddBooking';
 import {useUpdateBooking} from '@/hooks/useUpdateBooking';

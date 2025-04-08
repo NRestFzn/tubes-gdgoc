@@ -12,3 +12,13 @@ export interface Booking {
   phone: string;
   destination: string;
 }
+
+export interface Destination {
+  id?: string;
+  city: string;
+  country: string;
+  price: number;
+  quota: number;
+  discount?: number;
+  rating?: number;
+}

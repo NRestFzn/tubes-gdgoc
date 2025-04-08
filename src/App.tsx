@@ -1,8 +1,8 @@
 import SignIn from './pages/SignIn.tsx';
 import User from './pages/admin/User';
-import Booking from './pages/admin/Booking/index.tsx';
+import Booking from './pages/admin/Booking';
 import Vacation from './pages/admin/Vacation.tsx';
-import Destination from './pages/admin/Destination.tsx';
+import Destination from './pages/admin/Destination/index.tsx';
 import {ThemeProvider} from '@/components/theme-provider';
 import {createBrowserRouter, RouterProvider} from 'react-router';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
