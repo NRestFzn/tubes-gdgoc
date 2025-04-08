@@ -4,7 +4,7 @@ import {useState} from 'react';
 
 import {LoginIcon} from '../components/SvgIcons';
 
-export const SignIn: React.FC = (): React.ReactElement => {
+const SignIn: React.FC = (): React.ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = (): void => setShowPassword((prev) => !prev);
@@ -63,3 +63,5 @@ export const SignIn: React.FC = (): React.ReactElement => {
     </div>
   );
 };
+
+export default SignIn;
