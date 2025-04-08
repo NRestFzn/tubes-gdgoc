@@ -20,7 +20,7 @@
   background-image: linear-gradient(rgba(175, 224, 255, 0.726), white);
 }
 
-header {
+.header {
   height: 5em;
   width: 100vw;
 
@@ -157,7 +157,7 @@ header {
   font-size: 0.9em;
 }
 
-form {
+.form {
   width: 19em;
 
   margin-top: 20px;
@@ -215,7 +215,7 @@ form {
   text-decoration: underline;
 }
 
-form button {
+.form button {
   background-color: black;
   color: white;
 
@@ -229,7 +229,7 @@ form button {
   transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.form button:hover {
   background-color: #353535;
 }
 

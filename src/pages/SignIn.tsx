@@ -15,7 +15,7 @@ const SignIn: React.FC = (): React.ReactElement => {
   return (
     <div className={styles.background}>
       <div>
-        <header>
+        <header className={styles.header}>
           <div className={styles.logo}>
             <img src={logo} alt="mochi-travel-logo" />
             <p>Mochi Travel</p>
@@ -37,7 +37,7 @@ const SignIn: React.FC = (): React.ReactElement => {
             <p>Your travel management companion, all in one place.</p>
           </div>
 
-          <form>
+          <form className={styles.form}>
             <div className={styles.inputContainer}>
               <input type="text" placeholder="Email" />
             </div>
