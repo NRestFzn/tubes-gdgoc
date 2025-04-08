@@ -22,3 +22,13 @@ export interface Destination {
   discount?: number;
   rating?: number;
 }
+
+export interface Vacation {
+  id?: string;
+  city: string;
+  country: string;
+  price: number;
+  dayTrip: number;
+  quota: number;
+  rating?: number;
+}
