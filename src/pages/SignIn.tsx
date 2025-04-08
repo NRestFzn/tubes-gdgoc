@@ -1,7 +1,10 @@
 import styles from '../styles/SignIn.module.css';
-import logo from '../assets/mochi.jpg';
-import {useState} from 'react';
 
+import logo from '../assets/mochi.jpg';
+import viewEye from '../assets/viewEye.png';
+import hideEye from '../assets/hideEye.png';
+
+import {useState} from 'react';
 import {LoginIcon} from '../components/SvgIcons';
 
 const SignIn: React.FC = (): React.ReactElement => {
@@ -31,10 +34,7 @@ const SignIn: React.FC = (): React.ReactElement => {
 
           <div className={styles.title}>
             <p>Sign in with email</p>
-            <p>
-              Make your dream vacation come true. Start looking for destination
-              now
-            </p>
+            <p>Your travel management companion, all in one place.</p>
           </div>
 
           <form>
@@ -46,10 +46,18 @@ const SignIn: React.FC = (): React.ReactElement => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
               />
-              <div className={styles.eyeIcon} onClick={togglePassword}></div>
+              <div
+                className={styles.eyeIcon}
+                onClick={togglePassword}
+                tabIndex={0}
+                style={{
+                  WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
+                  maskImage: `url(${showPassword ? viewEye : hideEye})`,
+                }}
+              ></div>
             </div>
             <p>Forgot password?</p>
-            <button>Get Started</button>
+            <button>Start working</button>
             <p>Or sign in with</p>
           </form>
 
