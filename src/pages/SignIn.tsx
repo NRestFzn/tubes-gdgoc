@@ -7,10 +7,42 @@ import hideEye from '../assets/hideEye.png';
 import {useState} from 'react';
 import {LoginIcon} from '../components/SvgIcons';
 
+import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+
+type AuthErrorType = 'invalid-credentials' | 'generic';
+
 const SignIn: React.FC = (): React.ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
 
   const togglePassword = (): void => setShowPassword((prev) => !prev);
+
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setErrorType(null); // clear errors if any
+      navigate('/dashboard'); // redirect on success
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const msg = error.message.toLowerCase();
+        if (msg.includes('auth/user-not-found') || msg.includes('wrong-password')) {
+          setErrorType('invalid-credentials');
+        } else {
+          setErrorType('generic');
+        }
+      } else {
+        setErrorType('generic');
+      }
+    }
+  };
 
   return (
     <div className={styles.background}>
@@ -37,14 +69,23 @@ const SignIn: React.FC = (): React.ReactElement => {
             <p>Your travel management companion, all in one place.</p>
           </div>
 
-          <form className={styles.form}>
+          <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
-              <input type="text" placeholder="Email" />
+              <input 
+                type="text" 
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className={styles.inputContainer}>
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <div
                 className={styles.eyeIcon}
@@ -56,8 +97,19 @@ const SignIn: React.FC = (): React.ReactElement => {
                 }}
               ></div>
             </div>
+
             <p>Forgot password?</p>
-            <button>Start working</button>
+
+            <button type="submit">Start working</button>
+
+            {errorType === 'invalid-credentials' && (
+              <ErrorCard msg="wrong credentials" />
+            )}
+
+            {errorType === 'generic' && (
+              <ErrorCard msg="unknown error" />
+            )}
+
             <p>Or sign in with</p>
           </form>
 
@@ -71,5 +123,13 @@ const SignIn: React.FC = (): React.ReactElement => {
     </div>
   );
 };
+
+const ErrorCard: React.FC<string> = (msg: string): React.ReactElement => {
+  return (
+    <div className={styles.errorCard}>
+      <p>${msg}</p>
+    </div>
+  )
+}
 
 export default SignIn;

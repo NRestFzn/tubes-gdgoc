@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getDocs, collection } from 'firebase/firestore';
-import { db } from '@/config';
+import { db } from '@/firebase';
 import { User as UserInterface } from '@/utils/types';
 
 const fetchUsers = async () => {
