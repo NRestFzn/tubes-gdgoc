@@ -40,27 +40,56 @@ const SignIn: React.FC = (): React.ReactElement => {
           error.code === 'auth/wrong-password'
         ) {
           setErrorType('invalid-credentials');
+          showPopup();
+
         } else {
           setErrorType('generic');
+          showPopup();
+
         }
       } else {
         setErrorType('generic');
+        showPopup();
       }
     }
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
+      await signInWithPopup(auth, googleProvider);
 
       setErrorType(null);
       navigate('/admin/destination');
 
-    } catch (error: unknown) {
+    } catch {
       setErrorType('generic');
+      showPopup();
     }
-  };  
+  };
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
+
+  const showPopup = () => {
+    setIsMounted(true);
+    setAnimationClass(styles.animateSlideIn);
+    setTimeout(() => setIsVisible(true), 300);
+  };
+
+  const hidePopup = () => {
+    setIsVisible(false);
+    setAnimationClass(styles.animateFadeOut);
+    setTimeout(() => setIsMounted(false), 300); // triggers unmount after fade-out
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      setTimeout(() => hidePopup(), 2000);
+    }
+  }, [isVisible]);
 
   return (
     <div className={styles.background}>
@@ -130,10 +159,11 @@ const SignIn: React.FC = (): React.ReactElement => {
           </div>
         </div>
 
-        {errorType && (
+        {isMounted && (
           <ErrorCard
             msg={errorType === 'invalid-credentials' ? "Invalid credentials" : "Unknown error"}
-            visible
+            onClose={hidePopup}
+            animation={animationClass}
           />
         )}
       </div>
@@ -143,37 +173,17 @@ const SignIn: React.FC = (): React.ReactElement => {
 
 type ErrorCardProps = {
   msg?: string;
-  visible?: boolean;
+  onClose: () => void;
+  animation?: string
 };
 
-const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }) => {
-  const [dismissed, setDismissed] = useState(false);
-  const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
-
-  useEffect(() => {
-    if (visible) {
-      // Reset dismissed state and show animation
-      setDismissed(false);
-      setAnimationClass(styles.animateSlideIn);
-
-      const timeout = setTimeout(() => triggerDismiss(), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [visible, msg]); // Re-run if visible or message changes
-
-  const triggerDismiss = () => {
-    setAnimationClass(styles.animateFadeOut);
-    setTimeout(() => setDismissed(true), 300); // Match fade out time
-  };
-
-  if (!visible || dismissed) return null;
-
+const ErrorCard: React.FC<ErrorCardProps> = ({ msg, onClose, animation }) => {
   return (
     <div
       className={classNames(
         "flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50",
         styles.errorCard,
-        animationClass
+        animation
       )}
     >
       <div className="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#D10002] px-[10px]">
@@ -188,7 +198,7 @@ const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }) => {
             <p className="text-white">{msg}</p>
           </div>
         </div>
-        <button onClick={triggerDismiss} className={classNames("text-gray-600 p-1 rounded-md transition-colors ease-linear", styles.closeErrorPopup)}>
+        <button onClick={onClose} className={classNames("text-gray-600 p-1 rounded-md transition-colors ease-linear", styles.closeErrorPopup)}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
