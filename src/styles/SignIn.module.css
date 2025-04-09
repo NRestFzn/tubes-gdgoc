@@ -103,6 +103,7 @@
 
 .loginBox {
   background-image: linear-gradient(#bbf5fcb9 15%, #f4feff 30%);
+  color: black !important;
 
   display: flex;
   flex-direction: column;
@@ -198,6 +199,23 @@
 
 .inputContainer > input:focus {
   outline: none;
+}
+
+/* Autofill override to prevent yellow background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+}
+
+/* Firefox-specific */
+input:-moz-autofill {
+  box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  background-color: #f4f9ff !important;
+  color: #000 !important;
 }
 
 .inputContainer + p {
@@ -316,4 +334,41 @@
 
 .closeErrorPopup:hover {
   background-color: rgba(255, 255, 255, 0.316);
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutDrop {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.errorCard {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.animateSlideIn {
+  animation: slideInFade 0.4s ease-out forwards;
+}
+
+.animateFadeOut {
+  animation: fadeOutDrop 0.3s ease-in forwards;
 }

@@ -4,14 +4,15 @@ import logo from '../assets/mochi.jpg';
 import viewEye from '../assets/viewEye.png';
 import hideEye from '../assets/hideEye.png';
 
-import {useState} from 'react';
-import {LoginIcon} from '../components/SvgIcons';
+import { useState, useEffect } from 'react';
+import { LoginIcon } from '../components/SvgIcons';
 
 import classNames from 'classnames';
-
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/firebase';
 import { useNavigate } from 'react-router-dom';
+
+import { FirebaseError } from 'firebase/app';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '@/firebase';
 
 type AuthErrorType = 'invalid-credentials' | 'generic';
 
@@ -27,15 +28,17 @@ const SignIn: React.FC = (): React.ReactElement => {
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-
+  
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setErrorType(null); // clear errors if any
-      navigate('/admin/destination'); // redirect on success
+      setErrorType(null); // Clear errors on success
+      navigate('/admin/destination'); // Redirect on success
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        const msg = error.message.toLowerCase();
-        if (msg.includes('auth/user-not-found') || msg.includes('wrong-password')) {
+      if (error instanceof FirebaseError) {
+        if (
+          error.code === 'auth/user-not-found' ||
+          error.code === 'auth/wrong-password'
+        ) {
           setErrorType('invalid-credentials');
         } else {
           setErrorType('generic');
@@ -45,6 +48,19 @@ const SignIn: React.FC = (): React.ReactElement => {
       }
     }
   };
+
+  const loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      setErrorType(null);
+      navigate('/admin/destination');
+
+    } catch (error: unknown) {
+      setErrorType('generic');
+    }
+  };  
 
   return (
     <div className={styles.background}>
@@ -108,7 +124,7 @@ const SignIn: React.FC = (): React.ReactElement => {
           </form>
 
           <div className={styles.thirdPartyContainer}>
-            <div className={styles.googleLogin}></div>
+            <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
             <div className={styles.facebookLogin}></div>
             <div className={styles.appleLogin}></div>
           </div>
@@ -130,8 +146,25 @@ type ErrorCardProps = {
   visible?: boolean;
 };
 
-const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }): React.ReactElement | null => {
+const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }) => {
   const [dismissed, setDismissed] = useState(false);
+  const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
+
+  useEffect(() => {
+    if (visible) {
+      // Reset dismissed state and show animation
+      setDismissed(false);
+      setAnimationClass(styles.animateSlideIn);
+
+      const timeout = setTimeout(() => triggerDismiss(), 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [visible, msg]); // Re-run if visible or message changes
+
+  const triggerDismiss = () => {
+    setAnimationClass(styles.animateFadeOut);
+    setTimeout(() => setDismissed(true), 300); // Match fade out time
+  };
 
   if (!visible || dismissed) return null;
 
@@ -139,7 +172,8 @@ const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }): React.Rea
     <div
       className={classNames(
         "flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50",
-        styles.errorCard
+        styles.errorCard,
+        animationClass
       )}
     >
       <div className="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#D10002] px-[10px]">
@@ -154,7 +188,7 @@ const ErrorCard: React.FC<ErrorCardProps> = ({ msg, visible = true }): React.Rea
             <p className="text-white">{msg}</p>
           </div>
         </div>
-        <button onClick={() => setDismissed(true)} className={classNames("text-gray-600 p-1 rounded-md transition-colors ease-linear", styles.closeErrorPopup)}>
+        <button onClick={triggerDismiss} className={classNames("text-gray-600 p-1 rounded-md transition-colors ease-linear", styles.closeErrorPopup)}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
