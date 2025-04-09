@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Booking as BookingInterface} from '@/utils/types';
-import {Modal, Input, notification} from 'antd';
+import {Modal, Input, notification, Form} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddBooking} from '@/hooks/useAddBooking';
 import {useUpdateBooking} from '@/hooks/useUpdateBooking';
-import {useGetBookingById} from '@/hooks/useGetBookingById';
+import {fetchBookingById} from '@/hooks/useGetBookingById';
+import {useModalForm} from '@/hooks/useModalForm';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -20,76 +20,42 @@ const ModalForm: React.FC<ModalFormProps> = ({
   const mutateAddBooking = useAddBooking();
   const mutateUpdateBooking = useUpdateBooking();
 
-  const [addBooking, setAddBooking] = useState<BookingInterface>({
-    name: '',
-    phone: '',
-    destination: '',
-  });
+  const [form] = Form.useForm();
+  const isSubmitAble = useModalForm(form);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setAddBooking((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  const {data, isLoading, isError} = useGetBookingById(id as string);
-
-  const showModal = () => {
+  const showModal = async () => {
     setIsModalOpen(true);
 
     if (mode === 'edit') {
-      setAddBooking({
-        name: data?.name || '',
-        phone: data?.phone || '',
-        destination: data?.destination || '',
-      });
+      const data = await fetchBookingById(id as string);
+      form.setFieldsValue({...data});
     }
   };
 
-  const handleOk = () => {
+  const handleSuccess = (message: string): void => {
+    setIsModalOpen(false);
+    form.resetFields();
+    notification.success({
+      message: message,
+      description: `Booking ${message.toLowerCase()} successfully`,
+    });
+  };
+
+  const handleOk = async () => {
+    await form.validateFields();
+    const values = form.getFieldsValue();
+
     if (mode === 'add') {
       mutateAddBooking.mutate(
-        {...addBooking},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            setAddBooking({
-              name: '',
-              phone: '',
-              destination: '',
-            });
-            notification.success({
-              message: 'Added!',
-              description: 'Booking added successfully',
-            });
-          },
-        }
+        {...values},
+        {onSuccess: () => handleSuccess('Added')}
       );
     } else if (mode === 'edit') {
       mutateUpdateBooking.mutate(
-        {id: id as string, formData: addBooking},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            notification.success({
-              message: 'Updated!',
-              description: 'Booking updated successfully',
-            });
-          },
-        }
+        {id: id as string, formData: values},
+        {onSuccess: () => handleSuccess('Updated')}
       );
     }
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setAddBooking({
-      name: '',
-      phone: '',
-      destination: '',
-    });
   };
 
   return (
@@ -102,29 +68,40 @@ const ModalForm: React.FC<ModalFormProps> = ({
         title={mode === 'add' ? 'Add Booking' : 'Edit Booking'}
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
-        confirmLoading={mutateAddBooking.isPending}
+        onCancel={() => {
+          setIsModalOpen(false);
+          form.resetFields();
+        }}
+        confirmLoading={
+          mutateAddBooking.isPending || mutateUpdateBooking.isPending
+        }
+        okButtonProps={{disabled: !isSubmitAble}}
       >
-        <div className="flex flex-col gap-4">
-          <Input
+        <Form form={form} layout="vertical" autoComplete="off">
+          <Form.Item
             name="name"
-            placeholder="Name"
-            onChange={handleChange}
-            value={addBooking.name}
-          />
-          <Input
+            label="Name"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Name" />
+          </Form.Item>
+
+          <Form.Item
             name="phone"
-            placeholder="Phone"
-            onChange={handleChange}
-            value={addBooking.phone}
-          />
-          <Input
+            label="Phone"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Phone" />
+          </Form.Item>
+
+          <Form.Item
             name="destination"
-            placeholder="Destination"
-            onChange={handleChange}
-            value={addBooking.destination}
-          />
-        </div>
+            label="Destination"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Destination" />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

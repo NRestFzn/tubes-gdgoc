@@ -3,7 +3,9 @@ import {doc, getDoc} from 'firebase/firestore';
 import {db} from '@/config';
 import {Booking as BookingInterface} from '@/utils/types';
 
-const fetchBookingById = async (id: string): Promise<BookingInterface> => {
+export const fetchBookingById = async (
+  id: string
+): Promise<BookingInterface> => {
   const docRef = doc(db, 'bookings', id);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {

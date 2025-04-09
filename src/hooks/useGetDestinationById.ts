@@ -3,7 +3,7 @@ import {doc, getDoc} from 'firebase/firestore';
 import {db} from '@/config';
 import {Destination as DestinationInterface} from '@/utils/types';
 
-const fetchDestinationById = async (
+export const fetchDestinationById = async (
   id: string
 ): Promise<DestinationInterface> => {
   const docRef = doc(db, 'destinations', id);

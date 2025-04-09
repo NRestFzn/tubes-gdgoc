@@ -3,7 +3,7 @@ import {doc, getDoc} from 'firebase/firestore';
 import {db} from '@/config';
 import {User as UserInterface} from '@/utils/types';
 
-const fetchUserById = async (id: string): Promise<UserInterface> => {
+export const fetchUserById = async (id: string): Promise<UserInterface> => {
   const docRef = doc(db, 'users', id);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {

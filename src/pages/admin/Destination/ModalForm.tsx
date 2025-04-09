@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {Destination as DestinationInterface} from '@/utils/types';
-import {Modal, Input, notification, Select} from 'antd';
+import {Modal, notification, Select, Form, InputNumber} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddDestination} from '@/hooks/useAddDestination';
 import {useUpdateDestination} from '@/hooks/useUpdateDestination';
-import {useGetDestinationById} from '@/hooks/useGetDestinationById';
+import {fetchDestinationById} from '@/hooks/useGetDestinationById';
 import countryCity from '../../../utils/countryCity';
-import countryData from '../../../lib/countries-cities.json';
+import {useModalForm} from '@/hooks/useModalForm';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -18,108 +17,46 @@ const ModalForm: React.FC<ModalFormProps> = ({
   id,
 }): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [setCountry, isSetCountry] = useState<string | undefined>(undefined);
-  const [setCity, isSetCity] = useState<string | undefined>(undefined);
-  const [setDisableCity, isSetDisableCity] = useState(true);
 
   const mutateAddDestination = useAddDestination();
   const mutateUpdateDestination = useUpdateDestination();
 
-  const [addDestination, setAddDestination] = useState<DestinationInterface>({
-    city: '',
-    country: '',
-    price: 0,
-    quota: 0,
-    discount: 0,
-  });
+  const [form] = Form.useForm();
+  const isSubmitAble = useModalForm(form);
+  const selectedCountry = Form.useWatch(['country'], form);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setAddDestination((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  const {data} = useGetDestinationById(id as string);
-
-  const showModal = () => {
+  const showModal = async () => {
     setIsModalOpen(true);
+    const data = await fetchDestinationById(id as string);
 
     if (mode === 'edit') {
-      isSetCity(data?.city || '');
-      isSetCountry(data?.country || '');
-      isSetDisableCity(false);
-      setAddDestination({
-        city: setCity as string,
-        country: setCountry as string,
-        price: data?.price || 0,
-        quota: data?.quota || 0,
-        discount: data?.discount || 0,
-      });
+      form.setFieldsValue({...data});
     }
   };
 
-  const handleOk = () => {
-    if (mode === 'add') {
-      mutateAddDestination.mutate(
-        {...addDestination},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            setAddDestination({
-              city: '',
-              country: '',
-              price: 0,
-              quota: 0,
-              discount: 0,
-            });
-            notification.success({
-              message: 'Added!',
-              description: 'Destination added successfully',
-            });
-          },
-        }
-      );
-    } else if (mode === 'edit') {
-      mutateUpdateDestination.mutate(
-        {id: id as string, formData: addDestination},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            notification.success({
-              message: 'Updated!',
-              description: 'Destination updated successfully',
-            });
-          },
-        }
-      );
-    }
-  };
-
-  const handleCancel = () => {
+  const handleSuccess = (message: string): void => {
     setIsModalOpen(false);
-    setAddDestination({
-      city: '',
-      country: '',
-      price: 0,
-      quota: 0,
-      discount: 0,
+    form.resetFields();
+    notification.success({
+      message: message,
+      description: `Destination ${message.toLowerCase()} successfully`,
     });
   };
 
-  const onChangeSelect = (name: string, value: string) => {
-    setAddDestination((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+  const handleOk = async () => {
+    await form.validateFields();
+    const values = form.getFieldsValue();
 
-    if (name === 'country') {
-      isSetCountry(value);
-      isSetDisableCity(false);
-      isSetCity(undefined);
-    } else if (name === 'city') {
-      isSetCity(value);
+    if (mode === 'add') {
+      mutateAddDestination.mutate(
+        {...values},
+        {onSuccess: () => handleSuccess('Added')}
+      );
+    } else if (mode === 'edit') {
+      mutateUpdateDestination.mutate(
+        {id: id as string, formData: values},
+        {onSuccess: () => handleSuccess('Updated')}
+      );
     }
   };
 
@@ -133,61 +70,60 @@ const ModalForm: React.FC<ModalFormProps> = ({
         title={mode === 'add' ? 'Add Destination' : 'Edit Destination'}
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={() => {
+          setIsModalOpen(false);
+          form.resetFields();
+        }}
         confirmLoading={
           mutateAddDestination.isPending || mutateUpdateDestination.isPending
         }
+        okButtonProps={{disabled: !isSubmitAble}}
       >
-        <div className="flex flex-col gap-4">
-          <Select
-            showSearch
-            placeholder="Select destination country"
-            optionFilterProp="label"
-            onChange={(value: string) => onChangeSelect('country', value)}
-            onSearch={() => {}}
-            options={countryCity.getCountries().map((e: string) => {
-              return {value: e, label: e};
-            })}
-            allowClear
-            value={setCountry}
-          />
-          <Select
-            showSearch
-            placeholder="Select destination city"
-            optionFilterProp="label"
-            onChange={(value: string) => onChangeSelect('city', value)}
-            onSearch={() => {}}
-            options={countryCity
-              .getCities(setCountry as keyof (typeof countryData)['countries'])
-              .map((e: string) => {
+        <Form form={form} layout="vertical" autoComplete="off">
+          <Form.Item name="country" label="Country" rules={[{required: true}]}>
+            <Select
+              showSearch
+              placeholder="Select destination country"
+              optionFilterProp="label"
+              options={countryCity.getCountries().map((e: string) => {
                 return {value: e, label: e};
               })}
-            allowClear
-            disabled={setDisableCity}
-            value={setCity}
-          />
-          <Input
-            name="price"
-            placeholder="Price"
-            onChange={handleChange}
-            value={addDestination.price}
-            type="number"
-          />
-          <Input
+              allowClear
+              onChange={() => {
+                form.setFieldValue('city', undefined);
+              }}
+            />
+          </Form.Item>
+          <Form.Item name="city" label="City" rules={[{required: true}]}>
+            <Select
+              showSearch
+              placeholder="Select destination city"
+              optionFilterProp="label"
+              disabled={!selectedCountry}
+              options={countryCity
+                .getCities(selectedCountry)
+                .map((e: string) => {
+                  return {value: e, label: e};
+                })}
+              allowClear
+            />
+          </Form.Item>
+          <Form.Item name="price" label="Price" rules={[{required: true}]}>
+            <InputNumber style={{width: '100%'}} placeholder="Price" />
+          </Form.Item>
+
+          <Form.Item
             name="discount"
-            placeholder="Discount"
-            onChange={handleChange}
-            value={addDestination.discount}
-            type="number"
-          />
-          <Input
-            name="quota"
-            placeholder="Quota"
-            onChange={handleChange}
-            value={addDestination.quota}
-            type="number"
-          />
-        </div>
+            label="Discount"
+            rules={[{required: true}]}
+          >
+            <InputNumber style={{width: '100%'}} placeholder="Discount" />
+          </Form.Item>
+
+          <Form.Item name="quota" label="Quota" rules={[{required: true}]}>
+            <InputNumber style={{width: '100%'}} placeholder="Quota" />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

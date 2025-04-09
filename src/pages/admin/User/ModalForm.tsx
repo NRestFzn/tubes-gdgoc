@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {User as UserInterface} from '@/utils/types';
-import {Modal, Input, notification, Spin} from 'antd';
+import {Modal, Input, notification, Form} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddUser} from '@/hooks/useAddUser';
 import {useUpdateUser} from '@/hooks/useUpdateUser';
-import {useGetUserById} from '@/hooks/useGetUserById';
+import {fetchUserById} from '@/hooks/useGetUserById';
+import {useModalForm} from '@/hooks/useModalForm';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -20,80 +20,42 @@ const ModalForm: React.FC<ModalFormProps> = ({
   const mutateAddUser = useAddUser();
   const mutateUpdateUser = useUpdateUser();
 
-  const [addUser, setAddUser] = useState<UserInterface>({
-    name: '',
-    phone: '',
-    email: '',
-    password: '',
-  });
+  const [form] = Form.useForm();
+  const isSubmitAble = useModalForm(form);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setAddUser((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  const {data, isLoading, isError} = useGetUserById(id as string);
-
-  const showModal = () => {
+  const showModal = async () => {
     setIsModalOpen(true);
+    const data = await fetchUserById(id as string);
 
     if (mode === 'edit') {
-      setAddUser({
-        name: data?.name || '',
-        phone: data?.phone || '',
-        email: data?.email || '',
-        password: data?.password || '',
-      });
+      form.setFieldsValue({...data});
     }
   };
 
-  const handleOk = () => {
+  const handleSuccess = (message: string): void => {
+    setIsModalOpen(false);
+    form.resetFields();
+    notification.success({
+      message: message,
+      description: `User ${message.toLowerCase()} successfully`,
+    });
+  };
+
+  const handleOk = async () => {
+    await form.validateFields();
+    const values = form.getFieldsValue();
+
     if (mode === 'add') {
       mutateAddUser.mutate(
-        {...addUser},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            setAddUser({
-              name: '',
-              phone: '',
-              email: '',
-              password: '',
-            });
-            notification.success({
-              message: 'Added!',
-              description: 'User added successfully',
-            });
-          },
-        }
+        {...values},
+        {onSuccess: () => handleSuccess('Added')}
       );
     } else if (mode === 'edit') {
       mutateUpdateUser.mutate(
-        {id: id as string, formData: addUser},
-        {
-          onSuccess: () => {
-            setIsModalOpen(false);
-            notification.success({
-              message: 'Updated!',
-              description: 'User updated successfully',
-            });
-          },
-        }
+        {id: id as string, formData: values},
+        {onSuccess: () => handleSuccess('Updated')}
       );
     }
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setAddUser({
-      name: '',
-      phone: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
@@ -106,35 +68,46 @@ const ModalForm: React.FC<ModalFormProps> = ({
         title={mode === 'add' ? 'Add User' : 'Edit User'}
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
-        confirmLoading={mutateAddUser.isPending}
+        onCancel={() => {
+          setIsModalOpen(false);
+          form.resetFields();
+        }}
+        confirmLoading={mutateAddUser.isPending || mutateUpdateUser.isPending}
+        okButtonProps={{disabled: !isSubmitAble}}
       >
-        <div className="flex flex-col gap-4">
-          <Input
+        <Form form={form} layout="vertical" autoComplete="off">
+          <Form.Item
             name="name"
-            placeholder="Name"
-            onChange={handleChange}
-            value={addUser.name}
-          />
-          <Input
+            label="Name"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Name" />
+          </Form.Item>
+
+          <Form.Item
             name="phone"
-            placeholder="Phone"
-            onChange={handleChange}
-            value={addUser.phone}
-          />
-          <Input
+            label="Phone"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Phone" />
+          </Form.Item>
+
+          <Form.Item
             name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            value={addUser.email}
-          />
-          <Input.Password
+            label="Email"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input placeholder="Email" />
+          </Form.Item>
+
+          <Form.Item
             name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            value={addUser.password}
-          />
-        </div>
+            label="Password"
+            rules={[{min: 1, required: true}]}
+          >
+            <Input.Password placeholder="Password" />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );
