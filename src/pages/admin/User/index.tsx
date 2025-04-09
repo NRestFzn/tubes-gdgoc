@@ -73,7 +73,7 @@ const User: React.FC = (): React.ReactElement => {
   });
 
   return (
-    <AdminLayout headerTitle="Manage User" toolBarPlaceholder="+ Add User">
+    <AdminLayout headerTitle="Manage User">
       <div className="bg-muted/50 flex md:min-h-min p-4">
         <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
           <Input type="Search" placeholder="Search" />
