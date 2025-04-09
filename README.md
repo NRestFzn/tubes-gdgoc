@@ -7,6 +7,57 @@ TODO:
 - show password input on login page
 -
 
+### ✅ Spek Checklist
+
+#### 🔐 Authentication – Login Page
+- [ ] Input: Email & Password  
+- [ ] Bisa menampilkan/menyembunyikan password  
+- [ ] Validasi input dan tampilkan error jika salah  
+- [ ] Redirect ke Manage Destination jika login berhasil  
+
+#### 🧭 Navigation  
+**Profile Section**
+- [x] Menampilkan nama dan foto user  
+- [x] Klik → dropdown muncul dengan opsi "Logout"  
+- [ ] Logout → redirect ke login page  
+- [x] Klik di luar dropdown → dropdown tertutup  
+
+**Sidebar Navigation**
+- [x] Sidebar berisi item:
+  - [x] Manage Destination  
+  - [x] Manage Vacation  
+  - [x] Manage User  
+  - [x] Manage Booking  
+- [x] Klik item → redirect ke halaman yang sesuai  
+
+#### 📋 CRUD Pages  
+**Manage Destination**
+- [ ] Tabel dengan kolom: City, Price, Discount, Country, Rating, Quota  
+- [ ] Action: Tambah, Edit, Hapus, Search  
+- [ ] Pagination jika data > 10  
+- [ ] Validasi form  
+- [ ] Konfirmasi sebelum hapus  
+
+**Manage Vacation**
+- [ ] Tabel dengan kolom: City, Country, Price, Day Trip, Rating, Quota  
+- [ ] Action: Tambah, Edit, Hapus, Search  
+- [ ] Pagination jika data > 10  
+- [ ] Validasi form  
+- [ ] Konfirmasi sebelum hapus  
+- [ ] Validasi kuota sebelum tambah data  
+
+**Manage User**
+- [ ] Tabel dengan kolom: Name, Phone Number  
+- [ ] Action: Tambah, Edit, Hapus, Search  
+- [ ] Pagination jika data > 10  
+
+**Manage Booking**
+- [ ] Tabel dengan kolom: Name, Phone, Destination/Vacation  
+- [ ] Tidak bisa tambah data jika kuota penuh  
+- [ ] Action: Tambah, Edit, Hapus, Search  
+- [ ] Validasi semua field  
+---
+
 # TUBES GDGOC TELKOM BANDUNG - Travel Dashboard
 
 ## Deskripsi
@@ -18,8 +69,6 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi *Product Design
 - 
 - 
 - 
-
----
 
 ## Cara Menjalankan Aplikasi
 
@@ -47,8 +96,6 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi *Product Design
 
 5. **Deploy (Opsional)**
    - Hubungkan dengan [Vercel](https://vercel.com/) dan deploy langsung dari GitHub repo.
-
----
 
 ## Teknologi yang Digunakan
 
