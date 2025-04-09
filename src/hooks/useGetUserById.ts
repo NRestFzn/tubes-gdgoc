@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {doc, getDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {db} from '@/firebase';
 import {User as UserInterface} from '@/utils/types';
 
 export const fetchUserById = async (id: string): Promise<UserInterface> => {

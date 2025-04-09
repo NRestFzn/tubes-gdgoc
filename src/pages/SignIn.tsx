@@ -4,18 +4,94 @@ import logo from '../assets/mochi.jpg';
 import viewEye from '../assets/viewEye.png';
 import hideEye from '../assets/hideEye.png';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {LoginIcon} from '../components/SvgIcons';
+
+import classNames from 'classnames';
+import {useNavigate} from 'react-router-dom';
+
+import {FirebaseError} from 'firebase/app';
+import {signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
+import {auth, googleProvider} from '@/firebase';
+
+type AuthErrorType = 'invalid-credentials' | 'generic';
 
 const SignIn: React.FC = (): React.ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
 
   const togglePassword = (): void => setShowPassword((prev) => !prev);
+
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setErrorType(null); // Clear errors on success
+      navigate('/admin/destination'); // Redirect on success
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        if (
+          error.code === 'auth/user-not-found' ||
+          error.code === 'auth/wrong-password'
+        ) {
+          setErrorType('invalid-credentials');
+          showPopup();
+        } else {
+          setErrorType('generic');
+          showPopup();
+        }
+      } else {
+        setErrorType('generic');
+        showPopup();
+      }
+    }
+  };
+
+  const loginWithGoogle = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      await signInWithPopup(auth, googleProvider);
+
+      setErrorType(null);
+      navigate('/admin/destination');
+    } catch {
+      setErrorType('generic');
+      showPopup();
+    }
+  };
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
+
+  const showPopup = () => {
+    setIsMounted(true);
+    setAnimationClass(styles.animateSlideIn);
+    setTimeout(() => setIsVisible(true), 300);
+  };
+
+  const hidePopup = () => {
+    setIsVisible(false);
+    setAnimationClass(styles.animateFadeOut);
+    setTimeout(() => setIsMounted(false), 300); // triggers unmount after fade-out
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      setTimeout(() => hidePopup(), 2000);
+    }
+  }, [isVisible]);
 
   return (
     <div className={styles.background}>
       <div>
-        <header>
+        <header className={styles.header}>
           <div className={styles.logo}>
             <img src={logo} alt="mochi-travel-logo" />
             <p>Mochi Travel</p>
@@ -37,14 +113,23 @@ const SignIn: React.FC = (): React.ReactElement => {
             <p>Your travel management companion, all in one place.</p>
           </div>
 
-          <form>
+          <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
-              <input type="text" placeholder="Email" />
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className={styles.inputContainer}>
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <div
                 className={styles.eyeIcon}
@@ -56,17 +141,102 @@ const SignIn: React.FC = (): React.ReactElement => {
                 }}
               ></div>
             </div>
+
             <p>Forgot password?</p>
-            <button>Start working</button>
+
+            <button type="submit">Start working</button>
+
             <p>Or sign in with</p>
           </form>
 
           <div className={styles.thirdPartyContainer}>
-            <div className={styles.googleLogin}></div>
+            <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
             <div className={styles.facebookLogin}></div>
             <div className={styles.appleLogin}></div>
           </div>
         </div>
+
+        {isMounted && (
+          <ErrorCard
+            msg={
+              errorType === 'invalid-credentials'
+                ? 'Invalid credentials'
+                : 'Unknown error'
+            }
+            onClose={hidePopup}
+            animation={animationClass}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+type ErrorCardProps = {
+  msg?: string;
+  onClose: () => void;
+  animation?: string;
+};
+
+const ErrorCard: React.FC<ErrorCardProps> = ({msg, onClose, animation}) => {
+  return (
+    <div
+      className={classNames(
+        'flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50',
+        styles.errorCard,
+        animation
+      )}
+    >
+      <div className="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#D10002] px-[10px]">
+        <div className="flex gap-2">
+          <div className="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="white"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+              />
+            </svg>
+          </div>
+          <div>
+            <p
+              className="text-white"
+              style={{fontWeight: 600, fontSize: '13.5px'}}
+            >
+              Please try again
+            </p>
+            <p className="text-white">{msg}</p>
+          </div>
+        </div>
+        <button
+          onClick={onClose}
+          className={classNames(
+            'text-gray-600 p-1 rounded-md transition-colors ease-linear',
+            styles.closeErrorPopup
+          )}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="white"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );

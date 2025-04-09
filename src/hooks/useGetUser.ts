@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { getDocs, collection } from 'firebase/firestore';
-import { db } from '@/config';
-import { User as UserInterface } from '@/utils/types';
+import {useQuery} from '@tanstack/react-query';
+import {getDocs, collection} from 'firebase/firestore';
+import {db} from '@/firebase';
+import {User as UserInterface} from '@/utils/types';
 
 const fetchUsers = async () => {
   const querySnapshot = await getDocs(collection(db, 'users'));
-   return querySnapshot.docs.map((doc) => ({
+  return querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Omit<UserInterface, 'id'>),
   }));

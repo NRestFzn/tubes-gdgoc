@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {doc, getDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {db} from '@/firebase';
 import {Booking as BookingInterface} from '@/utils/types';
 
 export const fetchBookingById = async (

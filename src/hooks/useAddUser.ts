@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {doc, setDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {db} from '@/firebase';
 import {User} from '@/utils/types';
 import {v4} from 'uuid';
 

@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {doc, deleteDoc} from 'firebase/firestore';
-import {db} from '@/config';
+import {db} from '@/firebase';
 
 const deleteBooking = async (id: string): Promise<void> => {
   const docRef = doc(db, 'bookings', id);
