@@ -58,3 +58,21 @@ export const SearchIcon: React.FC<IconProps> = ({ className }): React.ReactEleme
     <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );
+
+export const AlertIcon: React.FC<IconProps> = ({ className }): React.ReactElement => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" stroke="black" strokeWidth="2" fill="none" />
+    <text 
+      x="12" 
+      y="16" 
+      textAnchor="middle" 
+      fontSize="12" 
+      fill="black" 
+      fontWeight="bold" 
+      fontFamily="Arial, sans-serif"
+    >
+      !
+    </text>
+  </svg>
+);
+
