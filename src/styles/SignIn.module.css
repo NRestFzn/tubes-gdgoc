@@ -6,6 +6,7 @@
   background-size: cover;
 
   height: 55rem;
+  width: 100vw;
 }
 
 .background > div {
@@ -13,16 +14,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5em;
 
   height: inherit;
+  width: inherit;
 
   background-image: linear-gradient(rgba(175, 224, 255, 0.726), white);
 }
 
 .header {
   height: 5em;
-  width: 100vw;
+  width: inherit;
 
   position: absolute;
   top: 0;
@@ -32,8 +33,6 @@
   justify-content: center;
 
   scale: 0.9;
-
-  gap: 65rem;
 }
 
 .logo {
@@ -41,8 +40,13 @@
   align-items: center;
   justify-content: center;
 
+  position: absolute;
+  left: 10px;
+
   gap: 10px;
   cursor: pointer;
+
+  width: fit-content;
 }
 
 .logo img {
@@ -66,12 +70,15 @@
   align-items: center;
   justify-content: center;
 
-  gap: 15px;
+  position: absolute;
+  right:  -5px;
 }
 
 .headerButtons button {
   height: 45px;
   width: 100px;
+
+  margin-right: 15px;
 
   background-color: #8e97ec;
   border: 1px solid white;
@@ -109,7 +116,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 1em;
+  gap: 10px;
+
+  margin-left: 5px;
 
   height: 39em;
   width: 27em;
@@ -371,4 +380,28 @@ input:-moz-autofill {
 
 .animateFadeOut {
   animation: fadeOutDrop 0.3s ease-in forwards;
+}
+
+@media (max-width: 768px) {
+
+  .headerButtons > button {
+    display: none;
+  }
+
+  label > input + svg > g > g > rect {
+    stroke-width: 0.7;
+  }
+
+  .loginBox {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 455px) {
+  .background {
+    width: 1005;
+  }
+  .loginBox {
+    width: 100%;
+  }
 }
