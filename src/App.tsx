@@ -1,4 +1,5 @@
 import SignIn from './pages/auth/SignIn.tsx';
+import SignUp from './pages/auth/SignUp.tsx';
 import User from './pages/admin/User';
 import Booking from './pages/admin/Booking';
 import Vacation from './pages/admin/Vacation';
@@ -13,6 +14,10 @@ const routes = createBrowserRouter([
   {
     path: '/sign-in',
     element: <SignIn />,
+  },
+  {
+    path: '/sign-up',
+    element: <SignUp />
   },
   {
     path: '/admin',
