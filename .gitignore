@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-.env
+/.env
 git-filter-repo
 
 node_modules

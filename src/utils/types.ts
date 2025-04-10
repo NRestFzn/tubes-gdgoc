@@ -4,6 +4,8 @@ export interface User {
   phone: string;
   email: string;
   password: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface Booking {
@@ -11,6 +13,8 @@ export interface Booking {
   name: string;
   phone: string;
   destination: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface Destination {
@@ -21,6 +25,8 @@ export interface Destination {
   quota: number;
   discount?: number;
   rating?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface Vacation {
@@ -31,4 +37,6 @@ export interface Vacation {
   dayTrip: number;
   quota: number;
   rating?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
