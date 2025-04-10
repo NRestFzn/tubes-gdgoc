@@ -1,16 +1,17 @@
-import {Card, CardContent} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import AdminLayout from '../layout/AdminLayout';
-import {useGetVacations} from '@/hooks/useGetVacations';
-import {Space, Table, Spin, Modal, Input, notification} from 'antd';
-import {Button} from '@/components/ui/button';
-import type {TableColumnsType} from 'antd';
+import { useGetVacations } from '@/hooks/useGetVacations';
+import { Space, Table, Spin, Modal, Input, notification } from 'antd';
+import { Button } from '@/components/ui/button';
+import type { TableColumnsType } from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
-import {Vacation as VacationInterface} from '@/utils/types';
-import {useDeleteVacation} from '@/hooks/useDeleteVacation';
+import { Vacation as VacationInterface } from '@/utils/types';
+import { useDeleteVacation } from '@/hooks/useDeleteVacation';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Vacation: React.FC = (): React.ReactElement => {
-  const {data, isLoading, isError} = useGetVacations();
+  const { data, isLoading, isError } = useGetVacations();
 
   const deleteVacationMutation = useDeleteVacation();
 
@@ -100,7 +101,9 @@ const Vacation: React.FC = (): React.ReactElement => {
 
       <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4 pt-0">
         {isLoading ? (
-          <Spin size="large" />
+          <div className="flex items-center justify-center h-full">
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </div>
         ) : (
           <Card>
             <CardContent>
