@@ -12,9 +12,9 @@ import {useState, useEffect} from 'react';
 import {LoginIcon} from '@/components/SvgIcons';
 import {useNavigate} from 'react-router-dom';
 
-import { PreloadImage } from './helper/preload';
-import { loginWithEmail } from './helper/loginWithEmail';
-import { loginWithGoogle } from './helper/loginWithGoogle';
+import { PreloadImage } from '../../helper/preload';
+import { loginWithEmail } from '../../helper/loginWithEmail';
+import { loginWithGoogle } from '../../helper/loginWithGoogle';
 
 export type AuthErrorType = 'invalid-credentials' | 'generic';
 

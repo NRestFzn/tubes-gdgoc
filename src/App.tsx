@@ -9,13 +9,15 @@ import AdminLayout from './pages/admin/layout/AdminLayout.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; // dari react-router-dom!
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProtectedRoute from './ProtectedRoute';
+import NotFound from './pages/NotFound.tsx';
+import RedirectBasedOnAuth from './helper/RedirectBasedOnAuth.tsx';
 
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/admin/destination" replace />,
+    element: <RedirectBasedOnAuth/>,
   },
   {
     path: '/sign-in',
@@ -33,11 +35,16 @@ const routes = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+      { index: true, element: <Navigate to="destination" replace /> },
       { path: 'destination', element: <Destination /> },
       { path: 'user', element: <User /> },
       { path: 'booking', element: <Booking /> },
       { path: 'vacation', element: <Vacation /> },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);
 

@@ -1,24 +1,21 @@
-// components/ProtectedRoute.tsx
-import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { Navigate } from 'react-router-dom';
-import { auth } from './firebase';
+import { useState } from 'react';
+import { User } from 'firebase/auth';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
+import NotFound from './pages/NotFound';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default function ProtectedRoute({ children }: Props) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
-    });
-    return () => unsubscribe();
-  }, []);
+  useGetUserInfo(setUser, setIsLoading);
 
-  if (isAuthenticated === null) return null; // atau spinner
+  if (isLoading) {
+    return null; // or a fancy spinner
+  }
 
-  return isAuthenticated ? <>{children}</> : <Navigate to="/sign-in" />;
+  return user ? <>{children}</> : <NotFound />;
 }
