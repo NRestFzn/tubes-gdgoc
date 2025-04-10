@@ -2,6 +2,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {doc, updateDoc} from 'firebase/firestore';
 import {db} from '@/firebase';
 import {User} from '@/utils/types';
+import bcrypt from 'bcryptjs';
 
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
@@ -12,6 +13,8 @@ export const useUpdateUser = () => {
 
       await updateDoc(docRef, {
         ...formData,
+        password: bcrypt.hashSync(formData.password, 7),
+        updatedAt: new Date(),
       });
 
       return docRef;
