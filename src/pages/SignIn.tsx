@@ -114,70 +114,72 @@ const SignIn: React.FC = (): React.ReactElement => {
             </div>
           </header>
 
-          <div className={styles.loginBox}>
-            <div className={styles.svgContainer}>
-              <LoginIcon className={styles.icon} />
-            </div>
-
-            <div className={styles.title}>
-              <p>Sign in with email</p>
-              <p>Your travel management companion, all in one place.</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.inputContainer}>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className={styles.inputContainer}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <div
-                  className={styles.eyeIcon}
-                  onClick={togglePassword}
-                  tabIndex={0}
-                  style={{
-                    WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
-                    maskImage: `url(${showPassword ? viewEye : hideEye})`,
-                  }}
-                ></div>
+          <main className={styles.mainContainer}>
+            <div className={styles.loginBox}>
+              <div className={styles.svgContainer}>
+                <LoginIcon className={styles.icon} />
               </div>
 
-              <p>Forgot password?</p>
+              <div className={styles.title}>
+                <p>Sign in with email</p>
+                <p>Your travel management companion, all in one place.</p>
+              </div>
 
-              <button type="submit">Start working</button>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputContainer}>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.inputContainer}>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <div
+                    className={styles.eyeIcon}
+                    onClick={togglePassword}
+                    tabIndex={0}
+                    style={{
+                      WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
+                      maskImage: `url(${showPassword ? viewEye : hideEye})`,
+                    }}
+                  ></div>
+                </div>
 
-              <p>Or sign in with</p>
-            </form>
+                <p>Forgot password?</p>
 
-            <div className={styles.thirdPartyContainer}>
-              <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
-              <div className={styles.facebookLogin}></div>
-              <div className={styles.appleLogin}></div>
+                <button type="submit">Start working</button>
+
+                <p>Or sign in with</p>
+              </form>
+
+              <div className={styles.thirdPartyContainer}>
+                <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
+                <div className={styles.facebookLogin}></div>
+                <div className={styles.appleLogin}></div>
+              </div>
             </div>
-          </div>
 
-          {isMounted && (
-            <ErrorCard
-              msg={
-                errorType === 'invalid-credentials'
-                  ? 'Invalid credentials'
-                  : 'Unknown error'
-              }
-              onClose={hidePopup}
-              animation={animationClass}
-            />
-          )}
+            {isMounted && (
+              <ErrorCard
+                msg={
+                  errorType === 'invalid-credentials'
+                    ? 'Invalid credentials'
+                    : 'Unknown error'
+                }
+                onClose={hidePopup}
+                animation={animationClass}
+              />
+            )}
+          </main>
         </div>
       </div>
     </div>
@@ -334,6 +336,12 @@ const StyledWrapperB = styled.div`
   cursor: pointer;
 
   margin-left : 20px;
+}
+
+@media (max-width: 350px) {
+  #theme-toggle-button {
+    display: none;
+  }
 }
 
 /* Hide default HTML checkbox */

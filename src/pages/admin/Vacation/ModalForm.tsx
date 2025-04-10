@@ -118,7 +118,12 @@ const ModalForm: React.FC<ModalFormProps> = ({
               allowClear
             />
           </Form.Item>
-          <Form.Item name="price" label="Price" rules={[{required: true}]}>
+          <Form.Item 
+            name="price" 
+            label="Price" 
+            rules={[{required: true}]}
+            hasFeedback
+          >
             <InputNumber style={{width: '100%'}} placeholder="Price" />
           </Form.Item>
 

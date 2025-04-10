@@ -10,7 +10,6 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  height: 55rem;
   width: 100vw;
 }
 
@@ -18,9 +17,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  height: inherit;
   width: inherit;
 
   background-image: linear-gradient(rgba(175, 224, 255, 0.726), white);
@@ -29,9 +27,6 @@
 .header {
   height: 5em;
   width: inherit;
-
-  position: absolute;
-  top: 0;
 
   display: flex;
   align-items: center;
@@ -76,7 +71,7 @@
   justify-content: center;
 
   position: absolute;
-  right:  -5px;
+  right:  5px;
 }
 
 .headerButtons button {
@@ -113,6 +108,13 @@
   color: white;
 }
 
+.mainContainer {
+  width: 100%;
+  height: 115vh;
+  display: grid;
+  place-items: center;
+}
+
 .loginBox {
   background-image: linear-gradient(#bbf5fcb9 15%, #f4feff 30%);
   color: black !important;
@@ -122,8 +124,6 @@
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-
-  margin-left: 5px;
 
   height: 39em;
   width: 27em;
@@ -408,5 +408,37 @@ input:-moz-autofill {
   }
   .loginBox {
     width: 100%;
+  }
+}
+
+@media (max-width: 350px) {
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+  }
+
+  .inputContainer > input {
+    width: 90vw;
+  }
+
+  .inputContainer + p {
+    position: absolute;
+    right: 20px;
+  }
+
+  .form button {
+    margin-top: 45px;
+    width: 90vw;
+  }
+
+  .thirdPartyContainer {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 260px) {
+  .logo {
+    display: none;
   }
 }

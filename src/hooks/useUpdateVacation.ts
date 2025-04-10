@@ -12,6 +12,7 @@ export const useUpdateVacation = () => {
 
       await updateDoc(docRef, {
         ...formData,
+        updatedAt: new Date(),
       });
 
       return docRef;

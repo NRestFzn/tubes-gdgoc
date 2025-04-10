@@ -28,7 +28,8 @@ const ModalForm: React.FC<ModalFormProps> = ({
     const data = await fetchUserById(id as string);
 
     if (mode === 'edit') {
-      form.setFieldsValue({ ...data });
+      const {password, ...restField} = data;
+      form.setFieldsValue({...restField});
     }
   };
 

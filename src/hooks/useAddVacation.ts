@@ -11,8 +11,10 @@ export const useAddVacation = () => {
     mutationFn: async (formData: Vacation) => {
       const id = v4();
       const docRef = await setDoc(doc(db, 'vacations', id), {
-        ...formData,
         id: id,
+        ...formData,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
       return docRef;
     },

@@ -12,6 +12,7 @@ export const useUpdateBooking = () => {
 
       await updateDoc(docRef, {
         ...formData,
+        updatedAt: new Date(),
       });
 
       return docRef;
