@@ -80,7 +80,12 @@ const ModalForm: React.FC<ModalFormProps> = ({
         okButtonProps={{disabled: !isSubmitAble}}
       >
         <Form form={form} layout="vertical" autoComplete="off">
-          <Form.Item name="country" label="Country" rules={[{required: true}]}>
+          <Form.Item 
+            name="country" 
+            label="Country" 
+            rules={[{required: true}]}
+            hasFeedback
+          >
             <Select
               showSearch
               placeholder="Select destination country"
@@ -94,7 +99,12 @@ const ModalForm: React.FC<ModalFormProps> = ({
               }}
             />
           </Form.Item>
-          <Form.Item name="city" label="City" rules={[{required: true}]}>
+          <Form.Item 
+            name="city" 
+            label="City" 
+            rules={[{required: true}]}
+            hasFeedback
+          >
             <Select
               showSearch
               placeholder="Select destination city"
@@ -108,7 +118,12 @@ const ModalForm: React.FC<ModalFormProps> = ({
               allowClear
             />
           </Form.Item>
-          <Form.Item name="price" label="Price" rules={[{required: true}]}>
+          <Form.Item 
+            name="price" 
+            label="Price" 
+            rules={[{required: true}]}
+            hasFeedback
+          >
             <InputNumber style={{width: '100%'}} placeholder="Price" />
           </Form.Item>
 
