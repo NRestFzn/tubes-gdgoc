@@ -1,12 +1,18 @@
 TODO:
-
-- ubah popup agar spwan from center bukan dari button
-- header sizing
-- show password input on login page
 - search bar on admin dashboard
 - limit get data
 - dark mode (search bar, notification, modal)
-
+- add rating on form
+- search feature
+- data filling
+- deploy vercel
+- default route
+- route protection
+- logout
+- user profile picture
+- user greeter
+- 
+  
 ### ✅ Spek Checklist
 
 #### 🔐 Authentication – Login Page
