@@ -162,3 +162,7 @@
 .dark .ant-pagination-item-active a {
   color: var(--foreground) !important;
 }
+
+.dark .ant-empty-description {
+  color: var(--foreground) !important;
+}
