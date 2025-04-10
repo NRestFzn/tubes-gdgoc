@@ -11,19 +11,19 @@ TODO:
 
 #### 🔐 Authentication – Login Page
 
-- [✅] Input: Email & Password
-- [✅] Bisa menampilkan/menyembunyikan password
-- [✅] Validasi input dan tampilkan error jika salah
-- [✅] Redirect ke Manage Destination jika login berhasil
+- [x] Input: Email & Password
+- [x] Bisa menampilkan/menyembunyikan password
+- [x] Validasi input dan tampilkan error jika salah
+- [x] Redirect ke Manage Destination jika login berhasil
 
 Display
-- [✅] Dekstop Display
-- [✅] Responsive on Zoom
-- [x] Mobile UI
+- [x] Dekstop Display
+- [x] Responsive on Zoom
+- [ ] Mobile UI
 
 Add-ons (Optional)
--  [✅] Google Sign-in
--  [x] Dark Mode 
+-  [x] Google Sign-in
+-  [ ] Dark Mode 
 
 #### 🧭 Navigation
 
