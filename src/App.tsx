@@ -1,22 +1,37 @@
+import { Navigate } from 'react-router-dom';
 import SignIn from './pages/auth/SignIn.tsx';
+import SignUp from './pages/auth/SignUp.tsx';
 import User from './pages/admin/User';
 import Booking from './pages/admin/Booking';
 import Vacation from './pages/admin/Vacation';
 import Destination from './pages/admin/Destination/index';
 import AdminLayout from './pages/admin/layout/AdminLayout.tsx';
-import {createBrowserRouter, RouterProvider} from 'react-router';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'; // dari react-router-dom!
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProtectedRoute from './ProtectedRoute';
 
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
   {
+    path: '/',
+    element: <Navigate to="/admin/destination" replace />,
+  },
+  {
     path: '/sign-in',
     element: <SignIn />,
   },
   {
+    path: '/sign-up',
+    element: <SignUp />
+  },
+  {
     path: '/admin',
-    element: <AdminLayout/>,
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { path: 'destination', element: <Destination /> },
       { path: 'user', element: <User /> },
