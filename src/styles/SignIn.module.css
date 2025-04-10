@@ -336,20 +336,6 @@ input:-moz-autofill {
   cursor: pointer;
 }
 
-.errorCard {
-  position: absolute;
-  top: 20vh;
-  right: 2vw;
-}
-
-.closeErrorPopup {
-  cursor: pointer;
-}
-
-.closeErrorPopup:hover {
-  background-color: rgba(255, 255, 255, 0.316);
-}
-
 @keyframes slideInFade {
   0% {
     opacity: 0;
@@ -372,13 +358,6 @@ input:-moz-autofill {
   }
 }
 
-.errorCard {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-}
-
 .animateSlideIn {
   animation: slideInFade 0.4s ease-out forwards;
 }
@@ -391,10 +370,6 @@ input:-moz-autofill {
 
   .headerButtons > button {
     display: none;
-  }
-
-  label > input + svg > g > g > rect {
-    stroke-width: 0.7;
   }
 
   .loginBox {

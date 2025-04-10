@@ -1,4 +1,4 @@
-import SignIn from './pages/SignIn.tsx';
+import SignIn from './pages/auth/SignIn.tsx';
 import User from './pages/admin/User';
 import Booking from './pages/admin/Booking';
 import Vacation from './pages/admin/Vacation';
