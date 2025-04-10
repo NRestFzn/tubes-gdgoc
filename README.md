@@ -1,11 +1,10 @@
 TODO:
 
-- fix darkmode on table
 - ubah popup agar spwan from center bukan dari button
 - header sizing
-- form input handling
 - show password input on login page
--
+- search bar on admin dashboard
+- limit get data
 
 ### ✅ Spek Checklist
 
@@ -23,7 +22,7 @@ Display
 
 Add-ons (Optional)
 -  [x] Google Sign-in
--  [ ] Dark Mode 
+-  [ ] Dark Mode
 
 #### 🧭 Navigation
 
@@ -47,33 +46,33 @@ Add-ons (Optional)
 
 **Manage Destination**
 
-- [ ] Tabel dengan kolom: City, Price, Discount, Country, Rating, Quota
-- [ ] Action: Tambah, Edit, Hapus, Search
-- [ ] Pagination jika data > 10
-- [ ] Validasi form
-- [ ] Konfirmasi sebelum hapus
+- [x] Tabel dengan kolom: City, Price, Discount, Country, Rating, Quota
+- [x] Action: Tambah, Edit, Hapus, Search
+- [x] Pagination jika data > 10
+- [x] Validasi form
+- [x] Konfirmasi sebelum hapus
 
 **Manage Vacation**
 
-- [ ] Tabel dengan kolom: City, Country, Price, Day Trip, Rating, Quota
-- [ ] Action: Tambah, Edit, Hapus, Search
-- [ ] Pagination jika data > 10
-- [ ] Validasi form
-- [ ] Konfirmasi sebelum hapus
-- [ ] Validasi kuota sebelum tambah data
+- [x] Tabel dengan kolom: City, Country, Price, Day Trip, Rating, Quota
+- [x] Action: Tambah, Edit, Hapus, Search
+- [x] Pagination jika data > 10
+- [x] Validasi form
+- [x] Konfirmasi sebelum hapus
+- [x] Validasi kuota sebelum tambah data
 
 **Manage User**
 
-- [ ] Tabel dengan kolom: Name, Phone Number
-- [ ] Action: Tambah, Edit, Hapus, Search
-- [ ] Pagination jika data > 10
+- [x] Tabel dengan kolom: Name, Phone Number
+- [x] Action: Tambah, Edit, Hapus, Search
+- [x] Pagination jika data > 10
 
 **Manage Booking**
 
-- [ ] Tabel dengan kolom: Name, Phone, Destination/Vacation
-- [ ] Tidak bisa tambah data jika kuota penuh
-- [ ] Action: Tambah, Edit, Hapus, Search
-- [ ] Validasi semua field
+- [x] Tabel dengan kolom: Name, Phone, Destination/Vacation
+- [x] Tidak bisa tambah data jika kuota penuh
+- [x] Action: Tambah, Edit, Hapus, Search
+- [x] Validasi semua field
 
 ---
 
