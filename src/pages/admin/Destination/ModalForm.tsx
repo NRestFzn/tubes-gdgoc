@@ -103,7 +103,6 @@ const ModalForm: React.FC<ModalFormProps> = ({
             name="city"
             label="City"
             rules={[{ required: true }]}
-
             hasFeedback
           >
             <Select
