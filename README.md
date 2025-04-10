@@ -5,6 +5,7 @@ TODO:
 - show password input on login page
 - search bar on admin dashboard
 - limit get data
+- dark mode (search bar, notification, modal)
 
 ### ✅ Spek Checklist
 
