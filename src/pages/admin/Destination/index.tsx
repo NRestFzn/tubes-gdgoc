@@ -1,16 +1,17 @@
-import {Card, CardContent} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import AdminLayout from '../layout/AdminLayout';
-import {useGetDestinations} from '@/hooks/useGetDestinations';
-import {Space, Table, Spin, Modal, Input, notification} from 'antd';
-import {Button} from '@/components/ui/button';
-import type {TableColumnsType} from 'antd';
+import { useGetDestinations } from '@/hooks/useGetDestinations';
+import { Space, Table, Spin, Modal, Input, notification } from 'antd';
+import { Button } from '@/components/ui/button';
+import type { TableColumnsType } from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
-import {Destination as DestinationInterface} from '@/utils/types';
-import {useDeleteDestination} from '@/hooks/useDeleteDestination';
+import { Destination as DestinationInterface } from '@/utils/types';
+import { useDeleteDestination } from '@/hooks/useDeleteDestination';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Destination: React.FC = (): React.ReactElement => {
-  const {data, isLoading, isError} = useGetDestinations();
+  const { data, isLoading, isError } = useGetDestinations();
 
   const deleteDestinationMutation = useDeleteDestination();
 
@@ -100,7 +101,9 @@ const Destination: React.FC = (): React.ReactElement => {
 
       <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4 pt-0">
         {isLoading ? (
-          <Spin size="large" />
+          <div className="flex items-center justify-center h-full">
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </div>
         ) : (
           <Card>
             <CardContent>

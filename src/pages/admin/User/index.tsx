@@ -1,16 +1,17 @@
-import {Card, CardContent} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import AdminLayout from '../layout/AdminLayout';
-import {useGetUsers} from '@/hooks/useGetUser';
-import {Space, Table, Spin, Modal, Input, notification} from 'antd';
-import {Button} from '@/components/ui/button';
-import type {TableColumnsType} from 'antd';
+import { useGetUsers } from '@/hooks/useGetUser';
+import { Space, Table, Spin, Modal, Input, notification } from 'antd';
+import { Button } from '@/components/ui/button';
+import type { TableColumnsType } from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
-import {User as UserInterface} from '@/utils/types';
-import {useDeleteUser} from '@/hooks/useDeleteUser';
+import { User as UserInterface } from '@/utils/types';
+import { useDeleteUser } from '@/hooks/useDeleteUser';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const User: React.FC = (): React.ReactElement => {
-  const {data, isLoading, isError} = useGetUsers();
+  const { data, isLoading, isError } = useGetUsers();
 
   const deleteUserMutation = useDeleteUser();
 
@@ -83,7 +84,9 @@ const User: React.FC = (): React.ReactElement => {
 
       <div className="bg-muted/50 min-h-[100vh] flex-1 md:min-h-min p-4 pt-0">
         {isLoading ? (
-          <Spin size="large" />
+          <div className="flex items-center justify-center h-full">
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </div>
         ) : (
           <Card>
             <CardContent>
