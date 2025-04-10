@@ -12,9 +12,15 @@ export interface Booking {
   id?: string;
   name: string;
   phone: string;
-  destination: string;
+  destination: {
+    city: string;
+    country: string;
+  };
   createdAt?: Date;
   updatedAt?: Date;
+
+  userId?: string;
+  destinationId?: string;
 }
 
 export interface Destination {

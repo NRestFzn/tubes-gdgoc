@@ -67,7 +67,7 @@ const Booking: React.FC = (): React.ReactElement => {
       no: index + 1,
       name: e.name,
       phone: e.phone,
-      destination: e.destination,
+      destination: `${e.destination.city}, ${e.destination.country}`,
     };
   });
 

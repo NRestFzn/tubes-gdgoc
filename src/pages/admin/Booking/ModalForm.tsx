@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
-import {Modal, Input, notification, Form} from 'antd';
+import {Modal, notification, Form, Select} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddBooking} from '@/hooks/useAddBooking';
 import {useUpdateBooking} from '@/hooks/useUpdateBooking';
 import {fetchBookingById} from '@/hooks/useGetBookingById';
 import {useModalForm} from '@/hooks/useModalForm';
+import {useGetUsers} from '@/hooks/useGetUser';
+import {
+  Destination as DestinationInterface,
+  User as UserInterface,
+} from '@/utils/types';
+import {useGetAvailableDestination} from '@/hooks/useGetDestinations';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -28,7 +34,10 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
     if (mode === 'edit') {
       const data = await fetchBookingById(id as string);
-      form.setFieldsValue({...data});
+      form.setFieldsValue({
+        userId: data.name,
+        destinationId: `${data.destination.city}, ${data.destination.country}`,
+      });
     }
   };
 
@@ -58,6 +67,18 @@ const ModalForm: React.FC<ModalFormProps> = ({
     }
   };
 
+  const userOptions = useGetUsers().data?.map((e: UserInterface) => ({
+    value: e.id,
+    label: e.name,
+  }));
+
+  const destinationOptions = useGetAvailableDestination().data?.map(
+    (e: DestinationInterface) => ({
+      value: e.id,
+      label: `${e.city}, ${e.country}`,
+    })
+  );
+
   return (
     <>
       <Button variant="outline" onClick={showModal}>
@@ -79,27 +100,27 @@ const ModalForm: React.FC<ModalFormProps> = ({
       >
         <Form form={form} layout="vertical" autoComplete="off">
           <Form.Item
-            name="name"
-            label="Name"
+            name="userId"
+            label="User"
             rules={[{min: 1, required: true}]}
           >
-            <Input placeholder="Name" />
+            <Select
+              showSearch
+              placeholder="Select user"
+              options={userOptions}
+            />
           </Form.Item>
 
           <Form.Item
-            name="phone"
-            label="Phone"
-            rules={[{min: 1, required: true}]}
-          >
-            <Input placeholder="Phone" />
-          </Form.Item>
-
-          <Form.Item
-            name="destination"
+            name="destinationId"
             label="Destination"
             rules={[{min: 1, required: true}]}
           >
-            <Input placeholder="Destination" />
+            <Select
+              showSearch
+              placeholder="Select destination"
+              options={destinationOptions}
+            />
           </Form.Item>
         </Form>
       </Modal>
