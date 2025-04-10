@@ -1,26 +1,34 @@
 import {SidebarInset, SidebarProvider} from '@/components/ui/sidebar';
 import {AppSidebar} from '@/components/app-sidebar';
 import AdminHeader from '../partials/Header';
+import {ThemeProvider} from '@/components/theme-provider';
 import React from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
-type AdminLayoutProps = {
-  headerTitle?: string;
-};
+const AdminLayout: React.FC = (): React.ReactElement => {
+  const location = useLocation();
 
-const AdminLayout: React.FC<React.PropsWithChildren<AdminLayoutProps>> = ({
-  children,
-  headerTitle,
-}): React.ReactElement => {
+  const headerTitleMap: Record<string, string> = {
+    '/admin/destination': 'Manage Destinations',
+    '/admin/user': 'Manage Users',
+    '/admin/booking': 'Manage Bookings',
+    '/admin/vacation': 'Manage Vacations',
+  };
+
+  const headerTitle = headerTitleMap[location.pathname] ?? 'Admin Dashboard';
+
   return (
-    <div>
-      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset className="group">
-          <AdminHeader headerTitle={headerTitle} />
-          {children}
-        </SidebarInset>
-      </SidebarProvider>
-    </div>
+    <ThemeProvider>
+      <div>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset className="group">
+            <AdminHeader headerTitle={headerTitle} />
+            <Outlet />
+          </SidebarInset>
+        </SidebarProvider>
+      </div>
+    </ThemeProvider>
   );
 };
 

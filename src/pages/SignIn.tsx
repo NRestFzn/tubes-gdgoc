@@ -89,87 +89,96 @@ const SignIn: React.FC = (): React.ReactElement => {
     }
   }, [isVisible]);
 
+  type ThemeType = 'light' | 'dark';
+  const [theme, setTheme] = useState<ThemeType>('light')
+
+  const handleThemeToggle = (): void => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <div className={styles.background}>
-      <div>
-        <header className={styles.header}>
-          <div className={styles.logo}>
-            <img src={logo} alt="mochi-travel-logo" />
-            <p>Mochi Travel</p>
-          </div>
-
-          <div className={styles.headerButtons}>
-            <button>Sign in</button>
-            <button>Sign Up</button>
-            <ThemeSwitch/>
-            <MenuDropdown/>
-          </div>
-        </header>
-
-        <div className={styles.loginBox}>
-          <div className={styles.svgContainer}>
-            <LoginIcon className={styles.icon} />
-          </div>
-
-          <div className={styles.title}>
-            <p>Sign in with email</p>
-            <p>Your travel management companion, all in one place.</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputContainer}>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <div
-                className={styles.eyeIcon}
-                onClick={togglePassword}
-                tabIndex={0}
-                style={{
-                  WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
-                  maskImage: `url(${showPassword ? viewEye : hideEye})`,
-                }}
-              ></div>
+    <div data-theme={theme} className={styles.wrapper}>
+      <div className={styles.background}>
+        <div>
+          <header className={styles.header}>
+            <div className={styles.logo}>
+              <img src={logo} alt="mochi-travel-logo" />
+              <p>Mochi Travel</p>
             </div>
 
-            <p>Forgot password?</p>
+            <div className={styles.headerButtons}>
+              <button>Sign in</button>
+              <button>Sign Up</button>
+              <ThemeSwitch onClick={handleThemeToggle}/>
+              <MenuDropdown/>
+            </div>
+          </header>
 
-            <button type="submit">Start working</button>
+          <div className={styles.loginBox}>
+            <div className={styles.svgContainer}>
+              <LoginIcon className={styles.icon} />
+            </div>
 
-            <p>Or sign in with</p>
-          </form>
+            <div className={styles.title}>
+              <p>Sign in with email</p>
+              <p>Your travel management companion, all in one place.</p>
+            </div>
 
-          <div className={styles.thirdPartyContainer}>
-            <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
-            <div className={styles.facebookLogin}></div>
-            <div className={styles.appleLogin}></div>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.inputContainer}>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className={styles.inputContainer}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <div
+                  className={styles.eyeIcon}
+                  onClick={togglePassword}
+                  tabIndex={0}
+                  style={{
+                    WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
+                    maskImage: `url(${showPassword ? viewEye : hideEye})`,
+                  }}
+                ></div>
+              </div>
+
+              <p>Forgot password?</p>
+
+              <button type="submit">Start working</button>
+
+              <p>Or sign in with</p>
+            </form>
+
+            <div className={styles.thirdPartyContainer}>
+              <div className={styles.googleLogin} onClick={loginWithGoogle}></div>
+              <div className={styles.facebookLogin}></div>
+              <div className={styles.appleLogin}></div>
+            </div>
           </div>
+
+          {isMounted && (
+            <ErrorCard
+              msg={
+                errorType === 'invalid-credentials'
+                  ? 'Invalid credentials'
+                  : 'Unknown error'
+              }
+              onClose={hidePopup}
+              animation={animationClass}
+            />
+          )}
         </div>
-
-        {isMounted && (
-          <ErrorCard
-            msg={
-              errorType === 'invalid-credentials'
-                ? 'Invalid credentials'
-                : 'Unknown error'
-            }
-            onClose={hidePopup}
-            animation={animationClass}
-          />
-        )}
       </div>
     </div>
   );
@@ -245,10 +254,14 @@ const ErrorCard: React.FC<ErrorCardProps> = ({msg, onClose, animation}) => {
   );
 };
 
-const ThemeSwitch = () => {
+type ThemeSwitchProps = {
+  onClick: () => void;
+}
+
+const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ onClick }): React.ReactElement => {
   return (
     <StyledWrapperB>
-      <label id="theme-toggle-button">
+      <label id="theme-toggle-button" onClick={onClick}>
         <input type="checkbox" id="toggle" />
         <svg viewBox="0 0 69.667 44" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">

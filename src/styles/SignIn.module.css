@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+.wrapper,
+.wrapper * {
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
 .background {
   background-image: url('../assets/cloudBackground.png');
   background-repeat: no-repeat;

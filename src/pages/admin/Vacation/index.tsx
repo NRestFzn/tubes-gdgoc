@@ -1,5 +1,4 @@
 import { Card, CardContent } from '@/components/ui/card';
-import AdminLayout from '../layout/AdminLayout';
 import { useGetVacations } from '@/hooks/useGetVacations';
 import { Space, Table, Spin, Modal, Input, notification } from 'antd';
 import { Button } from '@/components/ui/button';
@@ -91,7 +90,7 @@ const Vacation: React.FC = (): React.ReactElement => {
   });
 
   return (
-    <AdminLayout headerTitle="Manage Vacation">
+    <div>
       <div className="bg-muted/50 flex md:min-h-min p-4">
         <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
           <Input type="Search" placeholder="Search" />
@@ -112,7 +111,7 @@ const Vacation: React.FC = (): React.ReactElement => {
           </Card>
         )}
       </div>
-    </AdminLayout>
+    </div>
   );
 };
 
