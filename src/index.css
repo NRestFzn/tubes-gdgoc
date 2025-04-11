@@ -75,7 +75,7 @@
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.546 0.245 262.881);
   --sidebar-primary-foreground: oklch(0.379 0.146 265.522);
-  --sidebar-accent: oklch(0.14 0.00 0);
+  --sidebar-accent: oklch(0.14 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.488 0.243 264.376);
@@ -131,10 +131,14 @@
 /* .ant-table-wrapper {
   @apply !bg-red-500;
 } */
-
 .dark .ant-table .ant-table-cell,
 .dark .ant-pagination,
-.dark .ant-pagination-item {
+.dark .ant-pagination-item,
+.dark .ant-select-selector,
+.dark .ant-btn-variant-outlined,
+.dark .ant-btn:disabled,
+.dark .ant-btn[disabled],
+.dark .ant-notification-notice {
   background-color: var(--card) !important;
   border-color: var(--border) !important;
   color: var(--foreground) !important;
@@ -165,4 +169,42 @@
 
 .dark .ant-empty-description {
   color: var(--foreground) !important;
+}
+
+.dark .ant-modal-content,
+.dark .ant-modal-title {
+  background-color: var(--card) !important;
+}
+
+.dark .ant-modal-title,
+.dark .ant-form-item-required,
+.dark .ant-modal-close-x,
+.dark .ant-select-arrow,
+.dark .ant-input::placeholder,
+.dark .ant-select-item,
+.dark .ant-select-selection-placeholder,
+.dark .ant-modal-confirm-title,
+.dark .ant-modal-confirm-content,
+.dark .ant-notification-notice-message,
+.dark .ant-notification-notice-description {
+  color: white !important;
+}
+
+.dark .ant-input-outlined {
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
+  color: white !important;
+}
+
+.dark .ant-select-dropdown {
+  background-color: var(--card) !important;
+  color: white !important;
+}
+
+.dark .ant-select-item-option-active {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .ant-select-item-option-selected {
+  background-color: rgba(255, 255, 255, 0.2) !important;
 }
