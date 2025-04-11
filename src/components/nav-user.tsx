@@ -1,16 +1,22 @@
-"use client"
-import { useState, useEffect } from "react"
+"use client";
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { signOut, User as FirebaseUser } from "firebase/auth";
+import { auth } from "@/firebase";
+import useGetUserInfo from "@/hooks/useGetUserInfo";
+
 import {
   SunMoon,
   ChevronsUpDown,
   LogOut,
-} from "lucide-react"
+} from "lucide-react";
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,31 +29,32 @@ import {
   DropdownMenuTrigger,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "@/components/ui/dropdown-menu"
+  DropdownMenuPortal,
+} from "@/components/ui/dropdown-menu";
+
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { DropdownMenuPortal } from "@radix-ui/react-dropdown-menu"
-import { useTheme } from "@/components/theme-provider"
+} from "@/components/ui/sidebar";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }
-}) {
-  const { isMobile } = useSidebar()
-  const { setTheme } = useTheme()
+import { useTheme } from "@/components/theme-provider";
+
+export function NavUser() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const { isMobile } = useSidebar();
+  const { setTheme } = useTheme();
   const [themeValue, setThemeValue] = useState<"light" | "dark" | "system">("light");
+
+  useGetUserInfo(setUser)
+
   useEffect(() => {
-    setTheme(themeValue)
-  }, [themeValue, setTheme])
+    setTheme(themeValue);
+  }, [themeValue, setTheme]);
+
+  if (!user) return null; // atau bisa tampilkan spinner/loading di sini
 
   return (
     <SidebarMenu>
@@ -59,12 +66,12 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">MT</AvatarFallback>
+                <AvatarImage src={user.photoURL ?? ""} alt={user.displayName ?? "User"} />
+                <AvatarFallback className="rounded-lg">U</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-medium">{user.displayName ?? "Unknown"}</span>
+                <span className="truncate text-xs">{user.email ?? "No email"}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -79,12 +86,12 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarImage src={user.photoURL ?? ""} alt={user.displayName ?? "User"} />
+                  <AvatarFallback className="rounded-lg">U</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-medium">{user.displayName ?? "Unknown"}</span>
+                  <span className="truncate text-xs">{user.email ?? "No email"}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -100,7 +107,12 @@ export function NavUser({
                   data-align="end"
                   sideOffset={4}
                 >
-                  <DropdownMenuRadioGroup value={themeValue} onValueChange={(value) => setThemeValue(value as "light" | "dark" | "system")}>
+                  <DropdownMenuRadioGroup
+                    value={themeValue}
+                    onValueChange={(value) =>
+                      setThemeValue(value as "light" | "dark" | "system")
+                    }
+                  >
                     <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
@@ -110,7 +122,17 @@ export function NavUser({
             </DropdownMenuSub>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                signOut(auth)
+                  .then(() => {
+                    navigate("/sign-in");
+                  })
+                  .catch((error) => {
+                    console.error("Error saat logout:", error);
+                  });
+              }}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
@@ -118,5 +140,5 @@ export function NavUser({
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

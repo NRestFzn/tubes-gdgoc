@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.wrapper,
+.wrapper * {
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.background {
+  background-image: url('../assets/cherry_blossom.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  width: 100vw;
+}
+
+.background > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: inherit;
+
+  /* background-image: linear-gradient(#fa84867a, #a58d2d85); */
+}
+
+.header {
+  height: 5em;
+  width: inherit;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  scale: 0.9;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 10px;
+
+  gap: 10px;
+  cursor: pointer;
+
+  width: fit-content;
+}
+
+.logo img {
+  height: 40px;
+  width: 40px;
+
+  border-radius: 10px;
+}
+
+.logo p {
+  font-family: 'Roboto';
+  font-weight: 550;
+  font-size: 1.3em;
+
+  color: white;
+  letter-spacing: 1.5px;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right:  5px;
+}
+
+.headerButtons button {
+  height: 45px;
+  width: 100px;
+
+  margin-right: 15px;
+
+  background-color: #8e97ec;
+  border: 1px solid white;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.headerButtons button:hover {
+  background-color: #626fe5;
+}
+
+.headerButtons > button + button {
+  background-color: white;
+  border: 1px solid #8e97ec;
+  color: #8e97ec;
+}
+
+.headerButtons > button + button:hover {
+  background-color: #b48eec;
+  border: 1px solid white;
+  color: white;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 115vh;
+  display: grid;
+  place-items: center;
+}
+
+.loginBox {
+  background-image: linear-gradient(#ffb6bc 15%, #f4feff 90%);
+  color: black !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  height: 39em;
+  width: 27em;
+  border-radius: 30px;
+}
+
+.svgContainer {
+  height: 4em;
+  width: 4em;
+  scale: 0.9;
+
+  margin-top: 3em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+  border-radius: 20px;
+}
+
+.icon {
+  width: 2em;
+  height: 2em;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  scale: 0.9;
+}
+
+.loginBox .title > p {
+  font-weight: 510;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.loginBox .title > p + p {
+  padding-top: 5px;
+  width: 20em;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.form {
+  width: 19em;
+
+  margin-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputContainer {
+  width: inherit;
+  position: relative;
+}
+
+.inputContainer > input {
+  height: 3em;
+  width: inherit;
+
+  padding-left: 41px;
+
+  background: url('../assets/EnvelopeIcon.svg') no-repeat left;
+  background-size: 1.5em;
+  background-position: 10px;
+
+  background-color: #fff2e9;
+  border: 0.5px solid #cdcdcd;
+}
+
+.inputContainer + .inputContainer > input {
+  background: url('../assets/LockIcon.svg') no-repeat left;
+  background-size: 1.5em;
+  background-position: 10px;
+
+  background-color: #fff2e9;
+}
+
+.inputContainer > input:focus {
+  outline: none;
+}
+
+/* Autofill override to prevent yellow background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+}
+
+/* Firefox-specific */
+input:-moz-autofill {
+  box-shadow: 0 0 0 1000px #f4f9ff inset !important;
+  background-color: #f4f9ff !important;
+  color: #000 !important;
+}
+
+.inputContainer + p {
+  font-weight: 400;
+  font-size: 12px;
+  text-align: right;
+
+  width: inherit;
+
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.inputContainer + p:hover {
+  text-decoration: underline;
+}
+
+.form button {
+  background-color: black;
+  color: white;
+
+  margin-top: 15px;
+
+  height: 3.5em;
+  width: inherit;
+
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #353535;
+}
+
+.loginBox button + p {
+  text-align: center;
+  margin-top: 5px;
+  cursor: default;
+
+  font-size: 12px;
+}
+
+.thirdPartyContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.thirdPartyContainer div {
+  width: 80px;
+  height: 50px;
+
+  background-color: white;
+  border: 0.5px solid #e0e0e0;
+
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.thirdPartyContainer div:hover {
+  opacity: 0.8;
+}
+
+.googleLogin {
+  background-image: url('../assets/googleIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.facebookLogin {
+  background-image: url('../assets/facebookIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.appleLogin {
+  background-image: url('../assets/appleIcon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.eyeIcon {
+  height: 20px;
+  width: 20px;
+
+  background-color: rgb(63, 63, 63);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  -webkit-mask-position: center;
+
+  position: absolute;
+  right: 10px;
+  bottom: 12.5px;
+
+  cursor: pointer;
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutDrop {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.animateSlideIn {
+  animation: slideInFade 0.4s ease-out forwards;
+}
+
+.animateFadeOut {
+  animation: fadeOutDrop 0.3s ease-in forwards;
+}
+
+@media (max-width: 768px) {
+
+  .headerButtons > button {
+    display: none;
+  }
+
+  .loginBox {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 455px) {
+  .background {
+    width: 1005;
+  }
+  .loginBox {
+    width: 100%;
+  }
+}
+
+@media (max-width: 350px) {
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+  }
+
+  .inputContainer > input {
+    width: 90vw;
+  }
+
+  .inputContainer + p {
+    position: absolute;
+    right: 20px;
+  }
+
+  .form button {
+    margin-top: 45px;
+    width: 90vw;
+  }
+
+  .thirdPartyContainer {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 260px) {
+  .logo {
+    display: none;
+  }
+}
