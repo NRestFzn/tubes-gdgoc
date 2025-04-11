@@ -16,6 +16,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,9 +49,21 @@ export function NavUser() {
   const [themeValue, setThemeValue] = useState<"light" | "dark" | "system">("light");
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        try {
+          await firebaseUser.reload(); // force reload data
+          const updatedUser = auth.currentUser;
+          setUser(updatedUser);
+          console.log("Updated user:", updatedUser);
+        } catch (err) {
+          console.error("Error during user reload:", err);
+        }
+      } else {
+        setUser(null);
+      }
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -58,7 +71,7 @@ export function NavUser() {
     setTheme(themeValue);
   }, [themeValue, setTheme]);
 
-  if (!user) return null; // atau bisa tampilkan spinner/loading di sini
+  if (!user) return null;
 
   return (
     <SidebarMenu>
