@@ -13,9 +13,13 @@ import {useDebounce} from '@/hooks/useDebounce';
 const User: React.FC = (): React.ReactElement => {
   const [city, setCity] = useState<string>('');
 
-  const debounceCity = useDebounce(city, 300);
+  const debounce = useDebounce(city, 300);
 
-  const {data, isLoading, isError} = useGetUsers(debounceCity);
+  const {data, isLoading, isError} = useGetUsers({
+    field: 'name',
+    operator: '==',
+    value: debounce,
+  });
 
   const deleteUserMutation = useDeleteUser();
 

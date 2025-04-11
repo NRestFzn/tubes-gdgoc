@@ -121,7 +121,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
           <Form.Item
             name="price"
             label="Price"
-            rules={[{required: true}]}
+            rules={[
+              {required: true, message: 'Price is required'},
+              {pattern: /^\d+$/, message: 'Price must be digits'},
+              {
+                type: 'number',
+                min: 0,
+              },
+            ]}
             hasFeedback
           >
             <InputNumber
@@ -131,7 +138,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
             />
           </Form.Item>
 
-          <Form.Item name="dayTrip" label="Day Trip" rules={[{required: true}]}>
+          <Form.Item
+            name="dayTrip"
+            label="Day Trip"
+            rules={[{required: true, min: 1, type: 'number'}]}
+          >
             <InputNumber
               addonAfter="Days"
               style={{width: '100%'}}
@@ -139,7 +150,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
             />
           </Form.Item>
 
-          <Form.Item name="quota" label="Quota" rules={[{required: true}]}>
+          <Form.Item
+            name="quota"
+            label="Quota"
+            rules={[{required: true, min: 0, type: 'number'}]}
+          >
             <InputNumber style={{width: '100%'}} placeholder="Quota" />
           </Form.Item>
 

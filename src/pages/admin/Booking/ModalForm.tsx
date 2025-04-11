@@ -10,7 +10,7 @@ import {
   Destination as DestinationInterface,
   User as UserInterface,
 } from '@/utils/types';
-import {useGetAvailableDestination} from '@/hooks/useGetDestinations';
+import {useGetDestinations} from '@/hooks/useGetDestinations';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -72,12 +72,24 @@ const ModalForm: React.FC<ModalFormProps> = ({
     label: e.name,
   }));
 
-  const destinationOptions = useGetAvailableDestination().data?.map(
-    (e: DestinationInterface) => ({
-      value: e.id,
-      label: `${e.city}, ${e.country}`,
-    })
-  );
+  const availableDestinationOptions = useGetDestinations({
+    field: 'quota',
+    operator: '>',
+    value: 0,
+  }).data?.map((e: DestinationInterface) => ({
+    value: e.id,
+    label: `${e.city}, ${e.country}`,
+  }));
+
+  const unAvailableDestinationOptions = useGetDestinations({
+    field: 'quota',
+    operator: '<=',
+    value: 0,
+  }).data?.map((e: DestinationInterface) => ({
+    value: e.id,
+    label: `${e.city}, ${e.country}`,
+    disabled: true,
+  }));
 
   return (
     <>
@@ -119,7 +131,22 @@ const ModalForm: React.FC<ModalFormProps> = ({
             <Select
               showSearch
               placeholder="Select destination"
-              options={destinationOptions}
+              options={[
+                {
+                  label: 'Available destination',
+                  title: 'Available destination',
+                  options: availableDestinationOptions,
+                },
+                {
+                  label: (
+                    <span className="text-gray-600">
+                      Unavailable destination
+                    </span>
+                  ),
+                  title: 'Unavailable destination',
+                  options: unAvailableDestinationOptions,
+                },
+              ]}
             />
           </Form.Item>
         </Form>

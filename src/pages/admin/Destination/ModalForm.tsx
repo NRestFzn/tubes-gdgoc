@@ -127,13 +127,16 @@ const ModalForm: React.FC<ModalFormProps> = ({
               {pattern: /^\d+$/, message: 'Price must be digits'},
               {
                 type: 'number',
-                min: 1,
-                message: 'Price must be greater than 0',
+                min: 0,
               },
             ]}
             hasFeedback
           >
-            <InputNumber style={{width: '100%'}} placeholder="Price" />
+            <InputNumber
+              addonBefore="$"
+              style={{width: '100%'}}
+              placeholder="Price"
+            />
           </Form.Item>
 
           <Form.Item
@@ -159,8 +162,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
               {required: true, message: 'Quota is required'},
               {
                 type: 'number',
-                min: 1,
-                message: 'Price must be greater than 0',
+                min: 0,
               },
             ]}
             hasFeedback

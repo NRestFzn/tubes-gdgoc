@@ -12,9 +12,13 @@ import {useDebounce} from '@/hooks/useDebounce';
 const Booking: React.FC = (): React.ReactElement => {
   const [city, setCity] = useState<string>('');
 
-  const debounceCity = useDebounce(city, 300);
+  const debounce = useDebounce(city, 300);
 
-  const {data, isLoading, isError} = useGetBookings(debounceCity);
+  const {data, isLoading, isError} = useGetBookings({
+    field: 'name',
+    operator: '==',
+    value: debounce,
+  });
 
   const deleteBookingMutation = useDeleteBooking();
 

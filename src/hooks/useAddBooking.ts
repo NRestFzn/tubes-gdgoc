@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {doc, setDoc} from 'firebase/firestore';
+import {doc, setDoc, updateDoc} from 'firebase/firestore';
 import {db} from '@/firebase';
 import {Booking} from '@/utils/types';
 import {v4} from 'uuid';
@@ -30,6 +30,12 @@ export const useAddBooking = () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       });
+
+      await updateDoc(doc(db, 'destinations', destination.id as string), {
+        ...destination,
+        quota: destination.quota - 1,
+      });
+
       return docRef;
     },
     onSuccess: () => {

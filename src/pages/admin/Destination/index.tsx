@@ -11,11 +11,15 @@ import {LoadingOutlined} from '@ant-design/icons';
 import {useDebounce} from '@/hooks/useDebounce';
 
 const Destination: React.FC = (): React.ReactElement => {
-  const [city, setCity] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
 
-  const debounceCity = useDebounce(city, 300);
+  const debounce = useDebounce(country, 300);
 
-  const {data, isLoading, isError} = useGetDestinations(debounceCity);
+  const {data, isLoading, isError} = useGetDestinations({
+    field: 'country',
+    operator: '==',
+    value: debounce,
+  });
 
   const deleteDestinationMutation = useDeleteDestination();
 
@@ -105,8 +109,8 @@ const Destination: React.FC = (): React.ReactElement => {
         <div className=" flex w-full max-w-3xl items-center space-x-2 gap-2">
           <Input
             type="Search"
-            placeholder="Search by city"
-            onChange={(e) => setCity(e.target.value)}
+            placeholder="Search by country"
+            onChange={(e) => setCountry(e.target.value)}
           />
           <ModalForm mode="add" />
         </div>

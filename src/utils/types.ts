@@ -1,3 +1,5 @@
+import {WhereFilterOp} from 'firebase/firestore';
+
 export interface User {
   id?: string;
   name: string;
@@ -45,4 +47,10 @@ export interface Vacation {
   rating?: number;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface fireStoreWhere {
+  field: string;
+  operator: WhereFilterOp;
+  value: any;
 }
