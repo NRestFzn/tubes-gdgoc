@@ -140,7 +140,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
             name="discount"
             label="Discount"
             rules={[
-              { required: false },
+              { required: true },
               {
                 type: 'number',
                 min: 0,
