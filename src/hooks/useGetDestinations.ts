@@ -5,18 +5,21 @@ import {Destination as DestinationInterface} from '@/utils/types';
 
 const c = collection(db, 'destinations');
 
-const fetchDestinations = async () => {
-  const querySnapshot = await getDocs(c);
+const fetchDestinations = async (querySearch?: string) => {
+  const q = querySearch ? query(c, where('city', '==', querySearch)) : c;
+
+  const querySnapshot = await getDocs(q);
+
   return querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Omit<DestinationInterface, 'id'>),
   }));
 };
 
-export const useGetDestinations = () => {
+export const useGetDestinations = (querySearch?: string) => {
   return useQuery<DestinationInterface[]>({
-    queryKey: ['getAllDestinations'],
-    queryFn: fetchDestinations,
+    queryKey: ['getAllDestinations', querySearch],
+    queryFn: () => fetchDestinations(querySearch),
   });
 };
 

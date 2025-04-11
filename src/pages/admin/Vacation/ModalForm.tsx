@@ -27,9 +27,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
   const showModal = async () => {
     setIsModalOpen(true);
-    const data = await fetchVacationById(id as string);
 
     if (mode === 'edit') {
+      const data = await fetchVacationById(id as string);
       form.setFieldsValue({...data});
     }
   };
@@ -80,9 +80,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
         okButtonProps={{disabled: !isSubmitAble}}
       >
         <Form form={form} layout="vertical" autoComplete="off">
-          <Form.Item 
-            name="country" 
-            label="Country" 
+          <Form.Item
+            name="country"
+            label="Country"
             rules={[{required: true}]}
             hasFeedback
           >
@@ -99,9 +99,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
               }}
             />
           </Form.Item>
-          <Form.Item 
-            name="city" 
-            label="City" 
+          <Form.Item
+            name="city"
+            label="City"
             rules={[{required: true}]}
             hasFeedback
           >
@@ -118,9 +118,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
               allowClear
             />
           </Form.Item>
-          <Form.Item 
-            name="price" 
-            label="Price" 
+          <Form.Item
+            name="price"
+            label="Price"
             rules={[{required: true}]}
             hasFeedback
           >
