@@ -1,15 +1,15 @@
-import {Card, CardContent} from '@/components/ui/card';
-import {useGetBookings} from '@/hooks/useGetBookings';
-import {Space, Table, Spin, Modal, Input, notification} from 'antd';
-import {Button} from '@/components/ui/button';
-import type {TableColumnsType} from 'antd';
+import { Card, CardContent } from '@/components/ui/card';
+import { useGetBookings } from '@/hooks/useGetBookings';
+import { Space, Table, Spin, Modal, Input, notification } from 'antd';
+import { Button } from '@/components/ui/button';
+import type { TableColumnsType } from 'antd';
 import React from 'react';
 import ModalForm from './ModalForm';
-import {Booking as BookingInterface} from '@/utils/types';
-import {useDeleteBooking} from '@/hooks/useDeleteBooking';
-import {LoadingOutlined} from '@ant-design/icons';
+import { Booking as BookingInterface } from '@/utils/types';
+import { useDeleteBooking } from '@/hooks/useDeleteBooking';
+import { LoadingOutlined } from '@ant-design/icons';
 const Booking: React.FC = (): React.ReactElement => {
-  const {data, isLoading, isError} = useGetBookings();
+  const { data, isLoading, isError } = useGetBookings();
 
   const deleteBookingMutation = useDeleteBooking();
 
