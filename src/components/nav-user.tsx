@@ -51,7 +51,6 @@ export function NavUser() {
 
   useGetUserInfo(setUser)
 
-
   useEffect(() => {
     setTheme(themeValue);
   }, [themeValue, setTheme]);
