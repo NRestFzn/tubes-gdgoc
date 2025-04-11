@@ -2,7 +2,7 @@ import {FirebaseError} from 'firebase/app';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '@/firebase';
 import { NavigateFunction } from 'react-router';
-import { AuthErrorType } from '../SignIn';
+import { AuthErrorType } from '../pages/auth/SignIn';
 
 export const loginWithEmail = async (
   e: React.FormEvent,

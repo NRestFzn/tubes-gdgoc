@@ -1,4 +1,4 @@
-import styles from '@/styles/SignIn.module.css';
+import styles from '@/styles/SignUp.module.css';
 
 import logo from '@/assets/mochi.jpg';
 import viewEye from '@/assets/viewEye.png';
@@ -12,22 +12,25 @@ import {useState, useEffect} from 'react';
 import {LoginIcon} from '@/components/SvgIcons';
 import {useNavigate} from 'react-router-dom';
 
-import { PreloadImage } from './helper/preload';
-import { loginWithEmail } from './helper/loginWithEmail';
-import { loginWithGoogle } from './helper/loginWithGoogle';
+import { PreloadImage } from '../../helper/preload';
+import { loginWithEmail } from '../../helper/loginWithEmail';
+import { loginWithGoogle } from '../../helper/loginWithGoogle';
 
 export type AuthErrorType = 'invalid-credentials' | 'generic';
 
 const SignUp: React.FC = (): React.ReactElement => {
-  
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
   const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
 
   const togglePassword = (): void => setShowPassword((prev) => !prev);
+  const toggleConfirmPassword = (): void => setShowConfirmPassword((prev) => !prev)
 
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -84,8 +87,8 @@ const SignUp: React.FC = (): React.ReactElement => {
               </div>
 
               <div className={styles.title}>
-                <p>Sign in with email</p>
-                <p>Your travel management companion, all in one place.</p>
+                <p>Sign up with email</p>
+                <p>Get started managing your travel bussiness now. For free</p>
               </div>
 
               <form onSubmit={(e) => loginWithEmail(e, navigate, setErrorType, showPopup, email, password )} className={styles.form}>
@@ -113,6 +116,25 @@ const SignUp: React.FC = (): React.ReactElement => {
                     style={{
                       WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
                       maskImage: `url(${showPassword ? viewEye : hideEye})`,
+                    }}
+                  ></div>
+                </div>
+
+                <div className={styles.inputContainer}>
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="Confirm Password"
+                    value={password}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                  <div
+                    className={styles.eyeIcon}
+                    onClick={toggleConfirmPassword}
+                    tabIndex={0}
+                    style={{
+                      WebkitMaskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
+                      maskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
                     }}
                   ></div>
                 </div>

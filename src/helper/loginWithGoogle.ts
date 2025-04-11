@@ -1,7 +1,10 @@
 import { auth, googleProvider } from '@/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { NavigateFunction } from 'react-router';
-import { AuthErrorType } from '../SignIn';
+
+
+import { AuthErrorType } from '../pages/auth/SignIn';
+
 
 export const loginWithGoogle = async (
   e: React.FormEvent,

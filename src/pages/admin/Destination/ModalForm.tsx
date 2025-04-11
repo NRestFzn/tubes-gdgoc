@@ -119,9 +119,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
             />
           </Form.Item>
 
-          <Form.Item 
-            name="price" 
-            label="Price" 
+          <Form.Item
+            name="price"
+            label="Price"
             rules={[
               { required: true, message: 'Price is required' },
               { pattern: /^\d+$/, message: 'Price must be digits' },
@@ -133,14 +133,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber style={{ width: '100%' }} placeholder="Price" />
+            <InputNumber addonBefore="$" style={{ width: '100%' }} placeholder="Price" />
           </Form.Item>
 
           <Form.Item
             name="discount"
             label="Discount"
             rules={[
-              { required: false },
+              { required: true },
               {
                 type: 'number',
                 min: 0,
@@ -149,14 +149,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber style={{ width: '100%' }} placeholder="Discount" />
+            <InputNumber addonAfter="%" style={{ width: '100%' }} placeholder="Discount" />
           </Form.Item>
 
-          <Form.Item 
-            name="quota" 
-            label="Quota" 
+          <Form.Item
+            name="quota"
+            label="Quota"
             rules={[
-              { required: true, message: 'Quota is required'},
+              { required: true, message: 'Quota is required' },
               {
                 type: 'number',
                 min: 1,
@@ -166,6 +166,27 @@ const ModalForm: React.FC<ModalFormProps> = ({
             hasFeedback
           >
             <InputNumber style={{ width: '100%' }} placeholder="Quota" />
+          </Form.Item>
+
+          <Form.Item
+            name="rating"
+            label="Rating"
+            rules={[
+              { required: true, message: 'Rating is required' },
+              {
+                type: 'number',
+                min: 0,
+                message: 'Rating must be greater than 0',
+              },
+              {
+                type: 'number',
+                max: 5,
+                message: 'Rating must be less than 5',
+              },
+            ]}
+            hasFeedback
+          >
+            <InputNumber style={{ width: '100%' }} placeholder="Rating" />
           </Form.Item>
         </Form>
       </Modal>

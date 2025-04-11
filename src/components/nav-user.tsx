@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
+import { signOut, User as FirebaseUser } from "firebase/auth";
 import { auth } from "@/firebase";
+import useGetUserInfo from "@/hooks/useGetUserInfo";
 
 import {
   SunMoon,
@@ -48,24 +49,8 @@ export function NavUser() {
   const { setTheme } = useTheme();
   const [themeValue, setThemeValue] = useState<"light" | "dark" | "system">("light");
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        try {
-          await firebaseUser.reload(); // force reload data
-          const updatedUser = auth.currentUser;
-          setUser(updatedUser);
-          console.log("Updated user:", updatedUser);
-        } catch (err) {
-          console.error("Error during user reload:", err);
-        }
-      } else {
-        setUser(null);
-      }
-    });
+  useGetUserInfo(setUser)
 
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     setTheme(themeValue);
