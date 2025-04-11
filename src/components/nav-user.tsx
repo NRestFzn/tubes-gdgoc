@@ -17,6 +17,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,7 +55,7 @@ export function NavUser() {
     setTheme(themeValue);
   }, [themeValue, setTheme]);
 
-  if (!user) return null; // atau bisa tampilkan spinner/loading di sini
+  if (!user) return null;
 
   return (
     <SidebarMenu>

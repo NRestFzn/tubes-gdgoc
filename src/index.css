@@ -141,7 +141,16 @@
 .dark .ant-notification-notice,
 .dark .ant-input-group-addon,
 .dark .ant-input-number-handler-down,
-.dark .ant-input-number-handler-up {
+.dark .ant-input-number-handler-up,
+.dark .ant-input-group-addon,
+.dark .ant-input-number-group-addon,
+.dark .ant-input-number-affix-wrapper,
+.dark .ant-input-number-handler,
+.dark .ant-input-number,
+.dark .ant-input-suffix,
+.dark .ant-input-number-input::placeholder,
+.dark .ant-input-number-input,
+.dark .ant-notification-notice {
   background-color: var(--card) !important;
   border-color: var(--border) !important;
   color: var(--foreground) !important;

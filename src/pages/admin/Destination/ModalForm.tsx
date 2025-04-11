@@ -167,6 +167,27 @@ const ModalForm: React.FC<ModalFormProps> = ({
           >
             <InputNumber style={{width: '100%'}} placeholder="Quota" />
           </Form.Item>
+
+          <Form.Item
+            name="rating"
+            label="Rating"
+            rules={[
+              {required: true, message: 'Rating is required'},
+              {
+                type: 'number',
+                min: 0,
+                message: 'Rating must be greater than 0',
+              },
+              {
+                type: 'number',
+                max: 5,
+                message: 'Rating must be less than 5',
+              },
+            ]}
+            hasFeedback
+          >
+            <InputNumber style={{width: '100%'}} placeholder="Rating" />
+          </Form.Item>
         </Form>
       </Modal>
     </>

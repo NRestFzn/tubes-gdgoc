@@ -124,14 +124,43 @@ const ModalForm: React.FC<ModalFormProps> = ({
             rules={[{required: true}]}
             hasFeedback
           >
-            <InputNumber style={{width: '100%'}} placeholder="Price" />
+            <InputNumber
+              addonBefore="$"
+              style={{width: '100%'}}
+              placeholder="Price"
+            />
           </Form.Item>
 
           <Form.Item name="dayTrip" label="Day Trip" rules={[{required: true}]}>
-            <InputNumber style={{width: '100%'}} placeholder="Day Trip" />
+            <InputNumber
+              addonAfter="Days"
+              style={{width: '100%'}}
+              placeholder="Day Trip"
+            />
           </Form.Item>
 
           <Form.Item name="quota" label="Quota" rules={[{required: true}]}>
+            <InputNumber style={{width: '100%'}} placeholder="Quota" />
+          </Form.Item>
+
+          <Form.Item
+            name="rating"
+            label="Rating"
+            rules={[
+              {required: true, message: 'Rating is required'},
+              {
+                type: 'number',
+                min: 0,
+                message: 'Rating must be greater than 0',
+              },
+              {
+                type: 'number',
+                max: 5,
+                message: 'Rating must be less than 5',
+              },
+            ]}
+            hasFeedback
+          >
             <InputNumber style={{width: '100%'}} placeholder="Quota" />
           </Form.Item>
         </Form>
