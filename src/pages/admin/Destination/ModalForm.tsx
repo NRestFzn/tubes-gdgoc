@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Modal, notification, Select, Form, InputNumber } from 'antd';
-import { Button } from '@/components/ui/button';
-import { useAddDestination } from '@/hooks/useAddDestination';
-import { useUpdateDestination } from '@/hooks/useUpdateDestination';
-import { fetchDestinationById } from '@/hooks/useGetDestinationById';
+import React, {useState} from 'react';
+import {Modal, notification, Select, Form, InputNumber} from 'antd';
+import {Button} from '@/components/ui/button';
+import {useAddDestination} from '@/hooks/useAddDestination';
+import {useUpdateDestination} from '@/hooks/useUpdateDestination';
+import {fetchDestinationById} from '@/hooks/useGetDestinationById';
 import countryCity from '../../../utils/countryCity';
-import { useModalForm } from '@/hooks/useModalForm';
+import {useModalForm} from '@/hooks/useModalForm';
 
 type ModalFormProps = {
   mode: 'add' | 'edit';
@@ -27,10 +27,10 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
   const showModal = async () => {
     setIsModalOpen(true);
-    const data = await fetchDestinationById(id as string);
 
     if (mode === 'edit') {
-      form.setFieldsValue({ ...data });
+      const data = await fetchDestinationById(id as string);
+      form.setFieldsValue({...data});
     }
   };
 
@@ -49,13 +49,13 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
     if (mode === 'add') {
       mutateAddDestination.mutate(
-        { ...values },
-        { onSuccess: () => handleSuccess('Added') }
+        {...values},
+        {onSuccess: () => handleSuccess('Added')}
       );
     } else if (mode === 'edit') {
       mutateUpdateDestination.mutate(
-        { id: id as string, formData: values },
-        { onSuccess: () => handleSuccess('Updated') }
+        {id: id as string, formData: values},
+        {onSuccess: () => handleSuccess('Updated')}
       );
     }
   };
@@ -77,13 +77,13 @@ const ModalForm: React.FC<ModalFormProps> = ({
         confirmLoading={
           mutateAddDestination.isPending || mutateUpdateDestination.isPending
         }
-        okButtonProps={{ disabled: !isSubmitAble }}
+        okButtonProps={{disabled: !isSubmitAble}}
       >
         <Form form={form} layout="vertical" autoComplete="off">
           <Form.Item
             name="country"
             label="Country"
-            rules={[{ required: true, message: 'Please select a city' }]}
+            rules={[{required: true, message: 'Please select a city'}]}
             hasFeedback
           >
             <Select
@@ -91,7 +91,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
               placeholder="Select destination country"
               optionFilterProp="label"
               options={countryCity.getCountries().map((e: string) => {
-                return { value: e, label: e };
+                return {value: e, label: e};
               })}
               allowClear
               onChange={() => {
@@ -102,7 +102,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
           <Form.Item
             name="city"
             label="City"
-            rules={[{ required: true }]}
+            rules={[{required: true}]}
             hasFeedback
           >
             <Select
@@ -113,7 +113,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
               options={countryCity
                 .getCities(selectedCountry)
                 .map((e: string) => {
-                  return { value: e, label: e };
+                  return {value: e, label: e};
                 })}
               allowClear
             />
@@ -123,8 +123,8 @@ const ModalForm: React.FC<ModalFormProps> = ({
             name="price"
             label="Price"
             rules={[
-              { required: true, message: 'Price is required' },
-              { pattern: /^\d+$/, message: 'Price must be digits' },
+              {required: true, message: 'Price is required'},
+              {pattern: /^\d+$/, message: 'Price must be digits'},
               {
                 type: 'number',
                 min: 1,
@@ -133,14 +133,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber addonBefore="$" style={{ width: '100%' }} placeholder="Price" />
+            <InputNumber style={{width: '100%'}} placeholder="Price" />
           </Form.Item>
 
           <Form.Item
             name="discount"
             label="Discount"
             rules={[
-              { required: true },
+              {required: false},
               {
                 type: 'number',
                 min: 0,
@@ -149,14 +149,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber addonAfter="%" style={{ width: '100%' }} placeholder="Discount" />
+            <InputNumber style={{width: '100%'}} placeholder="Discount" />
           </Form.Item>
 
           <Form.Item
             name="quota"
             label="Quota"
             rules={[
-              { required: true, message: 'Quota is required' },
+              {required: true, message: 'Quota is required'},
               {
                 type: 'number',
                 min: 1,
@@ -165,14 +165,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber style={{ width: '100%' }} placeholder="Quota" />
+            <InputNumber style={{width: '100%'}} placeholder="Quota" />
           </Form.Item>
 
           <Form.Item
             name="rating"
             label="Rating"
             rules={[
-              { required: true, message: 'Rating is required' },
+              {required: true, message: 'Rating is required'},
               {
                 type: 'number',
                 min: 0,
@@ -186,7 +186,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
             ]}
             hasFeedback
           >
-            <InputNumber style={{ width: '100%' }} placeholder="Rating" />
+            <InputNumber style={{width: '100%'}} placeholder="Rating" />
           </Form.Item>
         </Form>
       </Modal>
