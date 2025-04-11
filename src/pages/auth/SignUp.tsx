@@ -8,33 +8,37 @@ import { ThemeSwitch } from '@/components/ui/theme-switch';
 import { MenuDropdown } from '@/components/ui/mobile-dropdown';
 import { ErrorCard } from '@/components/ui/error-card';
 
-import {useState, useEffect} from 'react';
-import {LoginIcon} from '@/components/SvgIcons';
-import {useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { LoginIcon } from '@/components/SvgIcons';
+import { useNavigate } from 'react-router-dom';
 
 import { PreloadImage } from '../../helper/preload';
-import { loginWithEmail } from '../../helper/loginWithEmail';
 import { loginWithGoogle } from '../../helper/loginWithGoogle';
+import { registerWithEmail } from '../../helper/registerWithEmail';
 
 export type AuthErrorType = 'invalid-credentials' | 'generic';
 
 const SignUp: React.FC = (): React.ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
-
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-
-  const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
-
-  const togglePassword = (): void => setShowPassword((prev) => !prev);
-  const toggleConfirmPassword = (): void => setShowConfirmPassword((prev) => !prev)
-
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
+
+  const togglePassword = (): void => setShowPassword((prev) => !prev);
+  const toggleConfirmPassword = (): void => setShowConfirmPassword((prev) => !prev);
+  const handleThemeToggle = (): void => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   const showPopup = () => {
     setIsMounted(true);
@@ -45,7 +49,7 @@ const SignUp: React.FC = (): React.ReactElement => {
   const hidePopup = () => {
     setIsVisible(false);
     setAnimationClass(styles.animateFadeOut);
-    setTimeout(() => setIsMounted(false), 300); // triggers unmount after fade-out
+    setTimeout(() => setIsMounted(false), 300);
   };
 
   useEffect(() => {
@@ -54,16 +58,19 @@ const SignUp: React.FC = (): React.ReactElement => {
     }
   }, [isVisible]);
 
-  type ThemeType = 'light' | 'dark';
-  const [theme, setTheme] = useState<ThemeType>('light')
+  const handleSubmit = (e: React.FormEvent) => {
+    if (password !== confirmPassword) {
+      setErrorType('invalid-credentials');
+      showPopup();
+      return;
+    }
 
-  const handleThemeToggle = (): void => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    registerWithEmail(e, navigate, setErrorType, showPopup, name, email, password);
   };
 
   return (
     <div data-theme={theme} className={styles.wrapper}>
-      <PreloadImage path={viewEye}/>
+      <PreloadImage path={viewEye} />
       <div className={styles.background}>
         <div>
           <header className={styles.header}>
@@ -73,10 +80,9 @@ const SignUp: React.FC = (): React.ReactElement => {
             </div>
 
             <div className={styles.headerButtons}>
-              <button>Sign in</button>
-              <button>Sign Up</button>
-              <ThemeSwitch onClick={handleThemeToggle}/>
-              <MenuDropdown/>
+              <button onClick={() => navigate('/sign-in')}>Sign in</button>
+              <ThemeSwitch onClick={handleThemeToggle} />
+              <MenuDropdown />
             </div>
           </header>
 
@@ -87,11 +93,21 @@ const SignUp: React.FC = (): React.ReactElement => {
               </div>
 
               <div className={styles.title}>
-                <p>Sign up with email</p>
-                <p>Get started managing your travel bussiness now. For free</p>
+                <p>Sign up with Email</p>
+                <p>Get started managing your travel business now. For free.</p>
               </div>
 
-              <form onSubmit={(e) => loginWithEmail(e, navigate, setErrorType, showPopup, email, password )} className={styles.form}>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputContainer}>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+
                 <div className={styles.inputContainer}>
                   <input
                     type="text"
@@ -101,6 +117,7 @@ const SignUp: React.FC = (): React.ReactElement => {
                     required
                   />
                 </div>
+
                 <div className={styles.inputContainer}>
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -124,7 +141,7 @@ const SignUp: React.FC = (): React.ReactElement => {
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     placeholder="Confirm Password"
-                    value={password}
+                    value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
@@ -147,7 +164,12 @@ const SignUp: React.FC = (): React.ReactElement => {
               </form>
 
               <div className={styles.thirdPartyContainer}>
-                <div className={styles.googleLogin} onClick={(e) => loginWithGoogle(e, navigate, setErrorType, showPopup)}></div>
+                <div
+                  className={styles.googleLogin}
+                  onClick={(e) =>
+                    loginWithGoogle(e, navigate, setErrorType, showPopup)
+                  }
+                ></div>
                 <div className={styles.facebookLogin}></div>
                 <div className={styles.appleLogin}></div>
               </div>
@@ -157,7 +179,7 @@ const SignUp: React.FC = (): React.ReactElement => {
               <ErrorCard
                 msg={
                   errorType === 'invalid-credentials'
-                    ? 'Invalid credentials'
+                    ? 'Invalid credentials or password mismatch'
                     : 'Unknown error'
                 }
                 onClose={hidePopup}
