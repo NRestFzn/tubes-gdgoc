@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 
 type ThemeSwitchProps = {
+  // to use default (cyan) variant, just ignore theme.
+  theme?: "red-theme"
   onClick: () => void;
 }
 
-export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ onClick }): React.ReactElement => {
+export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ theme, onClick }): React.ReactElement => {
   return (
     <StyledWrapperB>
-      <label id="theme-toggle-button" onClick={onClick}>
+      <label id="theme-toggle-button" onClick={onClick} className={theme}>
         <input type="checkbox" id="toggle" />
         <svg viewBox="0 0 69.667 44" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
             <g filter="url(#container)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
               <rect
-                fill="#96EEE5"
+                className="bg-rect"
                 stroke="#FFFFFF"
                 strokeWidth="1"
                 transform="translate(3.5 3.5)"
@@ -27,12 +29,12 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ onClick }): React.Reac
             <g transform="translate(2.333 2.333)" id="button">
               <g data-name="sun" id="sun">
                 <g filter="url(#sun-outer)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
-                  <circle fill="#f8e664" transform="translate(5.83 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="sun-outer" id="sun-outer-2" />
+                  <circle className="sunOuter" transform="translate(5.83 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="sun-outer" id="sun-outer-2" />
                 </g>
                 <g filter="url(#sun)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
                   <path fill="rgba(246,254,247,0.29)" transform="translate(9.33 9.33)" d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun" id="sun-3" />
                 </g>
-                <circle fill="#fcf4b9" transform="translate(8.167 8.167)" r={7} cy={7} cx={7} id="sun-inner" />
+                <circle className="sunInner" transform="translate(8.167 8.167)" r={7} cy={7} cx={7} id="sun-inner" />
               </g>
               <g data-name="moon" id="moon">
                 <g filter="url(#moon)" transform="matrix(1, 0, 0, 1, -31.5, -5.83)">
@@ -155,4 +157,29 @@ const StyledWrapperB = styled.div`
 
 #toggle:checked + svg #stars {
   opacity: 1;
-}`;
+}
+
+.bg-rect {
+  fill: #96EEE5;
+}
+
+.sunInner {
+  fill: #fcf4b9;
+}
+
+.sunOuter {
+  fill: #f8e664;
+}
+
+.red-theme .bg-rect {
+  fill:rgb(184, 34, 34);
+}
+
+.red-theme .sunOuter {
+  fill:rgb(254, 174, 62);
+}
+
+.red-theme .sunInner {
+  fill:rgb(255, 159, 56);
+}
+`;

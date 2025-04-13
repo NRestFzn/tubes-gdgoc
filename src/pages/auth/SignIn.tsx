@@ -69,6 +69,7 @@ const SignIn: React.FC = (): React.ReactElement => {
             </div>
 
             <div className={styles.headerButtons}>
+              <button>Sign In</button>
               <button onClick={() => navigate('/sign-up')}>Sign Up</button>
               <ThemeSwitch onClick={handleThemeToggle} />
               <MenuDropdown />

@@ -81,111 +81,114 @@ const SignUp: React.FC = (): React.ReactElement => {
 
             <div className={styles.headerButtons}>
               <button onClick={() => navigate('/sign-in')}>Sign in</button>
-              <ThemeSwitch onClick={handleThemeToggle} />
-              <MenuDropdown />
+              <button>Sign Up</button>
+              <ThemeSwitch theme='red-theme' onClick={handleThemeToggle} />
+              <MenuDropdown theme='red-theme'/>
             </div>
           </header>
 
           <main className={styles.mainContainer}>
-            <div className={styles.loginBox}>
-              <div className={styles.svgContainer}>
-                <LoginIcon className={styles.icon} />
+            <div className={styles.loginBoxContainer}>
+              <div className={styles.loginBox}>
+                <div className={styles.svgContainer}>
+                  <LoginIcon className={styles.icon} />
+                </div>
+
+                <div className={styles.title}>
+                  <p>Sign up with Email</p>
+                  <p>Get started managing your travel business now. For free.</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <div className={styles.inputContainer}>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.inputContainer}>
+                    <input
+                      type="text"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.inputContainer}>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <div
+                      className={styles.eyeIcon}
+                      onClick={togglePassword}
+                      tabIndex={0}
+                      style={{
+                        WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
+                        maskImage: `url(${showPassword ? viewEye : hideEye})`,
+                      }}
+                    ></div>
+                  </div>
+
+                  <div className={styles.inputContainer}>
+                    <input
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      placeholder="Confirm Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
+                    <div
+                      className={styles.eyeIcon}
+                      onClick={toggleConfirmPassword}
+                      tabIndex={0}
+                      style={{
+                        WebkitMaskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
+                        maskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
+                      }}
+                    ></div>
+                  </div>
+
+                  <p>Forgot password?</p>
+
+                  <button type="submit">Start working</button>
+
+                  <p>Or sign in with</p>
+                </form>
+
+                <div className={styles.thirdPartyContainer}>
+                  <div
+                    className={styles.googleLogin}
+                    onClick={(e) =>
+                      loginWithGoogle(e, navigate, setErrorType, showPopup)
+                    }
+                  ></div>
+                  <div className={styles.facebookLogin}></div>
+                  <div className={styles.appleLogin}></div>
+                </div>
               </div>
 
-              <div className={styles.title}>
-                <p>Sign up with Email</p>
-                <p>Get started managing your travel business now. For free.</p>
-              </div>
-
-              <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputContainer}>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className={styles.inputContainer}>
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className={styles.inputContainer}>
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <div
-                    className={styles.eyeIcon}
-                    onClick={togglePassword}
-                    tabIndex={0}
-                    style={{
-                      WebkitMaskImage: `url(${showPassword ? viewEye : hideEye})`,
-                      maskImage: `url(${showPassword ? viewEye : hideEye})`,
-                    }}
-                  ></div>
-                </div>
-
-                <div className={styles.inputContainer}>
-                  <input
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                  <div
-                    className={styles.eyeIcon}
-                    onClick={toggleConfirmPassword}
-                    tabIndex={0}
-                    style={{
-                      WebkitMaskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
-                      maskImage: `url(${showConfirmPassword ? viewEye : hideEye})`,
-                    }}
-                  ></div>
-                </div>
-
-                <p>Forgot password?</p>
-
-                <button type="submit">Start working</button>
-
-                <p>Or sign in with</p>
-              </form>
-
-              <div className={styles.thirdPartyContainer}>
-                <div
-                  className={styles.googleLogin}
-                  onClick={(e) =>
-                    loginWithGoogle(e, navigate, setErrorType, showPopup)
+              {isMounted && (
+                <ErrorCard
+                  msg={
+                    errorType === 'invalid-credentials'
+                      ? 'Invalid credentials or password mismatch'
+                      : 'Unknown error'
                   }
-                ></div>
-                <div className={styles.facebookLogin}></div>
-                <div className={styles.appleLogin}></div>
-              </div>
+                  onClose={hidePopup}
+                  animation={animationClass}
+                />
+              )}
             </div>
-
-            {isMounted && (
-              <ErrorCard
-                msg={
-                  errorType === 'invalid-credentials'
-                    ? 'Invalid credentials or password mismatch'
-                    : 'Unknown error'
-                }
-                onClose={hidePopup}
-                animation={animationClass}
-              />
-            )}
           </main>
         </div>
       </div>

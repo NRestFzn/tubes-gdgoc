@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import classNames from 'classnames';
 
-export const MenuDropdown = () => {
+interface themes {
+  theme?: "red-theme"
+}
+
+export const MenuDropdown: React.FC<themes> = ({ theme }): React.ReactElement => {
   const [clicked, setClicked] = useState(false);
 
   const toggleMenu = () => setClicked(prev => !prev);
 
   return (
     <StyledWrapper>
-      <div className={`nav_bar ${clicked ? "clicked" : ""}`} onClick={toggleMenu}>
+      <div className={classNames(theme, `nav_bar ${clicked ? "clicked" : ""}`)} onClick={toggleMenu}>
         <div className="bar1" />
         <div className="bar2" />
         <div className="bar3_h" />
@@ -35,6 +40,10 @@ const StyledWrapper = styled.div`
     height: 45px;
   }
 
+  .red-theme.nav_bar {
+    background-color: #b82222;
+  }
+
   @media (max-width: 768px) {
     .nav_bar {
       display: flex;
@@ -47,7 +56,7 @@ const StyledWrapper = styled.div`
   .bar3_h,
   .bar4 {
     border-radius: 30px;
-    background-color: #FFFFFF;
+    background-color:rgb(236, 236, 236);
     width: 25px;  /* Reduced from 50px */
     height: 3px;  /* Reduced from 5px */
     transition: 0.4s;
