@@ -1,5 +1,7 @@
 import styles from '@/styles/SignUp.module.css';
 
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+
 import logo from '@/assets/mochi.jpg';
 import viewEye from '@/assets/viewEye.png';
 import hideEye from '@/assets/hideEye.png';
@@ -33,6 +35,7 @@ const SignUp: React.FC = (): React.ReactElement => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errorType, setErrorType] = useState<AuthErrorType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const togglePassword = (): void => setShowPassword((prev) => !prev);
   const toggleConfirmPassword = (): void => setShowConfirmPassword((prev) => !prev);
@@ -65,7 +68,7 @@ const SignUp: React.FC = (): React.ReactElement => {
       return;
     }
 
-    registerWithEmail(e, navigate, setErrorType, showPopup, name, email, password);
+    registerWithEmail(e, navigate, setErrorType, showPopup, name, email, password, setIsLoading);
   };
 
   return (
@@ -188,6 +191,8 @@ const SignUp: React.FC = (): React.ReactElement => {
                   animation={animationClass}
                 />
               )}
+
+            {isLoading && <LoadingSpinner />}
             </div>
           </main>
         </div>

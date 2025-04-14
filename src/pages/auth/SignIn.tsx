@@ -1,5 +1,7 @@
 import styles from '@/styles/SignIn.module.css';
 
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+
 import logo from '@/assets/mochi.jpg';
 import viewEye from '@/assets/viewEye.png';
 import hideEye from '@/assets/hideEye.png';
@@ -31,6 +33,7 @@ const SignIn: React.FC = (): React.ReactElement => {
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [animationClass, setAnimationClass] = useState(styles.animateSlideIn);
+  const [isLoading, setIsLoading] = useState(false);
 
   const showPopup = () => {
     setIsMounted(true);
@@ -87,7 +90,7 @@ const SignIn: React.FC = (): React.ReactElement => {
                 <p>Your travel management companion, all in one place.</p>
               </div>
 
-              <form onSubmit={(e) => loginWithEmail(e, navigate, setErrorType, showPopup, email, password )} className={styles.form}>
+              <form onSubmit={(e) => loginWithEmail(e, navigate, setErrorType, showPopup, setIsLoading, email, password )} className={styles.form}>
                 <div className={styles.inputContainer}>
                   <input
                     type="text"
@@ -118,7 +121,9 @@ const SignIn: React.FC = (): React.ReactElement => {
 
                 <p>Forgot password?</p>
 
-                <button type="submit">Start working</button>
+                <button type="submit" disabled={isLoading}>
+                  {isLoading ? 'Loading...' : 'Start working'}
+                </button>
 
                 <p>Or sign in with</p>
               </form>
@@ -141,6 +146,8 @@ const SignIn: React.FC = (): React.ReactElement => {
                 animation={animationClass}
               />
             )}
+
+            {isLoading && <LoadingSpinner />}
           </main>
         </div>
       </div>

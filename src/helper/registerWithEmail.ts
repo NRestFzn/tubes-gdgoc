@@ -11,22 +11,21 @@ export const registerWithEmail = async (
   errorAction: () => void,
   name: string,
   email: string,
-  password: string
+  password: string,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> => {
   e.preventDefault();
+  setIsLoading(true); // Start loading
 
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-    // Set display name after account creation
     if (auth.currentUser) {
-      await updateProfile(auth.currentUser, {
-        displayName: name,
-      });
+      await updateProfile(auth.currentUser, { displayName: name });
     }
 
-    setErrorType(null); // clear error state
-    navigate('/sign-in'); // redirect to sign-in page
+    setErrorType(null);
+    navigate('/sign-in'); // Redirect after success
   } catch (error: unknown) {
     if (error instanceof FirebaseError) {
       console.error('Firebase error:', error.code, error.message);
@@ -35,6 +34,9 @@ export const registerWithEmail = async (
     }
 
     setErrorType('generic');
-    errorAction(); // show error popup
+    errorAction();
+  } finally {
+    setIsLoading(false); // Stop loading
   }
 };
+
