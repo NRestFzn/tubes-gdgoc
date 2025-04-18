@@ -22,7 +22,7 @@
 
   width: inherit;
 
-  /* background-image: linear-gradient(#fa84867a, #a58d2d85); */
+  background-image: linear-gradient(#ffac467d, #ffffff75);
 }
 
 .header {
@@ -116,17 +116,8 @@
   place-items: center;
 }
 
-.loginBoxContainer {
-  background-image: url("../assets/orange_clouds.png");
-  background-position: left;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  border-radius: 30px;
-}
-
 .loginBox {
-  background-image: linear-gradient(#ffcea0b9 15%, #f4feff 85%);
+  background-image: linear-gradient(#ffcbe3 15%, #ffffff 85%);
   
   color: black !important;
 
@@ -209,7 +200,7 @@
   background-size: 1.5em;
   background-position: 10px;
 
-  background-color: #fff2e9;
+  background-color: #f4f9ff;
   border: 0.5px solid #cdcdcd;
 }
 
@@ -218,7 +209,7 @@
   background-size: 1.5em;
   background-position: 10px;
 
-  background-color: #fff2e9;
+  background-color: #f4f9ff;
 }
 
 .inputContainer > input:focus {
