@@ -1,4 +1,4 @@
-import {WhereFilterOp} from 'firebase/firestore';
+import { WhereFilterOp } from "firebase/firestore";
 
 export interface User {
   id?: string;
@@ -31,7 +31,7 @@ export interface Destination {
   country: string;
   price: number;
   quota: number;
-  discount?: number;
+  discount: number | 0;
   rating?: number;
   createdAt?: Date;
   updatedAt?: Date;
