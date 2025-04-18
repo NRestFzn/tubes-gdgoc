@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
 import { LoginIcon } from '@/components/SvgIcons';
 import { useNavigate } from 'react-router-dom';
 
-import { PreloadImage } from '../../helper/preload';
+import { PreloadImageCSS } from '../../helper/preload';
 import { loginWithGoogle } from '../../helper/loginWithGoogle';
 import { registerWithEmail } from '../../helper/registerWithEmail';
 
@@ -30,7 +30,6 @@ const SignUp: React.FC = (): React.ReactElement => {
 
   const navigate = useNavigate();
 
-  const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -68,12 +67,12 @@ const SignUp: React.FC = (): React.ReactElement => {
       return;
     }
 
-    registerWithEmail(e, navigate, setErrorType, showPopup, name, email, password, setIsLoading);
+    registerWithEmail(e, navigate, setErrorType, showPopup, email, password, setIsLoading);
   };
 
   return (
     <div data-theme={theme} className={styles.wrapper}>
-      <PreloadImage path={viewEye} />
+      <PreloadImageCSS path={viewEye} />
       <div className={styles.background}>
         <div>
           <header className={styles.header}>
@@ -102,16 +101,6 @@ const SignUp: React.FC = (): React.ReactElement => {
               </div>
 
               <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputContainer}>
-                  <input
-                    type="text"
-                    placeholder="Username"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-
                 <div className={styles.inputContainer}>
                   <input
                     type="text"

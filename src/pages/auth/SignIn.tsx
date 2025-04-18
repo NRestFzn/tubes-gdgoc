@@ -14,7 +14,7 @@ import {useState, useEffect} from 'react';
 import {LoginIcon} from '@/components/SvgIcons';
 import {useNavigate} from 'react-router-dom';
 
-import { PreloadImage } from '../../helper/preload';
+import { PreloadImageCSS } from '../../helper/preload';
 import { loginWithEmail } from '../../helper/loginWithEmail';
 import { loginWithGoogle } from '../../helper/loginWithGoogle';
 
@@ -62,7 +62,7 @@ const SignIn: React.FC = (): React.ReactElement => {
 
   return (
     <div data-theme={theme} className={styles.wrapper}>
-      <PreloadImage path={viewEye}/>
+      <PreloadImageCSS path={viewEye}/>
       <div className={styles.background}>
         <div>
           <header className={styles.header}>
