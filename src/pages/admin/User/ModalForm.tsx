@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Modal, Input, notification, Form, InputNumber} from 'antd';
+import {Modal, Input, notification, Form} from 'antd';
 import {Button} from '@/components/ui/button';
 import {useAddUser} from '@/hooks/useAddUser';
 import {useUpdateUser} from '@/hooks/useUpdateUser';
@@ -28,7 +28,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
     if (mode === 'edit') {
       const data = await fetchUserById(id as string);
-      const {password, ...restField} = data;
+      const { ...restField} = data;
       form.setFieldsValue({...restField});
     }
   };

@@ -5,7 +5,7 @@ import User from "@/pages/admin/User";
 import Booking from "@/pages/admin/Booking";
 import Vacation from "@/pages/admin/Vacation";
 import Destination from "@/pages/admin/Destination/index";
-import AdminLayout from "@/pages/admin/layout/AdminLayout.tsx";
+import AdminLayout from "@/layouts/AdminLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom"; // dari react-router-dom!
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProtectedRoute from "@/ProtectedRoute";

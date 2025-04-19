@@ -1,0 +1,29 @@
+.root {
+  height: 850px;
+  padding-top: 50px;
+}
+
+.root > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.root > div + div {
+  margin-top: 50px;
+}
+
+.root > div > div {
+  position: relative;
+  width: fit-content;
+}
+
+.root > div > div > div {
+  width: 600px;
+}
+
+.root > div > div > div + img {
+  position: absolute;
+  right: -250px;
+  top: 50px;
+}

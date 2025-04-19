@@ -3,7 +3,7 @@ import BestVacationPlan from "./partials/BestVacationPlan";
 import ExclusiveDeals from "./partials/ExclusiveDeals";
 import Testimonial from "./partials/Testimonial";
 import Newsletter from "./partials/Newsletter";
-import HowToBook from "./partials/howToBook";
+import HowToBook from "./partials/HowToBook";
 import HeroBanner from "./partials/HeroBanner";
 
 const HomePage: React.FC = (): React.ReactElement => {
@@ -13,9 +13,9 @@ const HomePage: React.FC = (): React.ReactElement => {
         document.querySelector("#subscribe")?.scrollIntoView({ behavior: "smooth" });
       }}/>
 
-      <HowToBook/>
+      <HowToBook id="about"/>
       
-      <ExclusiveDeals />
+      <ExclusiveDeals id="tour"/>
 
       <BestVacationPlan />
 

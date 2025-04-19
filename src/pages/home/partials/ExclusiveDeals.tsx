@@ -3,11 +3,15 @@ import { useGetDestinations } from "@/hooks/useGetDestinations";
 import { Destination as DestinationType } from "@/utils/types";
 import React from "react";
 
-const ExclusiveDeals: React.FC = (): React.ReactElement => {
+type ExclusiveDealsProps = {
+  id?: string;
+}
+
+const ExclusiveDeals: React.FC<ExclusiveDealsProps> = ({id}): React.ReactElement => {
   const { data } = useGetDestinations();
 
   return (
-    <section className="bg-background-white text-primary-black font-body h-[960px] w-full">
+    <section id={id} className="bg-background-white text-primary-black font-body h-[960px] w-full">
       <h2 className="font-display text-h2 pt-[120px] text-center font-bold">
         Exclusive <span className="text-primary-orange">deals & discounts</span>
       </h2>

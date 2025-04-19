@@ -10,11 +10,11 @@ export default function HeroBanner( {id, onScroll}: HeroBannerProps ) {
   return (
     <section
         id={id}
-        className={classNames("flex items-start justify-center bg-background-white text-primary-black h-[900px] w-full", styles.root)}
+        className={classNames("flex items-start justify-center bg-background-white text-primary-black h-[800px] w-full", styles.root)}
       >
         <div className={classNames("flex items-center justify-center w-[1600px]", styles.heroContainer)}>
-          <div className="flex flex-col justify-center items-center w-[760px] mt-[50px]">
-            <h1 className="text-h1 font-display text-primary-black leading-[70px] font-bold w-[570px] pl-[33px]">
+          <div className="w-[760px] mt-[50px]">
+            <h1 className="text-[55px] font-display text-primary-black leading-[70px] font-bold w-[570px]">
               Get started your exciting{" "}
               <span className="text-primary-orange">journey</span> with us.
             </h1>

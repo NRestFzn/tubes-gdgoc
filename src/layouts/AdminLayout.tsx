@@ -1,6 +1,6 @@
 import {SidebarInset, SidebarProvider} from '@/components/ui/sidebar';
 import {AppSidebar} from '@/components/app-sidebar';
-import AdminHeader from '../partials/Header';
+import AdminHeader from '@/pages/admin/partials/Header';
 import {ThemeProvider} from '@/components/theme-provider';
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
