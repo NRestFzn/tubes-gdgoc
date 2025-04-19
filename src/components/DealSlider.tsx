@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import DestinationCard from './DestinationCard';
+import DealCard from './DealCard';
 
-type DestinationType = {
-  destinations: {
+type DealCardType = {
+  deals: {
     imgSrc?: string;
     city: string;
     country: string;
-    price: number;
-    dayTrip: number;
     rating?: number;
-    description?: string | '';
+    price: number;
+    discount: number | 0;
   }[];
 };
 
-const VacationSlider: React.FC<DestinationType> = ({
-  destinations,
+const VacationSlider: React.FC<DealCardType> = ({
+  deals,
 }): React.ReactElement => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -23,11 +22,11 @@ const VacationSlider: React.FC<DestinationType> = ({
   // Number of cards visible at once - responsive
   const getCardsPerView = () => {
     if (typeof window !== 'undefined') {
-      if (window.innerWidth > 1280) return 3; // xl
+      if (window.innerWidth > 1280) return 5; // xl
       if (window.innerWidth > 768) return 2; // md
       return 1; // mobile
     }
-    return 3; // default for SSR
+    return 5; // default for SSR
   };
 
   const [cardsPerView, setCardsPerView] = useState(getCardsPerView());
@@ -43,19 +42,19 @@ const VacationSlider: React.FC<DestinationType> = ({
   }, []);
 
   // Calculate total pages
-  const totalPages = Math.ceil(destinations.length / cardsPerView);
+  const totalPages = Math.ceil(deals.length / cardsPerView);
 
   // Get visible destinations based on current index
-  const getVisibleDestinations = () => {
-    const startIndex = (currentIndex * cardsPerView) % destinations.length;
-    const visibleDestinations = [];
+  const getVisibleDeals = () => {
+    const startIndex = (currentIndex * cardsPerView) % deals.length;
+    const visibleDeals = [];
 
     for (let i = 0; i < cardsPerView; i++) {
-      const idx = (startIndex + i) % destinations.length;
-      visibleDestinations.push(destinations[idx]);
+      const idx = (startIndex + i) % deals.length;
+      visibleDeals.push(deals[idx]);
     }
 
-    return visibleDestinations;
+    return visibleDeals;
   };
 
   const goToPrevSlide = () => {
@@ -96,47 +95,22 @@ const VacationSlider: React.FC<DestinationType> = ({
 
   return (
     <div className="vacation-slider-container relative w-full">
-      {/* Navigation buttons */}
-      <div className="mb-3 flex justify-end gap-3">
-        <button
-          onClick={goToPrevSlide}
-          className="bg-tw-background-white hover:border-tw-primary-orange flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#999999]/50 transition-all duration-300 focus:outline-none"
-          disabled={isAnimating}
-          aria-label="Previous destinations"
-        >
-          <img
-            className="h-2 w-2"
-            src="/assets/arrow-gray.svg"
-            alt="Previous"
-          />
-        </button>
-        <button
-          onClick={goToNextSlide}
-          className="bg-tw-primary-orange hover:bg-opacity-80 flex h-[40px] w-[40px] items-center justify-center rounded-full transition-all duration-300 focus:outline-none"
-          disabled={isAnimating}
-          aria-label="Next destinations"
-        >
-          <img className="h-2 w-2" src="/assets/arrow-white.svg" alt="Next" />
-        </button>
-      </div>
       {/* Slider content */}
       <div
         className="slider-content"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
-        <div
-          className={`grid grid-cols-1 gap-[15px] md:grid-cols-2 lg:grid-cols-3`}
-        >
-          {getVisibleDestinations().map((destination, index) => (
-            <DestinationCard
+        <div className="mx-auto mt-8 flex flex-wrap justify-center gap-6">
+          {getVisibleDeals().map((deals, index) => (
+            <DealCard
               key={`${currentIndex}-${index}`}
-              imgSrc={destination.imgSrc}
-              city={destination.city}
-              country={destination.country}
-              price={destination.price}
-              dayTrip={destination.dayTrip}
-              rating={destination.rating}
+              imgSrc={deals.imgSrc}
+              city={deals.city}
+              country={deals.country}
+              price={deals.price}
+              rating={deals.rating}
+              discount={deals.discount}
             />
           ))}
         </div>
@@ -160,6 +134,31 @@ const VacationSlider: React.FC<DestinationType> = ({
           />
         ))}
       </div>
+
+      {/* Navigation buttons */}
+      <div className="mb-3 flex justify-center gap-3">
+        <button
+          onClick={goToPrevSlide}
+          className="bg-tw-background-white hover:border-tw-primary-orange flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#999999]/50 transition-all duration-300 focus:outline-none"
+          disabled={isAnimating}
+          aria-label="Previous destinations"
+        >
+          <img
+            className="h-2 w-2"
+            src="/assets/arrow-gray.svg"
+            alt="Previous"
+          />
+        </button>
+        <button
+          onClick={goToNextSlide}
+          className="bg-tw-primary-orange hover:bg-opacity-80 flex h-[40px] w-[40px] items-center justify-center rounded-full transition-all duration-300 focus:outline-none"
+          disabled={isAnimating}
+          aria-label="Next destinations"
+        >
+          <img className="h-2 w-2" src="/assets/arrow-white.svg" alt="Next" />
+        </button>
+      </div>
+
     </div>
   );
 };

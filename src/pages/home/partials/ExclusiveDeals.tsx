@@ -1,6 +1,6 @@
-import DealCard from '@/components/DealCard';
+import DealSlider from '@/components/DealSlider';
 import { useGetDestinations } from '@/hooks/useGetDestinations';
-import { Destination as DestinationType } from '@/utils/types';
+import { Spin } from 'antd';
 import React from 'react';
 
 type ExclusiveDealsProps = {
@@ -10,12 +10,12 @@ type ExclusiveDealsProps = {
 const ExclusiveDeals: React.FC<ExclusiveDealsProps> = ({
   id,
 }): React.ReactElement => {
-  const { data } = useGetDestinations();
+  const { data, isLoading, isError } = useGetDestinations();
 
   return (
     <section
       id={id}
-      className="bg-tw-background-white text-tw-primary-black font-tw-body min-h-[960px] w-full"
+      className="bg-tw-background-white text-tw-primary-black font-tw-body w-full"
     >
       <h2 className="font-tw-display text-tw-h2 pt-[120px] text-center font-bold">
         Exclusive{' '}
@@ -26,25 +26,17 @@ const ExclusiveDeals: React.FC<ExclusiveDealsProps> = ({
         journey.
       </p>
       <div className="mx-auto mt-8 flex flex-wrap justify-center gap-6">
-        {data?.map((item: DestinationType, index) => (
-          <DealCard key={index} {...item} />
-        ))}
-      </div>
-      <div className="mt-[71px] flex flex-row items-center justify-center gap-3">
-        <button className="bg-tw-background-white h-[40px] w-[40px] rounded-full border-[1px] border-[#999999]/50">
-          <img
-            className="mx-auto my-auto"
-            src="/assets/arrow-gray.svg"
-            alt="Arrow Left"
-          />
-        </button>
-        <button className="bg-tw-primary-orange h-[40px] w-[40px] rounded-full">
-          <img
-            className="mx-auto my-auto"
-            src="/assets/arrow-white.svg"
-            alt="Arrow Right"
-          />
-        </button>
+        {isError ? (
+          'Error fetching data'
+        ) : isLoading ? (
+          <center className="mt-12">
+            <Spin size="large" />
+          </center>
+        ) : (
+          <div>
+            {data ? <DealSlider deals={data} /> : 'Vacation Data'}
+          </div>
+        )}
       </div>
     </section>
   );
