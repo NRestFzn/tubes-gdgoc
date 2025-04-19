@@ -30,7 +30,10 @@ const Newsletter: React.FC<NewsletterProps> = ( {id} ): React.ReactElement => {
               placeholder="Enter your email"
               className="text-content w-full rounded-lg bg-white px-6 py-4 pl-8"
             />
-            <button className="bg-primary-orange text-background-white absolute top-1/2 right-2 -translate-y-1/2 transform rounded-lg px-5 py-2 font-medium">
+            <button 
+              onClick={() => window.location.reload()} // or submit it to somewhere else
+              className="cursor-pointer bg-primary-orange text-background-white absolute top-1/2 right-2 -translate-y-1/2 transform rounded-lg px-5 py-2 font-medium"
+            >
               Subscribe
             </button>
           </div>
