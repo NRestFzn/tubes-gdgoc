@@ -33,18 +33,18 @@ const Navbar: React.FC = (): React.ReactElement => {
   const navigate = useNavigate();
 
   return (
-    <nav className={classNames("mx-auto flex h-[114px] w-screen items-center", styles.root)}>
-      <ul className="font-display justify-start ml-27">
+    <nav className={classNames(styles.root)}>
+      <ul className={styles.logo}>
         <a href="/">
-          <li className="flex flex-row gap-2 align-center">
-            <img className="h-[37px] w-[37px]" src={logo} alt="mochi-travel-logo" />
-            <h1 className="text-h3 text-primary-black font-bold">Mochi Travel</h1>
+          <li>
+            <img src={logo} alt="mochi-travel-logo" />
+            <h1>Mochi Travel</h1>
           </li>
         </a>
       </ul>
-      <ul className={classNames("text-nav flex flex-1 items-center justify-end mr-27 gap-4 font-sans", styles.menu)}>
+      <ul className={classNames(styles.menu)}>
         {NavbarMenu.map((item, index) => (
-          <li key={index} className="text-primary-black cursor-pointer">
+          <li key={index}>
             <a
               onClick={(e) => {
                 e.preventDefault();

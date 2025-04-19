@@ -1,20 +1,9 @@
-.menu {
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
+.root {
+  width: 100vw;
+  height: 50px;
 }
 
-.root > ul {
-  position: relative;
-}
-
-.menu {
-  position: absolute;
-  right: 20px;
-}
-
-@media (max-width: 1200px) {
-  .menu {
-    display: none;
-  }
+.logo img {
+  height: 40px;
+  width: 40px;
 }
