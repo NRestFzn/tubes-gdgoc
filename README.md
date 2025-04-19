@@ -8,7 +8,7 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design
 
 - Nashir Resta Fauzian (607062400083)
 - Fauzan Zulfa Muhammad (103022400032)
--
+- Kaisar Rayfa Al Baihaqqi (103022400110)
 -
 
 ## Cara Menjalankan Aplikasi
