@@ -21,7 +21,7 @@ export default function HeroBanner({id, onScroll}: HeroBannerProps) {
           styles.heroContainer
         )}
       >
-        <div className="w-[760px] mt-[50px]">
+        <div className="w-[730px] mt-[50px] mr-[30px]">
           <h1 className="text-[55px] font-tw-display text-tw-primary-black leading-[70px] font-bold w-[570px]">
             Get started your exciting{' '}
             <span className="text-tw-primary-orange">journey</span> with us.

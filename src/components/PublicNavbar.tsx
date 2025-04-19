@@ -2,7 +2,6 @@ import logo from '@/assets/mochi.jpg';
 import {smoothScrollTo} from '@/helper/scrollBehaviour';
 import styles from '@/styles/PublicNavbar.module.css';
 
-import classNames from 'classnames';
 import {useNavigate} from 'react-router-dom';
 
 const NavbarMenu = [
@@ -32,7 +31,7 @@ const Navbar: React.FC = (): React.ReactElement => {
   const navigate = useNavigate();
 
   return (
-    <nav className={classNames(styles.root)}>
+    <nav className={styles.root}>
       <ul className={styles.logo}>
         <a href="/">
           <li>
@@ -41,7 +40,7 @@ const Navbar: React.FC = (): React.ReactElement => {
           </li>
         </a>
       </ul>
-      <ul className={classNames(styles.menu)}>
+      <ul className={styles.menu}>
         {NavbarMenu.map((item, index) => (
           <li key={index}>
             <a

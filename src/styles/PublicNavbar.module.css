@@ -1,9 +1,77 @@
 .root {
   width: 100vw;
-  height: 50px;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.logo {
+  width: 250px;
+  height: inherit;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  
+  position: absolute;
+  left: 12vw;
+}
+
+.logo > a {
+  width: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.logo > a li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.logo h1 {
+  font-size: 21px;
+  font-weight: 600;
 }
 
 .logo img {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
+}
+
+.logo p {
+  width: fit-content;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 500px;
+  gap: 25px;
+  position: absolute;
+
+  right: 10vw;
+}
+
+.menu a {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .logo {
+    left: 40vw;
+  }
+
+  .menu {
+    display: none;
+  }
 }
