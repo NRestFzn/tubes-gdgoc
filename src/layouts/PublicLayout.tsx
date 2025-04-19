@@ -1,13 +1,10 @@
-import PublicFooter from "@/components/PublicFooter";
-import Navbar from "@/components/PublicNavbar";
+import PublicFooter from '@/components/PublicFooter';
+import Navbar from '@/components/PublicNavbar';
 
-import { useEffect } from "react";
+import {useEffect} from 'react';
+import {Outlet} from 'react-router';
 
-type PublicLayoutProps = {
-  children: React.ReactNode;
-};
-
-const PublicLayout: React.FC<PublicLayoutProps> = ({children}): React.ReactElement => {
+const PublicLayout: React.FC = (): React.ReactElement => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -15,7 +12,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({children}): React.ReactEleme
   return (
     <>
       <Navbar />
-      {children}
+      <Outlet />
       <PublicFooter />
     </>
   );
