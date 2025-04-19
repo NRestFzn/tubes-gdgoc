@@ -1,88 +1,3 @@
-TODO:
-- search bar on admin dashboard
-- limit get data
-- dark mode (search bar, notification, modal)
-- add rating on form
-- search feature
-- data filling
-- deploy vercel
-- default route
-- route protection
-- logout
-- user profile picture
-- user greeter
-- 
-  
-### ✅ Spek Checklist
-
-#### 🔐 Authentication – Login Page
-
-- [x] Input: Email & Password
-- [x] Bisa menampilkan/menyembunyikan password
-- [x] Validasi input dan tampilkan error jika salah
-- [x] Redirect ke Manage Destination jika login berhasil
-
-Display
-- [x] Dekstop Display
-- [x] Responsive on Zoom
-- [ ] Mobile UI
-
-Add-ons (Optional)
--  [x] Google Sign-in
--  [ ] Dark Mode
-
-#### 🧭 Navigation
-
-**Profile Section**
-
-- [x] Menampilkan nama dan foto user
-- [x] Klik → dropdown muncul dengan opsi "Logout"
-- [ ] Logout → redirect ke login page
-- [x] Klik di luar dropdown → dropdown tertutup
-
-**Sidebar Navigation**
-
-- [x] Sidebar berisi item:
-  - [x] Manage Destination
-  - [x] Manage Vacation
-  - [x] Manage User
-  - [x] Manage Booking
-- [x] Klik item → redirect ke halaman yang sesuai
-
-#### 📋 CRUD Pages
-
-**Manage Destination**
-
-- [x] Tabel dengan kolom: City, Price, Discount, Country, Rating, Quota
-- [x] Action: Tambah, Edit, Hapus, Search
-- [x] Pagination jika data > 10
-- [x] Validasi form
-- [x] Konfirmasi sebelum hapus
-
-**Manage Vacation**
-
-- [x] Tabel dengan kolom: City, Country, Price, Day Trip, Rating, Quota
-- [x] Action: Tambah, Edit, Hapus, Search
-- [x] Pagination jika data > 10
-- [x] Validasi form
-- [x] Konfirmasi sebelum hapus
-- [x] Validasi kuota sebelum tambah data
-
-**Manage User**
-
-- [x] Tabel dengan kolom: Name, Phone Number
-- [x] Action: Tambah, Edit, Hapus, Search
-- [x] Pagination jika data > 10
-
-**Manage Booking**
-
-- [x] Tabel dengan kolom: Name, Phone, Destination/Vacation
-- [x] Tidak bisa tambah data jika kuota penuh
-- [x] Action: Tambah, Edit, Hapus, Search
-- [x] Validasi semua field
-
----
-
 # TUBES GDGOC TELKOM BANDUNG - Travel Dashboard
 
 ## Deskripsi
@@ -91,8 +6,8 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design
 
 ### Anggota Kelompok
 
--
--
+- Nashir Resta Fauzian (607062400083)
+- Fauzan Zulfa Muhammad (103022400032)
 -
 -
 
@@ -101,8 +16,8 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design
 1. **Clone repository**
 
    ```bash
-   git clone https://github.com/username/nama-repo.git
-   cd nama-repo
+   git clone https://github.com/NRestFzn/tubes-gdgoc.git
+   cd tubes-gdgoc
    ```
 
 2. **Install dependencies**
@@ -124,16 +39,25 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design
    npm run dev
    ```
 
-5. **Deploy (Opsional)**
-   - Hubungkan dengan [Vercel](https://vercel.com/) dan deploy langsung dari GitHub repo.
+5. **Akses URL**
+
+   ```bash
+   '/' - Homepage
+   '/sign-in'/ - Halaman login untuk masuk ke admin dashboard
+   '/admin/destination' - Halaman admin untuk mengelola destinasi
+   '/admin/vacation' - Halaman admin untuk mengelola wisata
+   '/admin/user' - Halaman admin untuk mengelola user
+   '/admin/booking' - Halaman admin untuk mengelola booking
+   ```
 
 ## Teknologi yang Digunakan
 
 - **React.js** – Library utama untuk membangun UI.
 - **Tailwind CSS** – Styling cepat dan efisien.
 - **ShadCN** - Componen Library.
-- **Ant UI** -
+- **AntDesign** -
 - **Firebase** – Backend dan autentikasi.
 - **React Router DOM** – Routing antar halaman.
 - **Vercel** – Deployment platform.
+- **TanStack React-Query** – Fetching data.
 - **Git & GitHub** – Version control dan kolaborasi.
