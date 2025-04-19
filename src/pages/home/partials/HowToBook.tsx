@@ -7,12 +7,12 @@ type HowToBookProps = {
   id?: string;
 };
 
-export default function HowToBook({id}: HowToBookProps): React.ReactElement {
+export default function HowToBook({ id }: HowToBookProps): React.ReactElement {
   return (
     <section
       id={id}
       className={classNames(
-        'bg-tw-background-ash text-tw-primary-black font-tw-body h-[724px] w-full',
+        'bg-tw-background-ash text-tw-primary-black font-tw-body min-h-[724px] w-full',
         styles.root
       )}
     >
@@ -31,7 +31,7 @@ export default function HowToBook({id}: HowToBookProps): React.ReactElement {
           <img className="my-auto" src="/assets/plane.svg" alt="Plane" />
         </div>
       </div>
-      <div className="mx-auto grid max-w-[1170px] grid-cols-3 gap-[30px] pt-8">
+      <div className="grid grid-cols-1 gap-8 p-6 lg:px-6 @xl/main:grid-cols-2 flex-wrap @5xl/main:grid-cols-4">
         {TodoList.map((item, index) => (
           <FeatureCard key={index} {...item} />
         ))}
