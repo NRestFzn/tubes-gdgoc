@@ -366,6 +366,12 @@ input:-moz-autofill {
   animation: fadeOutDrop 0.3s ease-in forwards;
 }
 
+@media (max-width: 1024px) {
+  .mainContainer {
+    height: 70vh;
+  }
+}
+
 @media (max-width: 768px) {
 
   .headerButtons > button {
@@ -381,8 +387,10 @@ input:-moz-autofill {
   .background {
     width: 1005;
   }
+
   .loginBox {
     width: 100%;
+    border-radius: 0;
   }
 }
 
