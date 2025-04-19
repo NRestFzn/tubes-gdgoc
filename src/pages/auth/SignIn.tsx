@@ -66,7 +66,7 @@ const SignIn: React.FC = (): React.ReactElement => {
       <div className={styles.background}>
         <div>
           <header className={styles.header}>
-            <div className={styles.logo}>
+            <div className={styles.logo} onClick={() => navigate('/')} tabIndex={0}>
               <img src={logo} alt="mochi-travel-logo" />
               <p>Mochi Travel</p>
             </div>
