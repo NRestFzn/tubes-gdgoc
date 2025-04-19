@@ -1,0 +1,45 @@
+@media (max-width: 1400px) {
+  .root {
+    padding-top: 50px;
+    height: 1300px;
+  }
+
+  .heroContainer {
+    flex-direction: column-reverse;
+    gap: 50px;
+  }
+
+  .buttonContainer {
+    justify-content: center;
+  }
+
+  .heroContainer > div {
+    width: 60vw;
+  }
+
+  .heroContainer > div div {
+    width: inherit;
+  }
+
+  .heroContainer > div > h1 {
+    padding-left: 0;
+    font-size: 50px;
+    width: inherit;
+    text-align: center;
+  }
+
+  .heroContainer p {
+    width: inherit;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .heroImageContainer {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .heroImageContainer img {
+    padding-left: 4vw;
+  }
+}
