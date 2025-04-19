@@ -39,11 +39,14 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
    ```bash
    git clone https://github.com/NRestFzn/tubes-gdgoc.git
    cd tubes-gdgoc
+   git checkout dev
+   ```
 
 2. **Install Dependencies**
    ```bash
    npm install
-
+   ```
+   
 3. **Setup Firebase**
    - Buat project di [Firebase Console](https://console.firebase.google.com/)
    - Aktifkan **Authentication** (Email/Password)
@@ -54,6 +57,10 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
    ```bash
    npm run dev
    ```
+   
+5. **Deploy (Opsional)**
+   - Hubungkan ke [Vercel](https://vercel.com/) dan deploy langsung dari GitHub.
+   
 ### Akses URL
    ```bash
    '/' - Homepage
@@ -63,8 +70,6 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
    '/admin/user' - Halaman admin untuk mengelola user
    '/admin/booking' - Halaman admin untuk mengelola booking
    ```
-5. **Deploy (Opsional)**
-   - Hubungkan ke [Vercel](https://vercel.com/) dan deploy langsung dari GitHub.
 
 ## Teknologi yang Digunakan
 - **React.js** – Library utama UI
