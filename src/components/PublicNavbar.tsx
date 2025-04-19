@@ -1,5 +1,5 @@
-import React from "react";
 import logo from '@/assets/mochi.jpg';
+import { smoothScrollTo } from "@/helper/scrollBehaviour";
 
 const NavbarMenu = [
   {
@@ -37,9 +37,21 @@ const Navbar: React.FC = (): React.ReactElement => {
       </ul>
       <ul className="text-nav flex flex-1 items-center justify-end mr-15 gap-4 font-sans">
         {NavbarMenu.map((item, index) => (
-          <a href={item.href} key={index}>
-            <li className="text-primary-black">{item.name}</li>
-          </a>
+          <li key={index} className="text-primary-black cursor-pointer">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                const section = document.querySelector(item.href);
+                if (section) {
+                  const offsetTop = section.getBoundingClientRect().top + window.scrollY;
+                  smoothScrollTo(offsetTop, 400);
+                }
+              }}
+              href={item.href}
+            >
+              {item.name}
+            </a>
+          </li>
         ))}
       </ul>
     </nav>

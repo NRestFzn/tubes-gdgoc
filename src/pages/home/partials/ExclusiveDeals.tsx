@@ -4,7 +4,7 @@ import { Destination as DestinationType } from "@/utils/types";
 import React from "react";
 
 const ExclusiveDeals: React.FC = (): React.ReactElement => {
-  const { data, isLoading, isError } = useGetDestinations();
+  const { data } = useGetDestinations();
 
   return (
     <section className="bg-background-white text-primary-black font-body h-[960px] w-full">

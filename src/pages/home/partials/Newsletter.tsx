@@ -1,8 +1,10 @@
-import React from "react";
+type NewsletterProps = {
+  id?: string;
+};
 
-const Newsletter: React.FC = (): React.ReactElement => {
+const Newsletter: React.FC<NewsletterProps> = ( {id} ): React.ReactElement => {
   return (
-    <section className="w-full bg-[#F7F8FC] py-[120px]">
+    <section className="w-full bg-[#F7F8FC] py-[120px]" id={id}>
       <div className="bg-primary-orange relative mx-auto max-w-[1170px] rounded-xl p-12 text-center">
         <div className="absolute top-2 right-0">
           <img

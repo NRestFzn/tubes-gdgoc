@@ -1,4 +1,4 @@
-import React from "react";
+import logo from '@/assets/mochi.jpg';
 
 const PublicFooter: React.FC = (): React.ReactElement => {
   return (
@@ -6,8 +6,8 @@ const PublicFooter: React.FC = (): React.ReactElement => {
       <div className="mx-auto grid max-w-[1170px] grid-cols-4 gap-8">
         <div>
           <div className="flex flex-row gap-1">
-            <h3 className="text-h3 text-primary-black font-bold">Trabook</h3>
-            <img src="/assets/logo.svg" alt="logo" />
+            <img className="h-[37px] w-[37px]" src={logo} alt="mochi-travel-logo" />
+            <h3 className="text-h3 text-primary-black font-bold">Mochi Travel</h3>
           </div>
           <p className="text-light-gray mt-4">
             Book your trip in minute, get full control for much longer.
