@@ -2,10 +2,10 @@ type NewsletterProps = {
   id?: string;
 };
 
-const Newsletter: React.FC<NewsletterProps> = ( {id} ): React.ReactElement => {
+const Newsletter: React.FC<NewsletterProps> = ({id}): React.ReactElement => {
   return (
     <section className="w-full bg-[#F7F8FC] py-[120px]" id={id}>
-      <div className="bg-primary-orange relative mx-auto max-w-[1170px] rounded-xl p-12 text-center">
+      <div className="bg-tw-primary-orange relative mx-auto max-w-[1170px] rounded-xl p-12 text-center">
         <div className="absolute top-2 right-0">
           <img
             src="assets\white-coconut-tree-ornament.svg"
@@ -15,7 +15,7 @@ const Newsletter: React.FC<NewsletterProps> = ( {id} ): React.ReactElement => {
         <div className="absolute bottom-0 left-0">
           <img src="assets\news-background-ornament.svg" alt="coconut tree" />
         </div>
-        <h2 className="font-display text-h2 text-background-white mx-auto max-w-[650px] font-bold">
+        <h2 className="font-tw-display text-tw-h2 text-tw-background-white mx-auto max-w-[650px] font-bold">
           Subscribe and get exclusive deals & offers
         </h2>
         <div className="mt-10 flex justify-center">
@@ -28,11 +28,11 @@ const Newsletter: React.FC<NewsletterProps> = ( {id} ): React.ReactElement => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="text-content w-full rounded-lg bg-white px-6 py-4 pl-8"
+              className="text-tw-content w-full rounded-lg bg-white px-6 py-4 pl-8"
             />
-            <button 
+            <button
               onClick={() => window.location.reload()} // or submit it to somewhere else
-              className="cursor-pointer bg-primary-orange text-background-white absolute top-1/2 right-2 -translate-y-1/2 transform rounded-lg px-5 py-2 font-medium"
+              className="cursor-pointer bg-tw-primary-orange text-tw-background-white absolute top-1/2 right-2 -translate-y-1/2 transform rounded-lg px-5 py-2 font-medium"
             >
               Subscribe
             </button>

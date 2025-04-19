@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type DestinationCardType = {
   imgSrc?: string;
@@ -7,7 +7,7 @@ type DestinationCardType = {
   price: number;
   dayTrip: number;
   rating?: number;
-  description?: string | "";
+  description?: string | '';
 };
 
 const DestinationCard: React.FC<DestinationCardType> = ({
@@ -17,7 +17,7 @@ const DestinationCard: React.FC<DestinationCardType> = ({
   price,
   dayTrip,
   rating,
-  description = "",
+  description = '',
 }): React.ReactElement => {
   return (
     <div className="rounded-[20px] border border-[#66666608] bg-white transition-shadow duration-300 hover:shadow-lg">
@@ -26,7 +26,7 @@ const DestinationCard: React.FC<DestinationCardType> = ({
           src={
             imgSrc
               ? imgSrc
-              : "https://images.unsplash.com/photo-1551376347-075b0121a65b?q=80&w=1000"
+              : 'https://images.unsplash.com/photo-1551376347-075b0121a65b?q=80&w=1000'
           }
           alt={`${country}, ${city}`}
           className="h-[232px] w-full rounded-lg object-cover"
@@ -36,7 +36,7 @@ const DestinationCard: React.FC<DestinationCardType> = ({
       <div className="p-2.5">
         <div className="flex items-center justify-between">
           <h3 className="text-[18px] font-semibold text-[#2D3134]">{`${country}, ${city}`}</h3>
-          <p className="text-background-orange text-[16px] font-semibold">
+          <p className="text-tw-background-orange text-[16px] font-semibold">
             ${price}
           </p>
         </div>
