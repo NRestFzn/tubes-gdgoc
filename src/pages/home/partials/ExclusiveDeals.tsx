@@ -1,6 +1,6 @@
 import DealCard from '@/components/DealCard';
-import {useGetDestinations} from '@/hooks/useGetDestinations';
-import {Destination as DestinationType} from '@/utils/types';
+import { useGetDestinations } from '@/hooks/useGetDestinations';
+import { Destination as DestinationType } from '@/utils/types';
 import React from 'react';
 
 type ExclusiveDealsProps = {
@@ -10,12 +10,12 @@ type ExclusiveDealsProps = {
 const ExclusiveDeals: React.FC<ExclusiveDealsProps> = ({
   id,
 }): React.ReactElement => {
-  const {data} = useGetDestinations();
+  const { data } = useGetDestinations();
 
   return (
     <section
       id={id}
-      className="bg-tw-background-white text-tw-primary-black font-tw-body h-[960px] w-full"
+      className="bg-tw-background-white text-tw-primary-black font-tw-body min-h-[960px] w-full"
     >
       <h2 className="font-tw-display text-tw-h2 pt-[120px] text-center font-bold">
         Exclusive{' '}
@@ -25,7 +25,7 @@ const ExclusiveDeals: React.FC<ExclusiveDealsProps> = ({
         Discover our fantastic early booking discounts & start planning your
         journey.
       </p>
-      <div className="mx-auto mt-8 grid w-[1170px] grid-cols-4">
+      <div className="mx-auto mt-8 flex flex-wrap justify-center gap-6">
         {data?.map((item: DestinationType, index) => (
           <DealCard key={index} {...item} />
         ))}
