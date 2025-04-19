@@ -1,13 +1,16 @@
 import PublicFooter from "@/components/PublicFooter";
 import Navbar from "@/components/PublicNavbar";
 import React from "react";
-import { Outlet } from "react-router";
 
-const PublicLayout: React.FC = (): React.ReactElement => {
+type PublicLayoutProps = {
+  children: React.ReactNode;
+};
+
+const PublicLayout: React.FC<PublicLayoutProps> = ({children}): React.ReactElement => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      {children}
       <PublicFooter />
     </>
   );

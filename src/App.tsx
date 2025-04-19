@@ -10,16 +10,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"; // dari 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProtectedRoute from "@/ProtectedRoute";
 import NotFound from "@/pages/NotFound.tsx";
-import HomePage from "@/pages/home/index.tsx";
-import PublicLayout from "@/layouts/PublicLayout.tsx";
+import RedirectBasedOnAuth from "./helper/RedirectBasedOnAuth";
 
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <PublicLayout />,
-    children: [{ index: true, element: <HomePage /> }],
+    element: <RedirectBasedOnAuth/>,
   },
   {
     path: "/sign-in",

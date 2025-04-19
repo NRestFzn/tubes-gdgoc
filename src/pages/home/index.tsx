@@ -4,7 +4,7 @@ import TodoList from "@/constants/TodoList";
 import BestVacationPlan from "./partials/BestVacationPlan";
 import ExclusiveDeals from "./partials/ExclusiveDeals";
 import Testimonial from "./partials/Testimonial";
-import Newsletter from "./partials/NewsLetter";
+import Newsletter from "./partials/Newsletter";
 
 const HomePage: React.FC = (): React.ReactElement => {
   return (
