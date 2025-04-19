@@ -1,5 +1,4 @@
 .root {
-  height: 850px;
   padding-top: 50px;
 }
 
@@ -23,7 +22,8 @@
 }
 
 .root > div > div > div + img {
-  position: absolute;
-  right: -250px;
-  top: 50px;
+  position: absolute; 
+  margin-top: 30px;  
+  max-width: 100%;  
+  height: auto;
 }

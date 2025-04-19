@@ -16,7 +16,7 @@ const FeatureCard: React.FC<FeatureCardType> = ({
   return (
     <>
       <div
-        className={`bg-tw-background-white drop-shadow-feature border-tw-light-gray/8 flex h-[278px] w-[370px] flex-col rounded-[8px] border-[2px] p-5`}
+        className={`bg-tw-background-white drop-shadow-feature border-tw-light-gray/8 flex h-[278px] max-w-300 sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] flex-col rounded-[8px] border-[2px] p-7`}
         style={{
           backgroundImage: imgBackground ? `url(${imgBackground})` : 'none',
         }}

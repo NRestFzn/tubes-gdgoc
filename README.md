@@ -1,46 +1,60 @@
-# TUBES GDGOC TELKOM BANDUNG - Travel Dashboard
+# Travel Dashboard – GDGOC TELKOM BANDUNG
 
-## Deskripsi
+Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan sebagai bagian dari *Product Design Requirement (PRD)* program Web Development GDGOC-Telkom Bandung. Aplikasi ini dilengkapi fitur autentikasi, dashboard admin, halaman CRUD, dan berbagai fitur tambahan.
 
-Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design Requirement (PRD)_ dari program Web Development GDGOC-Telkom Bandung. Aplikasi ini mencakup fitur autentikasi, navigasi dashboard, serta halaman CRUD yang berfungsi penuh. Desain UI bersifat bebas namun harus tetap memperhatikan user experience dan fungsionalitas sesuai dengan ketentuan PRD.
+## Anggota Kelompok
 
-### Anggota Kelompok
+- [Nashir Resta Fauzian](https://github.com/NRestFzn) [607062400083]
+- [Fauzan Zulfa Muhammad](https://github.com/zoovasoup) [103022400032]
+- [Kaisar Rayfa Al Baihaqqi](https://github.com/kaisaaru) [103022400110]
+- [Muhammad Hafizh](https://github.com/Gimerbone) [ ]
 
-- Nashir Resta Fauzian (607062400083)
-- Fauzan Zulfa Muhammad (103022400032)
-- Kaisar Rayfa Al Baihaqqi (103022400110)
--
+## List Feature
+- Autentikasi dengan Email/Password dan Google Sign-in
+- Dashboard admin responsif dengan navigasi sidebar
+- Halaman CRUD untuk:
+    - Destinasi Wisata
+    - Paket Liburan
+    - Data User
+    - Data Booking
+- Validasi form dan konfirmasi sebelum hapus
+- Pencarian & pagination data
+- Proteksi route berdasarkan autentikasi
+- Cek kuota otomatis sebelum booking
+- Tampilan dropdown profil dengan logout
+- Dukungan mode mobile dan desktop
+- Light/Dark Mode pada Login & Admin Dashboard
+- 
 
 ## Cara Menjalankan Aplikasi
 
-1. **Clone repository**
+### Untuk Pengguna Umum (Live Deployment)
 
+1. Buka halaman repository ini.
+2. Klik link URL di bagian **About** repo untuk mengakses aplikasi live (via Vercel).
+
+### Untuk Pengembangan (Development Mode)
+
+1. **Clone Repository**
    ```bash
    git clone https://github.com/NRestFzn/tubes-gdgoc.git
    cd tubes-gdgoc
-   ```
 
-2. **Install dependencies**
-
+2. **Install Dependencies**
    ```bash
    npm install
-   ```
 
 3. **Setup Firebase**
-
    - Buat project di [Firebase Console](https://console.firebase.google.com/)
    - Aktifkan **Authentication** (Email/Password)
-   - Buat dan konfigurasi **Firestore** database
-   - Tambahkan konfigurasi Firebase ke dalam file `.env` atau langsung di file `firebase.js`
+   - Konfigurasi **Firestore**
+   - Tambahkan konfigurasi Firebase ke file `.env` atau langsung di `firebase.js`
 
-4. **Jalankan aplikasi**
-
+4. **Jalankan Aplikasi**
    ```bash
    npm run dev
    ```
-
-5. **Akses URL**
-
+### Akses URL
    ```bash
    '/' - Homepage
    '/sign-in'/ - Halaman login untuk masuk ke admin dashboard
@@ -49,15 +63,19 @@ Ini adalah proyek dashboard web yang dikembangkan untuk memenuhi _Product Design
    '/admin/user' - Halaman admin untuk mengelola user
    '/admin/booking' - Halaman admin untuk mengelola booking
    ```
+5. **Deploy (Opsional)**
+   - Hubungkan ke [Vercel](https://vercel.com/) dan deploy langsung dari GitHub.
 
 ## Teknologi yang Digunakan
+- **React.js** – Library utama UI
+- **Tailwind CSS** – Styling modern & cepat
+- **ShadCN UI** – Komponen UI modular
+- **Ant Design (Ant UI)** – Komponen tambahan
+- **Firebase** – Autentikasi & database
+- **React Router DOM** – Navigasi antar halaman
+- **Vercel** – Deployment platform
+- **Git & GitHub** – Version control & kolaborasi
 
-- **React.js** – Library utama untuk membangun UI.
-- **Tailwind CSS** – Styling cepat dan efisien.
-- **ShadCN** - Componen Library.
-- **AntDesign** -
-- **Firebase** – Backend dan autentikasi.
-- **React Router DOM** – Routing antar halaman.
-- **Vercel** – Deployment platform.
-- **TanStack React-Query** – Fetching data.
-- **Git & GitHub** – Version control dan kolaborasi.
+## Notes 
+- 
+- 
