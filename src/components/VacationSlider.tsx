@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import DestinationCard from "./DestinationCard";
+import React, {useState, useEffect} from 'react';
+import DestinationCard from './DestinationCard';
 
 type DestinationType = {
   destinations: {
@@ -9,7 +9,7 @@ type DestinationType = {
     price: number;
     dayTrip: number;
     rating?: number;
-    description?: string | "";
+    description?: string | '';
   }[];
 };
 
@@ -22,7 +22,7 @@ const VacationSlider: React.FC<DestinationType> = ({
 
   // Number of cards visible at once - responsive
   const getCardsPerView = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       if (window.innerWidth > 1280) return 3; // xl
       if (window.innerWidth > 768) return 2; // md
       return 1; // mobile
@@ -38,8 +38,8 @@ const VacationSlider: React.FC<DestinationType> = ({
       setCardsPerView(getCardsPerView());
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Calculate total pages
@@ -62,7 +62,7 @@ const VacationSlider: React.FC<DestinationType> = ({
     if (isAnimating) return;
 
     setIsAnimating(true);
-    setCurrentIndex(prev => (prev === 0 ? totalPages - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
 
     setTimeout(() => setIsAnimating(false), 500);
   };
@@ -71,17 +71,17 @@ const VacationSlider: React.FC<DestinationType> = ({
     if (isAnimating) return;
 
     setIsAnimating(true);
-    setCurrentIndex(prev => (prev === totalPages - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
 
     setTimeout(() => setIsAnimating(false), 500);
   };
 
   // Touch handlers for mobile swipe
-  const handleTouchStart: React.TouchEventHandler = e => {
+  const handleTouchStart: React.TouchEventHandler = (e) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
-  const handleTouchMove: React.TouchEventHandler = e => {
+  const handleTouchMove: React.TouchEventHandler = (e) => {
     if (isAnimating) return;
 
     const touchEndX = e.touches[0].clientX;
@@ -100,7 +100,7 @@ const VacationSlider: React.FC<DestinationType> = ({
       <div className="mb-3 flex justify-end gap-3">
         <button
           onClick={goToPrevSlide}
-          className="bg-background-white hover:border-primary-orange flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#999999]/50 transition-all duration-300 focus:outline-none"
+          className="bg-tw-background-white hover:border-tw-primary-orange flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#999999]/50 transition-all duration-300 focus:outline-none"
           disabled={isAnimating}
           aria-label="Previous destinations"
         >
@@ -112,7 +112,7 @@ const VacationSlider: React.FC<DestinationType> = ({
         </button>
         <button
           onClick={goToNextSlide}
-          className="bg-primary-orange hover:bg-opacity-80 flex h-[40px] w-[40px] items-center justify-center rounded-full transition-all duration-300 focus:outline-none"
+          className="bg-tw-primary-orange hover:bg-opacity-80 flex h-[40px] w-[40px] items-center justify-center rounded-full transition-all duration-300 focus:outline-none"
           disabled={isAnimating}
           aria-label="Next destinations"
         >
@@ -155,7 +155,7 @@ const VacationSlider: React.FC<DestinationType> = ({
               }
             }}
             className={`mx-1 h-2 w-2 rounded-full transition-all ${
-              currentIndex === index ? "bg-primary-orange" : "bg-gray-300"
+              currentIndex === index ? 'bg-tw-primary-orange' : 'bg-gray-300'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

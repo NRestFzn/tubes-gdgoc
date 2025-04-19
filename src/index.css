@@ -1,45 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 * {
   /* margin: 0; */
   /* padding: 0; */
   /* box-sizing: border-box; */
-  font-family: "Poppins", serif;
+  font-family: 'Poppins', serif;
   /* text-decoration: none; */
 }
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-display: "Volkhov", serif;
-  --font-body: "Poppins", sans-serif;
+  --font-tw-display: 'Volkhov', serif;
+  --font-tw-body: 'Poppins', sans-serif;
 
-  --color-primary-orange: #fa7436;
-  --color-primary-black: #222222;
+  --color-tw-primary-orange: #fa7436;
+  --color-tw-primary-black: #222222;
 
-  --color-dark-gray: #444444;
-  --color-light-gray: #666666;
+  --color-tw-dark-gray: #444444;
+  --color-tw-light-gray: #666666;
 
-  --color-secondary-blue: #4086f4;
-  --color-secondary-yellow: #ffb60a;
+  --color-tw-secondary-blue: #4086f4;
+  --color-tw-secondary-yellow: #ffb60a;
 
-  --color-background-orange: #fa7436;
-  --color-background-white: #fefcfb;
-  --color-background-ash: #f7f8fc;
+  --color-tw-background-orange: #fa7436;
+  --color-tw-background-white: #fefcfb;
+  --color-tw-background-ash: #f7f8fc;
 
-  --text-h1: 64px;
-  --text-h2: 48px;
-  --text-h3: 24px;
-  --text-title: 24px;
-  --text-p1: 20px;
-  --text-p2: 18px;
-  --text-content: 16px;
-  --text-nav: 16px;
+  --text-tw-h1: 64px;
+  --text-tw-h2: 48px;
+  --text-tw-h3: 24px;
+  --text-tw-title: 24px;
+  --text-tw-p1: 20px;
+  --text-tw-p2: 18px;
+  --text-tw-content: 16px;
+  --text-tw-nav: 16px;
 
   --spacing: 8px;
-  --drop-shadow-feature: 0px 14px 24px rgba(102, 102, 102, 0.1);
+  --drop-shadow-tw-feature: 0px 14px 24px rgba(102, 102, 102, 0.1);
 }
 
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 

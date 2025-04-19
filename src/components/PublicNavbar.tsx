@@ -1,31 +1,30 @@
 import logo from '@/assets/mochi.jpg';
-import { smoothScrollTo } from "@/helper/scrollBehaviour";
-import styles from '@/styles/PublicNavbar.module.css'
+import {smoothScrollTo} from '@/helper/scrollBehaviour';
+import styles from '@/styles/PublicNavbar.module.css';
 
 import classNames from 'classnames';
-import { useNavigate } from 'react-router-dom';
-
+import {useNavigate} from 'react-router-dom';
 
 const NavbarMenu = [
   {
-    name: "Home",
-    href: "#home",
+    name: 'Home',
+    href: '#home',
   },
   {
-    name: "About",
-    href: "#about",
+    name: 'About',
+    href: '#about',
   },
   {
-    name: "Desitnation",
-    href: "#destination",
+    name: 'Desitnation',
+    href: '#destination',
   },
   {
-    name: "Tour",
-    href: "#tour",
+    name: 'Tour',
+    href: '#tour',
   },
   {
-    name: "Manage",
-    href: "#blog",
+    name: 'Manage',
+    href: '#blog',
   },
 ];
 
@@ -48,18 +47,19 @@ const Navbar: React.FC = (): React.ReactElement => {
             <a
               onClick={(e) => {
                 e.preventDefault();
-                if (item.name === "About") {
+                if (item.name === 'About') {
                   const bottom = document.body.scrollHeight;
                   smoothScrollTo(bottom, 400);
-                } else if (item.name === "Manage") {
-                  navigate("/sign-in");
+                } else if (item.name === 'Manage') {
+                  navigate('/sign-in');
                 } else {
                   const section = document.querySelector(item.href);
                   if (section) {
-                    const offsetTop = section.getBoundingClientRect().top + window.scrollY;
+                    const offsetTop =
+                      section.getBoundingClientRect().top + window.scrollY;
                     smoothScrollTo(offsetTop, 400);
                   }
-                }                
+                }
               }}
               href={item.href}
             >
