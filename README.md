@@ -7,11 +7,11 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
 - [Nashir Resta Fauzian](https://github.com/NRestFzn) [607062400083]
 - [Fauzan Zulfa Muhammad](https://github.com/zoovasoup) [103022400032]
 - [Kaisar Rayfa Al Baihaqqi](https://github.com/kaisaaru) [103022400110]
-- [Muhammad Hafizh](https://github.com/Gimerbone) [ ]
+- [Muhammad Hafizh](https://github.com/Gimerbone) [103012400078]
 
 ## List Feature
 - Autentikasi dengan Email/Password dan Google Sign-in
-- Dashboard admin responsif dengan navigasi sidebar
+- Dashboard admin, login/register, dan landing page responsif dengan navigasi sidebar
 - Halaman CRUD untuk:
     - Destinasi Wisata
     - Paket Liburan
@@ -23,8 +23,7 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
 - Cek kuota otomatis sebelum booking
 - Tampilan dropdown profil dengan logout
 - Dukungan mode mobile dan desktop
-- Light/Dark Mode pada Login & Admin Dashboard
-- 
+- Light/Dark Mode pada Admin Dashboard
 
 ## Cara Menjalankan Aplikasi
 
