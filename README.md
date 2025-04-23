@@ -29,8 +29,8 @@ Sebuah proyek dashboard web untuk manajemen perjalanan wisata, dikembangkan seba
 
 ### Untuk Pengguna Umum (Live Deployment)
 
-1. Buka halaman repository ini.
-2. Klik link URL di bagian **About** repo untuk mengakses aplikasi live (via Vercel).
+- Click [Link ini](https://tubes-gdgoc-black.vercel.app/)
+- atau kunjungi https://tubes-gdgoc-black.vercel.app/
 
 ### Untuk Pengembangan (Development Mode)
 
